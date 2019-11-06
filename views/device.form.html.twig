@@ -1,0 +1,42 @@
+<h2>Formulaire</h2>
+
+{% if device is defined %}
+<form method="post" name="formulaire" action="{{ url('device.save', {id: device.id}) }}">
+
+    <input type="hidden" name="id" value={{device.id}} />
+
+    <label for="name">Lib : </label>
+    <input type="text" name="lib" value={{device.lib}} />
+
+    <label for="name">Marque : </label>
+    <input type="text" name="marque" value={{device.marque}}  />
+
+    <label for="name">Os : </label>
+    <input type="text" name="os" value={{device.os}}  />
+
+    <select name="cboUser">
+      {% for user in users %}
+        <option value="{{user.id}}">{{user.nom}}</option>
+      {% endfor %}
+    </select>
+{% else %}
+<form method="post" name="formulaire" action="{{ url('device.save') }}">
+    <label for="name">Lib : </label>
+    <input type="text" name="lib" />
+
+    <label for="name">Marque : </label>
+    <input type="text" name="marque" />
+
+    <label for="name">Os : </label>
+    <input type="text" name="os" />
+
+    <select name="cboUser">
+      {% for user in users %}
+        <option value="{{user.id}}">{{user.nom}} {{user.prenom}}</option>
+      {% endfor %}
+    </select>
+{% endif %}
+
+    <button type="submit">Envoyer</button>
+
+</form>

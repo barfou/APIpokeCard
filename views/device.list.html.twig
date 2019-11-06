@@ -1,0 +1,36 @@
+<h1>Liste des appareils</h1>
+<form method="get" name="formulaire" action="{{ url('device.new') }}">
+  <button type="submit">Ajouter</button>
+</form>
+<table>
+<thead>
+  <tr>
+    <th>ID</th>
+    <th>LIB</th>
+    <th>MARQUE</th>
+    <th>OS</th>
+    <th>UTLISATEUR</th>
+  </tr>
+</thead>
+<tbdoy>
+{% for device in device %}
+   <tr>
+     <td>{{device.id}}</td>
+     <td>{{device.lib}}</td>
+     <td>{{device.marque}}</td>
+     <td>{{device.os}}</td>
+     <td>{{device.user.getNom()}} {{device.user.getPrenom()}}</td>
+     <td>
+       <form method="post" name="formulaire" action="{{ url('device.delete', {id: device.id}) }}">
+            <button type="submit">Supprimer</button>
+        </form>
+      </td>
+      <td>
+        <form method="get" name="formulaire" action="{{ url('device.edit', {id: device.id}) }}">
+          <button type="submit">Modifier</button>
+        </form>
+      </td>
+   </tr>
+{% endfor %}
+</tbdoy>
+</table>
