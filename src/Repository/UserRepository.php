@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Users\Repository;
+namespace App\Repository;
 
-use App\Users\Entity\User;
+use App\Entity\User;
 use Doctrine\DBAL\Connection;
 
 /**

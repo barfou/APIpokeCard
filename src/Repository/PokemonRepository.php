@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Pokemon\Repository;
+namespace App\Repository;
 
-use App\Pokemon\Entity\Pokemon;
+use App\Entity\Pokemon;
 use Doctrine\DBAL\Connection;
 /**
  * pokemon repository.

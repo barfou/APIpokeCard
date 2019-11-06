@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Devices\Entity;
+namespace App\Entity;
 
 class Device
 {
