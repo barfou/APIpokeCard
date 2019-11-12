@@ -7,3 +7,5 @@ $app->post('/users/delete/{id}', 'App\Controller\UsersController::deleteAction')
 $app->post('/users/save', 'App\Controller\UsersController::saveAction')->bind('users.save');
 
 $app->get('/pokemon/list', 'App\Controller\PokemonController::listAction')->bind('pokemon.list');
+
+$app->get('/article/list', 'App\Controller\ArticleController::listAction')->bind('article.list');
