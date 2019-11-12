@@ -25,7 +25,7 @@ class PokemonsController
         $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon");
         //json_decode($httpsfile)
         $httpsFileDecode = json_decode($httpsfile);
-        return $httpsFileDecode->{'count'};;
+        return $httpsFileDecode->{'results'};;
     }
 
     public function deleteAction(Request $request, Application $app)
