@@ -92,6 +92,9 @@ class ComposerStaticInit29533c39c8c92442be06b4131c2b096c
             'App\\Users\\Repository\\' => 21,
             'App\\Users\\Entity\\' => 17,
             'App\\Users\\Controller\\' => 21,
+            'App\\Pokemons\\Repository\\' => 24,
+            'App\\Pokemons\\Entity\\' => 20,
+            'App\\Pokemons\\Controller\\' => 24,
             'App\\Devices\\Repository\\' => 23,
             'App\\Devices\\Entity\\' => 19,
             'App\\Devices\\Controller\\' => 23,
@@ -306,6 +309,18 @@ class ComposerStaticInit29533c39c8c92442be06b4131c2b096c
         'App\\Users\\Controller\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/Users/Controller',
+        ),
+        'App\\Pokemons\\Repository\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Pokemons/Repository',
+        ),
+        'App\\Pokemons\\Entity\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Pokemons/Entity',
+        ),
+        'App\\Pokemons\\Controller\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Pokemons/Controller',
         ),
         'App\\Devices\\Repository\\' => 
         array (
