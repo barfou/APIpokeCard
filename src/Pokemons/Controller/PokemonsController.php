@@ -22,8 +22,8 @@ class PokemonsController
             return $res;
         }*/
 
-        $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokedex/1");
-        return "$httpsfile";
+        $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon");
+        return json_decode($httpsfile);
     }
 
     public function deleteAction(Request $request, Application $app)
