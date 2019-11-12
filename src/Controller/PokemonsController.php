@@ -4,9 +4,9 @@ namespace App\Controller;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
-use App\Pokemon\Repository\PokemonRepository;
+//use App\Pokemon\Repository\PokemonRepository;
 
-class PokemonController
+class PokemonsController
 {
     public function listAction(Request $request, Application $app)
     {
