@@ -21,7 +21,9 @@ class PokemonsController
         } else {
             return $res;
         }*/
-        return "coucou";
+
+        $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokedex/1");
+        return "$httpsfile";
     }
 
     public function deleteAction(Request $request, Application $app)
