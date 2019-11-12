@@ -10,7 +10,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/Pokemons/Controller" isTestSource="false" packagePrefix="App\Pokemons\Controller\" />
       <sourceFolder url="file://$MODULE_DIR$/src/Devices/Controller" isTestSource="false" packagePrefix="App\Devices\Controller\" />
       <sourceFolder url="file://$MODULE_DIR$/src/Devices/Entity" isTestSource="false" packagePrefix="App\Devices\Entity\" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Users/Controller" isTestSource="false" packagePrefix="App\Users\Controller\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Users/Controller" isTestSource="false" packagePrefix="App\User\Controller\" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/annotations" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/cache" />

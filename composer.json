@@ -14,7 +14,7 @@
     },
     "autoload": {
        "psr-4": {
-         "App\\Users\\Controller\\": "src/Users/Controller/",
+         "App\\User\\Controller\\": "src/Users/Controller/",
          "App\\Users\\Repository\\": "src/Users/Repository/",
          "App\\Users\\Entity\\": "src/Users/Entity/",
          "App\\Devices\\Controller\\": "src/Devices/Controller/",
