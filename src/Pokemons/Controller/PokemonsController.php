@@ -23,7 +23,8 @@ class PokemonsController
         }*/
 
         $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon");
-        return json_decode($httpsfile);
+        //json_decode($httpsfile)
+        return var_dump(json_decode($httpsfile));
     }
 
     public function deleteAction(Request $request, Application $app)
