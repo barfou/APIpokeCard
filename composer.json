@@ -19,7 +19,11 @@
          "App\\Users\\Entity\\": "src/Users/Entity/",
          "App\\Devices\\Controller\\": "src/Devices/Controller/",
          "App\\Devices\\Repository\\": "src/Devices/Repository/",
-         "App\\Devices\\Entity\\": "src/Devices/Entity/"
+         "App\\Devices\\Entity\\": "src/Devices/Entity/",
+
+         "App\\Pokemons\\Controller\\": "src/Pokemons/Controller/",
+         "App\\Pokemons\\Repository\\": "src/Pokemons/Repository/",
+         "App\\Pokemons\\Entity\\": "src/Pokemons/Entity/"
        }
    }
 }

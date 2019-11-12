@@ -30,13 +30,13 @@
     <label for="name">Os : </label>
     <input type="text" name="os" />
 
+
     <select name="cboUser">
       {% for user in users %}
         <option value="{{user.id}}">{{user.nom}} {{user.prenom}}</option>
       {% endfor %}
     </select>
-{% endif %}
 
-    <button type="submit">Envoyer</button>
-
+    {% endif %}
 </form>
+    <button type="submit">Envoyer</button>

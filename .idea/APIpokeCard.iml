@@ -3,8 +3,11 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/Users/Repository" isTestSource="false" packagePrefix="App\Users\Repository\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Pokemons/Repository" isTestSource="false" packagePrefix="App\Pokemons\Repository\" />
       <sourceFolder url="file://$MODULE_DIR$/src/Devices/Repository" isTestSource="false" packagePrefix="App\Devices\Repository\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Pokemons/Entity" isTestSource="false" packagePrefix="App\Pokemons\Entity\" />
       <sourceFolder url="file://$MODULE_DIR$/src/Users/Entity" isTestSource="false" packagePrefix="App\Users\Entity\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Pokemons/Controller" isTestSource="false" packagePrefix="App\Pokemons\Controller\" />
       <sourceFolder url="file://$MODULE_DIR$/src/Devices/Controller" isTestSource="false" packagePrefix="App\Devices\Controller\" />
       <sourceFolder url="file://$MODULE_DIR$/src/Devices/Entity" isTestSource="false" packagePrefix="App\Devices\Entity\" />
       <sourceFolder url="file://$MODULE_DIR$/src/Users/Controller" isTestSource="false" packagePrefix="App\Users\Controller\" />
