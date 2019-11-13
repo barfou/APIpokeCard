@@ -22,9 +22,9 @@ class PokemonsController
             return $res;
         }*/
 
-        $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=964");
+        $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=963");
         //json_decode($httpsfile)
-        return $httpsFile;
+        return $httpsfile;
     }
 
     public function deleteAction(Request $request, Application $app)
