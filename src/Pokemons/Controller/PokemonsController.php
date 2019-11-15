@@ -22,7 +22,7 @@ class PokemonsController
             return $res;
         }*/
 
-        $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=963");
+        $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=5");
         //json_decode($httpsfile)
         return $httpsfile;
     }
