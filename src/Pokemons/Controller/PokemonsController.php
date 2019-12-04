@@ -10,20 +10,14 @@ class PokemonsController
 {
     public function listAction(Request $request, Application $app)
     {
-        //$devices = $app['repository.device']->getAll();
-        //return $app['twig']->render('device.list.html.twig', array('device' => $devices));
-        
-        /*$req = new HttpRequest("https://pokeapi.co/api/v2/pokedex/1", HttpRequest::METH_GET);
-        $res = $req->send();
-
-        if ($res->getResponseCode() == 200) {
-            return $res->getResponseBody();
-        } else {
-            return $res;
-        }*/
-
         $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon?offset=0&limit=151");
-        //json_decode($httpsfile)
+        return $httpsfile;
+    }
+
+    public function pokemonAction(Request $request, Application $app)
+    {
+        $parameters = $request->attributes->all();
+        $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon/" . $parameters['id']);
         return $httpsfile;
     }
 
