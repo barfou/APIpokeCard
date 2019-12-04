@@ -21,8 +21,11 @@ class PokemonsController
         $jsonDecoded = json_decode($httpsfile);
         var_dump($jsonDecoded);
         $baseInfos = $jsonDecoded->name . ' ' . $jsonDecoded->height . ' ' . $jsonDecoded->weight; // . ' ' . $jsonDecoded->sprites . ' ' .  $jsonDecoded->abilities;
-        //$sprites = $jsonDecoded->sprites;
-        return $baseInfos;
+        $abilities = "";
+        foreach ($jsonDecoded->abilities as &$value) {
+            $abilities += $value;
+        }
+        return $baseInfos . "\r" . $abilities;
     }
 
     public function deleteAction(Request $request, Application $app)
