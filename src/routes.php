@@ -23,7 +23,7 @@ $app->post('/devices/delete/{id}', 'App\Devices\Controller\DevicesController::de
 $app->post('/devices/save', 'App\Devices\Controller\DevicesController::saveAction')->bind('devices.save');
 
 $app->get('/pokemons/list', 'App\Pokemons\Controller\PokemonsController::listAction')->bind('pokemons.list');
-$app->get('/pokemons/{url}', 'App\Pokemons\Controller\PokemonsController::pokemonAction')->bind('pokemons.entity');
+$app->get('/pokemons/{name}', 'App\Pokemons\Controller\PokemonsController::pokemonAction')->bind('pokemons.entity');
 
 $app->get('/pokemons/edit/{id}', 'App\Pokemons\Controller\PokemonsController::editAction')->bind('pokemons.edit');
 $app->get('/pokemons/new', 'App\Pokemons\Controller\PokemonsController::newAction')->bind('pokemons.new');

@@ -17,7 +17,7 @@ class PokemonsController
     public function pokemonAction(Request $request, Application $app)
     {
         $parameters = $request->attributes->all();
-        $httpsfile = file_get_contents($parameters['url']);
+        $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon/" . $parameters['name']);
         return $httpsfile;
     }
 
