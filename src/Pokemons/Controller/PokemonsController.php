@@ -19,9 +19,10 @@ class PokemonsController
         $parameters = $request->attributes->all();
         $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon/" . $parameters['name']);
         $jsonDecoded = json_decode($httpsfile);
-        //var_dump($jsonDecoded);
-        $infos = $jsonDecoded->name . ' ' . $jsonDecoded->height . ' ' . $jsonDecoded->weight . ' ' . $jsonDecoded->sprites . ' ' .  $jsonDecoded->abilities;
-        return $infos;
+        var_dump($jsonDecoded);
+        $baseInfos = $jsonDecoded->name . ' ' . $jsonDecoded->height . ' ' . $jsonDecoded->weight; // . ' ' . $jsonDecoded->sprites . ' ' .  $jsonDecoded->abilities;
+        //$sprites = $jsonDecoded->sprites;
+        return $baseInfos;
     }
 
     public function deleteAction(Request $request, Application $app)
