@@ -22,9 +22,10 @@ class PokemonsController
         //var_dump($jsonDecoded);
         $baseInfos = $jsonDecoded->name . ' ' . $jsonDecoded->height . ' ' . $jsonDecoded->weight; // . ' ' . $jsonDecoded->sprites . ' ' .  $jsonDecoded->abilities;
         $abilities = "";
-        foreach ($jsonDecoded->abilities as &$value) {
+        $abilities = $jsonDecoded->abilities[0][ability][name];
+        /*foreach ($jsonDecoded->abilities as &$value) {
             $abilities += $value->ability->name;
-        }
+        }*/
         return $baseInfos . "\r" . $abilities;
     }
 
