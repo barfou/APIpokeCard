@@ -20,7 +20,7 @@ class PokemonsController
         $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon/" . $parameters['name']);
         $jsonDecoded = json_decode($httpsfile);
         //var_dump($jsonDecoded);
-        $infos = $jsonDecoded->height . ' ' . $jsonDecoded->weight;
+        $infos = $jsonDecoded->name . ' ' . $jsonDecoded->height . ' ' . $jsonDecoded->weight . ' ' . $jsonDecoded->sprites . ' ' .  $jsonDecoded->abilities;
         return $infos;
     }
 
