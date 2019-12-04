@@ -18,8 +18,8 @@ class PokemonsController
     {
         $parameters = $request->attributes->all();
         $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon/" . $parameters['name']);
-        
-        return $httpsfile['abilities'];
+        $infos = $httpsfile['height'] . ' ' . $httpsfile['weight'];
+        return $infos;
     }
 
     public function deleteAction(Request $request, Application $app)
