@@ -11,7 +11,7 @@ $app->get('/pokemon/list', 'App\Controller\PokemonsController::listAction')->bin
 $app->get('/article/list', 'App\Controller\ArticleController::listAction')->bind('article.list');*/
 
 $app->get('/users/list', 'App\Users\Controller\UsersController::listAction')->bind('users.list');
-$app->get('/users/{id}', 'App\Users\Controller\UsersController::listAction')->bind('users.list');
+$app->get('/users/get/id={id}', 'App\Users\Controller\UsersController::getUserAction')->bind('users.list');
 
 $app->get('/users/edit/{id}', 'App\Users\Controller\UsersController::editAction')->bind('users.edit');
 $app->get('/users/new', 'App\Users\Controller\UsersController::newAction')->bind('users.new');
