@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Users\Repository;
-
 use App\Entity\User;
 use Doctrine\DBAL\Connection;
-
 /**
  * User repository.
  */
@@ -14,12 +11,10 @@ class UserRepository
      * @var \Doctrine\DBAL\Connection
      */
     protected $db;
-
     public function __construct(Connection $db)
     {
         $this->db = $db;
     }
-
    /**
     * Returns a collection of users.
     *
@@ -37,17 +32,14 @@ class UserRepository
        $queryBuilder = $this->db->createQueryBuilder();
        $queryBuilder
            ->select('u.*')
-           ->from('users', 'u');
-
+           ->from('Users', 'u');
        $statement = $queryBuilder->execute();
        $usersData = $statement->fetchAll();
        foreach ($usersData as $userData) {
-           $userEntityList[$userData['id']] = new User($userData['id'], $userData['nom'], $userData['prenom']);
+           $userEntityList[$userData['id']] = new User($userData['id'], $userData['nom']);//, $userData['prenom']);
        }
-
        return $userEntityList;
    }
-
    /**
     * Returns an User object.
     *
@@ -72,9 +64,7 @@ class UserRepository
       else {
         return new User("","","");
       }
-
    }
-
     public function delete($id)
     {
         $queryBuilder = $this->db->createQueryBuilder();
@@ -82,10 +72,8 @@ class UserRepository
           ->delete('users')
           ->where('id = :id')
           ->setParameter(':id', $id);
-
         $statement = $queryBuilder->execute();
     }
-
     public function update($parameters)
     {
         $queryBuilder = $this->db->createQueryBuilder();
@@ -93,22 +81,18 @@ class UserRepository
           ->update('users')
           ->where('id = :id')
           ->setParameter(':id', $parameters['id']);
-
         if ($parameters['nom']) {
             $queryBuilder
               ->set('nom', ':nom')
               ->setParameter(':nom', $parameters['nom']);
         }
-
         if ($parameters['prenom']) {
             $queryBuilder
             ->set('prenom', ':prenom')
             ->setParameter(':prenom', $parameters['prenom']);
         }
-
         $statement = $queryBuilder->execute();
     }
-
     public function insert($parameters)
     {
         $queryBuilder = $this->db->createQueryBuilder();

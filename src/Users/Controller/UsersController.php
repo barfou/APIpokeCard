@@ -10,8 +10,9 @@ class UsersController
     public function listAction(Request $request, Application $app)
     {
         $users = $app['repository.user']->getAll();
-
-        return $app['twig']->render('users.list.html.twig', array('users' => $users));
+        $usersEncodeJson = json_encode($users);
+        return $usersEncodeJson;
+        //return $app['twig']->render('users.list.html.twig', array('users' => $users));
     }
 
     public function deleteAction(Request $request, Application $app)
