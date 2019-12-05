@@ -36,7 +36,7 @@ class UserRepository
        $statement = $queryBuilder->execute();
        $usersData = $statement->fetchAll();
        foreach ($usersData as $userData) {
-           $userEntityList[$userData['id']] = new User($userData['id'], $userData['nom']);//, $userData['prenom']);
+           $userEntityList[$userData['id']] = new User($userData['id'], $userData['name']);//, $userData['prenom']);
        }
        return $userEntityList;
    }
