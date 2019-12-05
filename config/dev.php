@@ -13,7 +13,7 @@ $app['db.options'] = array(
     'host' => '127.0.0.1',
     'port' => '3306',
     'dbname' => 'dbPokeCard',
-    'user' => 'admin',
-    'password' => '',
+    'user' => 'admin01',
+    'password' => '123',
 );
 
