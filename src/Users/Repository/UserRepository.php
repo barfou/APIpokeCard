@@ -53,7 +53,7 @@ class UserRepository
        $queryBuilder = $this->db->createQueryBuilder();
        $queryBuilder
            ->select('u.*')
-           ->from('users', 'u')
+           ->from('Users', 'u')
            ->where('id = ?')
            ->setParameter(0, $id);
        $statement = $queryBuilder->execute();

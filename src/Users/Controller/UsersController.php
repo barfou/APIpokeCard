@@ -18,9 +18,9 @@ class UsersController
     public function getUserAction(Request $request, Application $app)
     {
         $parameters = $request->attributes->all();
-        $users = $app['repository.user']->getById($parameters['id']);
-        $usersEncodeJson = json_encode($users);
-        return $usersEncodeJson;
+        $user = $app['repository.user']->getById($parameters['id']);
+        $userEncodeJson = json_encode($user);
+        return $userEncodeJson;
         //return $app['twig']->render('users.list.html.twig', array('users' => $users));
     }
 
