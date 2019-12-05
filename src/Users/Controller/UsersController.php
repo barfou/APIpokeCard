@@ -15,6 +15,15 @@ class UsersController
         //return $app['twig']->render('users.list.html.twig', array('users' => $users));
     }
 
+    public function getUserAction(Request $request, Application $app)
+    {
+        $parameters = $request->attributes->all();
+        $users = $app['repository.user']->getById($parameters['id']);
+        $usersEncodeJson = json_encode($users);
+        return $usersEncodeJson;
+        //return $app['twig']->render('users.list.html.twig', array('users' => $users));
+    }
+
     public function deleteAction(Request $request, Application $app)
     {
         $parameters = $request->attributes->all();
