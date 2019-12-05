@@ -3,21 +3,21 @@ namespace App\Users\Entity;
 class User
 {
     protected $id;
-    protected $nom;
+    protected $name;
     //protected $prenom;
-    public function __construct($id, $nom)//, $prenom)
+    public function __construct($id, $name)//, $prenom)
     {
         $this->id = $id;
         //$this->prenom = $prenom;
-        $this->nom = $nom;
+        $this->nom = $name;
     }
     public function setId($id)
     {
         $this->id = $id;
     }
-    public function setNom($nom)
+    public function setNom($name)
     {
-        $this->nom = $nom;
+        $this->name = $name;
     }
     /*public function setPrenom($prenom)
     {
@@ -33,13 +33,13 @@ class User
     }*/
     public function getNom()
     {
-        return $this->nom;
+        return $this->name;
     }
     public function toArray()
     {
         $array = array();
         $array['id'] = $this->id;
-        $array['nom'] = $this->nom;
+        $array['name'] = $this->name;
         //$array['prenom'] = $this->prenom;
         return $array;
     }
