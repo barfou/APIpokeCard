@@ -16,17 +16,34 @@ class PokemonsController
         //$httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon?offset=0&limit=151");
         //return $httpsfile;
 
-        $client = HttpClient::create();
+        // Function to get HTTP response code  
+        function get_http_response_code($url) { 
+            $headers = get_headers($url); 
+            return substr($headers[0], 9, 3); 
+        } 
+        
+        // Function call  
+        $get_http_response_code = get_http_response_code($url); 
+        
+        // Check HTTP response code is 200 or not 
+        if ( $get_http_response_code == 200 ) 
+            file_get_contents($url);
+        else
+            echo "<br>HTTP request not successfully!"; 
+
+        /*$client = HttpClient::create();
         $response = $client->request('GET', $url);
 
         $statusCode = $response->getStatusCode();
+
+        $response2 = new Response($response);
 
         if($statusCode === 200){
             return $response;
         }
         else{
             return $statusCode;
-        }      
+        }*/   
     }
 
     public function getPokemonAction(Request $request, Application $app)
