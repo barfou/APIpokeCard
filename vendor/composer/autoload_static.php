@@ -29,7 +29,6 @@ class ComposerStaticInit29533c39c8c92442be06b4131c2b096c
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Intl\\Idn\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
-            'Symfony\\Flex\\' => 13,
             'Symfony\\Contracts\\Service\\' => 26,
             'Symfony\\Contracts\\EventDispatcher\\' => 34,
             'Symfony\\Contracts\\Cache\\' => 24,
@@ -49,6 +48,7 @@ class ComposerStaticInit29533c39c8c92442be06b4131c2b096c
             'Symfony\\Component\\Cache\\' => 24,
             'Symfony\\Bundle\\FrameworkBundle\\' => 31,
             'Symfony\\Bridge\\Twig\\' => 20,
+            'Silex\\' => 6,
         ),
         'P' => 
         array (
@@ -126,10 +126,6 @@ class ComposerStaticInit29533c39c8c92442be06b4131c2b096c
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
-        'Symfony\\Flex\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/flex/src',
-        ),
         'Symfony\\Contracts\\Service\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/service-contracts',
@@ -205,6 +201,10 @@ class ComposerStaticInit29533c39c8c92442be06b4131c2b096c
         'Symfony\\Bridge\\Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/twig-bridge',
+        ),
+        'Silex\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/silex/silex/src/Silex',
         ),
         'Psr\\Log\\' => 
         array (
@@ -338,6 +338,13 @@ class ComposerStaticInit29533c39c8c92442be06b4131c2b096c
             'Twig_' => 
             array (
                 0 => __DIR__ . '/..' . '/twig/twig/lib',
+            ),
+        ),
+        'P' => 
+        array (
+            'Pimple' => 
+            array (
+                0 => __DIR__ . '/..' . '/pimple/pimple/src',
             ),
         ),
     );
