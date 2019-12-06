@@ -15,6 +15,8 @@ class PokemonsController
         $url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=151";
         //$httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon?offset=0&limit=151");
         //return $httpsfile;
+        $request = 
+
         $client = HttpClient::create();
         $response = $client->request('GET', $url);
 
@@ -24,7 +26,7 @@ class PokemonsController
         // $contentType = 'application/json'
         $content = $response->getContent();
         // $content = '{"id":521583, "name":"symfony-docs", ...}'
-        $content = $response->toArray();
+        //$content = $response->toArray();
         // $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
         return $statusCode . " " . $content;
     }
