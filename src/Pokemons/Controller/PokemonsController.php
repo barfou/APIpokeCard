@@ -13,6 +13,7 @@ class PokemonsController
     {
         $url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=151";
         $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon?offset=0&limit=151");
+        var_dump($httpsfile->http_response_code());
         return $httpsfile;
     }
 
