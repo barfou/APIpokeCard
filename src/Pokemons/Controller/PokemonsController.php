@@ -22,11 +22,7 @@ class PokemonsController
             return substr($headers[0], 9, 3); 
         } 
         
-        $response = new Response(
-            'Content',
-            Response::HTTP_OK,
-            ['content-type' => 'text/html']
-        );
+        $response = new Response();
 
         // Function call  
         $get_http_response_code = get_http_response_code($url); 
