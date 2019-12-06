@@ -20,8 +20,8 @@ $app->post('/devices/save', 'App\Devices\Controller\DevicesController::saveActio
 
 
 //User
-$app->get('/users/list', 'App\Users\Controller\UsersController::getListUserAction')->bind('users.list');
-$app->get('/users/get/id={id}', 'App\Users\Controller\UsersController::getUserAction')->bind('users.get');
+$app->get('/users', 'App\Users\Controller\UsersController::getListUserAction')->bind('users.list');
+$app->get('/users/{id}', 'App\Users\Controller\UsersController::getUserAction')->bind('users.get');
 
 $app->get('/users/edit/{id}', 'App\Users\Controller\UsersController::editAction')->bind('users.edit');
 $app->get('/users/new', 'App\Users\Controller\UsersController::newAction')->bind('users.new');
@@ -29,7 +29,7 @@ $app->post('/users/delete/{id}', 'App\Users\Controller\UsersController::deleteAc
 $app->post('/users/save', 'App\Users\Controller\UsersController::saveAction')->bind('users.save');
 
 //Pokemon
-$app->get('/pokemons/list', 'App\Pokemons\Controller\PokemonsController::getListPokemonAction')->bind('pokemons.list');
+$app->get('/pokemons', 'App\Pokemons\Controller\PokemonsController::getListPokemonAction')->bind('pokemons.list');
 $app->get('/pokemons/{name}', 'App\Pokemons\Controller\PokemonsController::getPokemonAction')->bind('pokemons.entity');
 
 $app->get('/pokemons/edit/{id}', 'App\Pokemons\Controller\PokemonsController::editAction')->bind('pokemons.edit');

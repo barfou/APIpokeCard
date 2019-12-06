@@ -4,13 +4,15 @@ namespace App\Pokemons\Controller;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 //use App\Pokemon\Repository\PokemonRepository;
 
 class PokemonsController
 {
     public function getListPokemonAction(Request $request, Application $app)
     {
-        $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon?offset=0&limit=151");
+        $url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=151";
+        $httpsfile = file_get_contents($url);
         return $httpsfile;
     }
 
