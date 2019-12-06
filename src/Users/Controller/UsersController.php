@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UsersController
 {
-    public function listAction(Request $request, Application $app)
+    public function getListUserAction(Request $request, Application $app)
     {
         $users = $app['repository.user']->getAll();
         $usersEncodeJson = json_encode($users);

@@ -8,13 +8,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PokemonsController
 {
-    public function listAction(Request $request, Application $app)
+    public function getListPokemonAction(Request $request, Application $app)
     {
         $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon?offset=0&limit=151");
         return $httpsfile;
     }
 
-    public function pokemonAction(Request $request, Application $app)
+    public function getPokemonAction(Request $request, Application $app)
     {
         $parameters = $request->attributes->all();
         $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon/" . $parameters['name']);
