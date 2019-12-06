@@ -18,10 +18,6 @@
          "App\\Users\\Controller\\": "src/Users/Controller/",
          "App\\Users\\Repository\\": "src/Users/Repository/",
          "App\\Users\\Entity\\": "src/Users/Entity/",
-         
-         "App\\Devices\\Controller\\": "src/Devices/Controller/",
-         "App\\Devices\\Repository\\": "src/Devices/Repository/",
-         "App\\Devices\\Entity\\": "src/Devices/Entity/",
 
          "App\\Pokemons\\Controller\\": "src/Pokemons/Controller/",
          "App\\Pokemons\\Repository\\": "src/Pokemons/Repository/",

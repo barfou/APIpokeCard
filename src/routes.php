@@ -11,14 +11,6 @@ $app->get('/pokemon/list', 'App\Controller\PokemonsController::listAction')->bin
 $app->get('/article/list', 'App\Controller\ArticleController::listAction')->bind('article.list');*/
 
 
-//Devices
-$app->get('/devices/list', 'App\Devices\Controller\DevicesController::listAction')->bind('devices.list');
-$app->get('/devices/edit/{id}', 'App\Devices\Controller\DevicesController::editAction')->bind('devices.edit');
-$app->get('/devices/new', 'App\Devices\Controller\DevicesController::newAction')->bind('devices.new');
-$app->post('/devices/delete/{id}', 'App\Devices\Controller\DevicesController::deleteAction')->bind('devices.delete');
-$app->post('/devices/save', 'App\Devices\Controller\DevicesController::saveAction')->bind('devices.save');
-
-
 //User
 $app->get('/users', 'App\Users\Controller\UsersController::getListUserAction')->bind('users.list');
 $app->get('/users/{id}', 'App\Users\Controller\UsersController::getUserAction')->bind('users.get');

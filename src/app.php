@@ -17,10 +17,6 @@ $app['repository.user'] = function ($app) {
     return new App\Users\Repository\UserRepository($app['db']);
 };
 
-$app['repository.device'] = function ($app) {
-    return new App\Devices\Repository\DeviceRepository($app['db'], $app['repository.user']);
-};
-
 $app['repository.pokemon'] = function ($app) {
     return new App\Pokemon\Repository\PokemonRepository($app['db'], $app['repository.pokemon']);
 };
