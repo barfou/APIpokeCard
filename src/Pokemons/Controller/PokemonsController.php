@@ -22,12 +22,22 @@ class PokemonsController
             return substr($headers[0], 9, 3); 
         } 
         
+        $response = new Response(
+            'Content',
+            Response::HTTP_OK,
+            ['content-type' => 'text/html']
+        );
+
         // Function call  
         $get_http_response_code = get_http_response_code($url); 
+                
         
         // Check HTTP response code is 200 or not 
-        if ( $get_http_response_code == 200 ) 
-            return file_get_contents($url);
+        if ( $get_http_response_code == 200 ){
+            $response->setContent(file_get_contents($url));
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }
         else
             return "<br>HTTP request not successfully!"; 
 
