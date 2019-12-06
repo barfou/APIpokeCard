@@ -63,7 +63,4 @@ return array(
     'App\\Pokemons\\Repository\\' => array($baseDir . '/src/Pokemons/Repository'),
     'App\\Pokemons\\Entity\\' => array($baseDir . '/src/Pokemons/Entity'),
     'App\\Pokemons\\Controller\\' => array($baseDir . '/src/Pokemons/Controller'),
-    'App\\Devices\\Repository\\' => array($baseDir . '/src/Devices/Repository'),
-    'App\\Devices\\Entity\\' => array($baseDir . '/src/Devices/Entity'),
-    'App\\Devices\\Controller\\' => array($baseDir . '/src/Devices/Controller'),
 );
