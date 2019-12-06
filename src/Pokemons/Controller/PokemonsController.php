@@ -13,43 +13,28 @@ class PokemonsController
     public function getListPokemonAction(Request $request, Application $app)
     {
         $url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=151";
-        //$httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon?offset=0&limit=151");
-        //return $httpsfile;
+
+        //Create Response object
+        $response = new Response();
 
         // Function to get HTTP response code  
         function get_http_response_code($url) { 
             $headers = get_headers($url); 
             return substr($headers[0], 9, 3); 
         } 
-        
-        $response = new Response();
-
-        // Function call  
-        $get_http_response_code = get_http_response_code($url); 
-                
-        
+             
         // Check HTTP response code is 200 or not 
-        if ( $get_http_response_code == 200 ){
+        if (get_http_response_code($url) == 200 ){
             $response->setContent(file_get_contents($url));
             $response->headers->set('Content-Type', 'application/json');
-            return $response;
-        }
-        else
-            return "<br>HTTP request not successfully!"; 
-
-        /*$client = HttpClient::create();
-        $response = $client->request('GET', $url);
-
-        $statusCode = $response->getStatusCode();
-
-        $response2 = new Response($response);
-
-        if($statusCode === 200){
-            return $response;
+            $response->setStatusCode(Response::HTTP_OK);
         }
         else{
-            return $statusCode;
-        }*/   
+            $response->setContent("HTTP request not successfully!");
+            $response->headers->set('Content-Type', 'text/html');
+            $response->setStatusCode(Response::HTTP_NOT_FOUND);
+        }  
+        return $response;
     }
 
     public function getPokemonAction(Request $request, Application $app)
