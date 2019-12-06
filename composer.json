@@ -4,7 +4,8 @@
         "twig/twig": "^1.24",
         "symfony/twig-bridge": "^3.1",
          "doctrine/dbal": "^2.5",
-        "jms/serializer-bundle": "^3.4"
+        "jms/serializer-bundle": "^3.4",
+        "symfony/polyfill-ctype": "~1.12"
     },
     "scripts": {
       "run": [
