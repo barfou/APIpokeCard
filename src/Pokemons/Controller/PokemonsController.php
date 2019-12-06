@@ -28,7 +28,7 @@ class PokemonsController
         // $content = '{"id":521583, "name":"symfony-docs", ...}'
         //$content = $response->toArray();
         // $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
-        return $response;
+        return $contentType. "\n" .$content;
     }
 
     public function getPokemonAction(Request $request, Application $app)
