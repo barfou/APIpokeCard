@@ -5,6 +5,7 @@ namespace App\Pokemons\Controller;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpClient\HttpClient;
 //use App\Pokemon\Repository\PokemonRepository;
 
 class PokemonsController
@@ -12,9 +13,20 @@ class PokemonsController
     public function getListPokemonAction(Request $request, Application $app)
     {
         $url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=151";
-        $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon?offset=0&limit=151");
-        var_dump($httpsfile->http_response_code());
-        return $httpsfile;
+        //$httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon?offset=0&limit=151");
+        //return $httpsfile;
+        $client = HttpClient::create();
+        $response = $client->request('GET', $url);
+
+        $statusCode = $response->getStatusCode();
+        // $statusCode = 200
+        $contentType = $response->getHeaders()['content-type'][0];
+        // $contentType = 'application/json'
+        $content = $response->getContent();
+        // $content = '{"id":521583, "name":"symfony-docs", ...}'
+        $content = $response->toArray();
+        // $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
+        return $statusCode . " " . $content;
     }
 
     public function getPokemonAction(Request $request, Application $app)
