@@ -27,9 +27,9 @@ class PokemonsController
         
         // Check HTTP response code is 200 or not 
         if ( $get_http_response_code == 200 ) 
-            file_get_contents($url);
+            return file_get_contents($url);
         else
-            echo "<br>HTTP request not successfully!"; 
+            return "<br>HTTP request not successfully!"; 
 
         /*$client = HttpClient::create();
         $response = $client->request('GET', $url);
