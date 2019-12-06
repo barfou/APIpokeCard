@@ -12,7 +12,7 @@ class PokemonsController
     public function getListPokemonAction(Request $request, Application $app)
     {
         $url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=151";
-        $httpsfile = file_get_contents($url);
+        $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon?offset=0&limit=151");
         return $httpsfile;
     }
 
