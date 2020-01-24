@@ -46,16 +46,12 @@ class PokemonsController
         $baseInfos = $jsonDecoded->name . ' ' . $jsonDecoded->height . ' ' . $jsonDecoded->weight; // . ' ' . $jsonDecoded->sprites . ' ' .  $jsonDecoded->abilities;
         $abilitiesStdClass = $jsonDecoded->abilities;
         $abilities = "";
-        /*for($i = 0; $i > $abilitiesStdClass.size; $i++ ){
+
+        for($i = 0; $i > count((array)$abilitiesStdClass); $i++ ){
             $abilities += $abilitiesStdClass[$i]->ability->name;
         }
-        $abilities = $jsonDecoded->abilities[0]->ability->name;
-        foreach ($jsonDecoded->abilities as &$value) {
-            $abilities += $value->ability->name;
-        }*/
-        //return $baseInfos . "\r" . $abilities;
-
-        return "Size: " . count((array)$abilitiesStdClass) . " " . $abilities = $jsonDecoded->abilities[0]->ability->name;;
+        
+        return $baseInfos . "\r" . $abilities;
     }
 
     public function deleteAction(Request $request, Application $app)
