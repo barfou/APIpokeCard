@@ -43,7 +43,7 @@ class PokemonsController
         $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon/" . $parameters['name']);
         $jsonDecoded = json_decode($httpsfile);
 
-        $baseInfos = $jsonDecoded->name . ' ' . $jsonDecoded->height . ' ' . $jsonDecoded->weight; // . ' ' . $jsonDecoded->sprites
+        $baseInfos = $jsonDecoded->name . ' ' . $jsonDecoded->height . ' ' . $jsonDecoded->weight;
 
         $abilitiesStdClass = $jsonDecoded->abilities;
         $abilities = "";
@@ -51,15 +51,27 @@ class PokemonsController
             $abilities = $abilities . " " . $abilitiesStdClass[$i]->ability->name;
         }
 
-        /*$spritesStdClass = $jsonDecoded->sprites;
-        for($i = 0; $i < count((array)$spritesStdClass); $i++){
-            $sprites = $sprites . " " . $spritesStdClass[$i];
-        }*/
+        $jsonDecoded->sprites;
+        $sprites = $jsonDecoded->sprites->front_default . " " . $jsonDecoded->sprites->back_default;
 
-        $sprites = $jsonDecoded->sprites->front_default;
+        $statsStdClass = $jsonDecoded->stats;
+        $stats = "";
+        for($i = 0; $i < count((array)$statsStdClass); $i++){
+            $base_stat = $statsStdClass[$i]->base_stat;
+            $effort = $statsStdClass[$i]->effort;
+            $tabStat = $statsStdClass[$i]->stat;
 
-        return $baseInfos . "\r" . $abilities . "\n" . $sprites;
+            $stat = "";
+            for($i = 0; $i < count($stat); $i++){
+                $stat = $stat . " " . $tabStat[$y]->name . " " . $tabStat[$y]->url;
+            }
+            $stats = $stats . " " . $base_stat . " " . $effort . " " . $stat;
+        }
+
+        return $baseInfos . "\n" . $abilities . "\n" . $sprites;
     }
+
+
 
     public function deleteAction(Request $request, Application $app)
     {
