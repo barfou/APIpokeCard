@@ -54,7 +54,8 @@ class PokemonsController
             $abilities += $value->ability->name;
         }*/
         //return $baseInfos . "\r" . $abilities;
-        return "Size: " . $abilitiesStdClass.size;
+
+        return "Size: " . count((array)$abilitiesStdClass);
     }
 
     public function deleteAction(Request $request, Application $app)
