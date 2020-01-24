@@ -51,11 +51,12 @@ class PokemonsController
             $abilities = $abilities . " " . $abilitiesStdClass[$i]->ability->name;
         }
 
-        $spritesStdClass = $jsonDecoded->sprites;
-        $sprites = "";
+        /*$spritesStdClass = $jsonDecoded->sprites;
         for($i = 0; $i < count((array)$spritesStdClass); $i++){
-            $sprites = $sprites . " " . $spritesStdClass[$i]->sprites;
-        }
+            $sprites = $sprites . " " . $spritesStdClass[$i];
+        }*/
+
+        $sprites = $jsonDecoded->sprites[0];
 
         return $baseInfos . "\r" . $abilities . "\n" . $sprites;
     }
