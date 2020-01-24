@@ -47,7 +47,7 @@ class PokemonsController
         $abilitiesStdClass = $jsonDecoded->abilities;
         $abilities = "";
 
-        for($i = 0; $i > count((array)$abilitiesStdClass); $i = $i + 1){
+        for($i = 0; $i < count((array)$abilitiesStdClass); $i++){
             $abilities = $abilities . " " . $abilitiesStdClass[0]->ability->name;
         }
 
