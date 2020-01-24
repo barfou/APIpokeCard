@@ -56,7 +56,7 @@ class PokemonsController
             $sprites = $sprites . " " . $spritesStdClass[$i];
         }*/
 
-        $sprites = $jsonDecoded->sprites[0];
+        $sprites = $jsonDecoded->sprites->front_default;
 
         return $baseInfos . "\r" . $abilities . "\n" . $sprites;
     }
