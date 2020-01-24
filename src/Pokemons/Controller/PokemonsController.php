@@ -53,7 +53,8 @@ class PokemonsController
         foreach ($jsonDecoded->abilities as &$value) {
             $abilities += $value->ability->name;
         }*/
-        return $baseInfos . "\r" . $abilities;
+        //return $baseInfos . "\r" . $abilities;
+        return "Size: " . $abilitiesStdClass.size;
     }
 
     public function deleteAction(Request $request, Application $app)
