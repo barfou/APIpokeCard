@@ -52,7 +52,7 @@ class PokemonsController
         //}
         $abilities = "a";
 
-        $abilities = $abilities . $jsonDecoded->abilities[0]->ability->name;
+        $abilities = $abilities . $abilitiesStdClass[0]->ability->name;
 
 
         return $baseInfos . "\r" . $abilities;
