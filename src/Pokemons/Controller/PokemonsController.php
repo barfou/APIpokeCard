@@ -62,7 +62,7 @@ class PokemonsController
             $tabStat = $statsStdClass[$i]->stat;
 
             $stat = "";
-            for($i = 0; $i < count($stat); $i++){
+            for($i = 0; $i < count($tabStat); $i++){
                 $stat = $stat . " " . $tabStat[$y]->name . " " . $tabStat[$y]->url;
             }
             $stats = $stats . " " . $base_stat . " " . $effort . " " . $stat;
