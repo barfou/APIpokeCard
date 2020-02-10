@@ -89,7 +89,9 @@ class PokemonsController
         ///
 
         //return json_encode($baseInfos . $abilities  . $sprites . $stats);
-        return json_encode($baseInfos . $stats);
+        $baseInfosReturn = json_encode($baseInfos);
+        $statsReturn = json_encode($stats);
+        return $baseInfosReturn . "\n" . $statsReturn;
     }
 
 
