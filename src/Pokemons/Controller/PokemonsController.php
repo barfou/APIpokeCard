@@ -65,7 +65,7 @@ class PokemonsController
             $statName = $statStdClass->name;
             $statUrl = $statStdClass->url;
             
-            $stats = $stats . " " . $base_stat . " " . $effort . " " . $statName . " " . $statUrl;
+            $stats = $stats . " " . $base_stat . " " . $effort . " " . $statName . " " . $statUrl + "\n";
         } 
         ///
 
