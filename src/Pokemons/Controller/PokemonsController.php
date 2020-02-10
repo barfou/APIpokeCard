@@ -110,7 +110,7 @@ class PokemonsController
             "weight" => $weight
         ];
 
-        return json_encode($pokemonInfos);
+        return json_encode($stats);
     }
 
 
