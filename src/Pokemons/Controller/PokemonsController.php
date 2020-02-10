@@ -76,7 +76,11 @@ class PokemonsController
         }
 
         //$sprites = $jsonDecoded->sprites->front_default . " " . $jsonDecoded->sprites->back_default;
-        array_push($pokemonInfos, $jsonDecoded->sprites->front_default, $jsonDecoded->sprites->back_default);
+        $sprites = [
+            "back_default" => $jsonDecoded->sprites->back_default,
+            "front_default" => $jsonDecoded->sprites->front_default
+        ];
+        array_push($pokemonInfos, $sprites);
 
 
         //A revoir !!!
