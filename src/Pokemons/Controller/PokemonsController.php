@@ -68,15 +68,23 @@ class PokemonsController
             $base_stat = $statsStdClass[$i]->base_stat;
             $effort = $statsStdClass[$i]->effort;
             $statStdClass = $statsStdClass[$i]->stat;
-
             $statName = $statStdClass->name;
             $statUrl = $statStdClass->url;
             
-            $stats = $stats . " " . $base_stat . " " . $effort . " " . $statName . " " . $statUrl;
+            //$stats = $stats . " " . $base_stat . " " . $effort . " " . $statName . " " . $statUrl;
+            $array = [
+                "base_stat" => $base_stat,
+                "effort" => $effort, 
+                [
+                    "name" => $statName,
+                    "url" => $statUrl
+                ]
+            ];
         } 
         ///
 
-        return json_encode($baseInfos . $abilities  . $sprites . $stats); 
+        //return json_encode($baseInfos . $abilities  . $sprites . $stats);
+        return json_encode($array);
     }
 
 
