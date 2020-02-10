@@ -50,17 +50,11 @@ class PokemonsController
         $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon/" . $parameters['name']);
         $jsonDecoded = json_decode($httpsfile);
 
-        $pokemonInfos = [];
 
-        $baseInfos = [
-            "name" => $jsonDecoded->name,
-            "height" => $jsonDecoded->height,
-            "weight" => $jsonDecoded->weight
-        ];
-
-        array_push($pokemonInfos, $jsonDecoded->name, $jsonDecoded->height, $jsonDecoded->weight);
-
-        
+        $name = $jsonDecoded->name;
+        $height = $jsonDecoded->height;
+        $weight = $jsonDecoded->weight;
+        $id = $jsonDecoded->id;
 
         $abilitiesStdClass = $jsonDecoded->abilities;
         //$abilities = "";
@@ -80,7 +74,6 @@ class PokemonsController
             "back_default" => $jsonDecoded->sprites->back_default,
             "front_default" => $jsonDecoded->sprites->front_default
         ];
-        array_push($pokemonInfos, $sprites);
 
 
         //A revoir !!!
@@ -104,10 +97,18 @@ class PokemonsController
             ];
             array_push($stats, $stat);
         } 
-        array_push($pokemonInfos, $stats);
         ///
 
         //return json_encode($baseInfos . $abilities  . $sprites . $stats);
+        
+        $pokemonInfos = [
+            "abilities" => $abilities,
+            "height" => $height,
+            "id" => $id,
+            "sprites" => $sprites,
+            "stats" => $stat,
+            "weight" => $weight
+        ];
 
         return json_encode($pokemonInfos);
     }
