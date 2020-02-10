@@ -63,12 +63,13 @@ class PokemonsController
             $effort = $statsStdClass[$i]->effort;
             $statStdClass = $statsStdClass[$i]->stat;
 
+            $stat = "";
             for($i = 0; $i < count((array)$statStdClass); $i++){
-                $stats = $stats . " " . $statStdClass->name . " " . $statStdClass->url;
+                $stat = $stat . " " . $statStdClass->name . " " . $statStdClass->url;
             }
 
             
-            $stats = $stats . " " . $base_stat . " " . $effort . " " . $stats;
+            $stats = $stats . " " . $base_stat . " " . $effort;
         }
         ///
 
