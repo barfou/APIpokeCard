@@ -69,7 +69,7 @@ class PokemonsController
         } 
         ///
 
-        return $baseInfos . "\n" . $abilities . "\n" . $sprites;
+        return $baseInfos . "\n" . $abilities . "\n" . $sprites . "\n" . $stats; 
     }
 
 
