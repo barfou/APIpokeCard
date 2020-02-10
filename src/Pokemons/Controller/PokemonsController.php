@@ -106,11 +106,11 @@ class PokemonsController
             "height" => $height,
             "id" => $id,
             "sprites" => $sprites,
-            "stats" => $stat,
+            "stats" => $stats,
             "weight" => $weight
         ];
 
-        return json_encode($stats);
+        return json_encode($pokemonInfos);
     }
 
 
