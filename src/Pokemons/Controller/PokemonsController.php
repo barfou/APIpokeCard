@@ -63,7 +63,7 @@ class PokemonsController
 
         //A revoir !!!
         $statsStdClass = $jsonDecoded->stats;
-        $stats = "";
+        $stats = [];
         for($i = 0; $i < count((array)$statsStdClass); $i++){
             $base_stat = $statsStdClass[$i]->base_stat;
             $effort = $statsStdClass[$i]->effort;
@@ -72,7 +72,7 @@ class PokemonsController
             $statUrl = $statStdClass->url;
             
             //$stats = $stats . " " . $base_stat . " " . $effort . " " . $statName . " " . $statUrl;
-            $array = [
+            $stat = [
                 "base_stat" => $base_stat,
                 "effort" => $effort, 
                 [
@@ -80,11 +80,12 @@ class PokemonsController
                     "url" => $statUrl
                 ]
             ];
+            array_push($stats, $stat);
         } 
         ///
 
         //return json_encode($baseInfos . $abilities  . $sprites . $stats);
-        return json_encode($array);
+        return json_encode($stats);
     }
 
 
