@@ -12,7 +12,7 @@ class PokemonsController
 {
     public function getListPokemonAction(Request $request, Application $app)
     {
-        $url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=151";
+        $url = "https://pokeapi.co/api/v2/pokemon";
 
         //Create Response object
         $response = new Response();
@@ -22,11 +22,18 @@ class PokemonsController
             $headers = get_headers($url); 
             return substr($headers[0], 9, 3); 
         } 
+
+        //"results": [
+        //    {
+        //        "name": "bulbasaur",
+        //        "url": "https://pokeapi.co/api/v2/pokemon/1/"
+        //        "urlImage": "https://pokeapi.co/api/v2/pokemon/1/"
+        //    },
              
         // Check HTTP response code is 200 or not 
         if (get_http_response_code($url) == 200 ){
-            $response->setContent(file_get_contents($url));
             $response->headers->set('Content-Type', 'application/json');
+            $response->setContent(file_get_contents($url));
             $response->setStatusCode(Response::HTTP_OK);
         }
         else{
@@ -69,7 +76,7 @@ class PokemonsController
         } 
         ///
 
-        return $baseInfos . "\n" . $abilities . "\n" . $sprites . "\n" . $stats; 
+        return json_encode($baseInfos . $abilities  . $sprites . $stats); 
     }
 
 
