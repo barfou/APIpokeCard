@@ -75,7 +75,7 @@ class PokemonsController
             $stat = [
                 "base_stat" => $base_stat,
                 "effort" => $effort, 
-                [
+                "stat" => [
                     "name" => $statName,
                     "url" => $statUrl
                 ]
