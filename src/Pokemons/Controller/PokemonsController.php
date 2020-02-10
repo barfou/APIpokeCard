@@ -51,7 +51,6 @@ class PokemonsController
             $abilities = $abilities . " " . $abilitiesStdClass[$i]->ability->name;
         }
 
-        $jsonDecoded->sprites;
         $sprites = $jsonDecoded->sprites->front_default . " " . $jsonDecoded->sprites->back_default;
 
 
@@ -63,14 +62,11 @@ class PokemonsController
             $effort = $statsStdClass[$i]->effort;
             $statStdClass = $statsStdClass[$i]->stat;
 
-            $stat = "";
-            for($i = 0; $i < count((array)$statStdClass); $i++){
-                $stat = $stat . " " . $statStdClass->name . " " . $statStdClass->url;
-            }
-
+            $statName = $statStdClass->name;
+            $statUrl = $statStdClass->url;
             
-            $stats = $stats . " " . $base_stat . " " . $effort;
-        }
+            $stats = $stats . " " . $base_stat . " " . $effort . " " . $statName . " " . $statUrl;
+        } 
         ///
 
         return $baseInfos . "\n" . $abilities . "\n" . $sprites;
