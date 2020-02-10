@@ -50,19 +50,33 @@ class PokemonsController
         $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon/" . $parameters['name']);
         $jsonDecoded = json_decode($httpsfile);
 
+        $pokemonInfos = [];
+
         $baseInfos = [
             "name" => $jsonDecoded->name,
             "height" => $jsonDecoded->height,
             "weight" => $jsonDecoded->weight
         ];
 
+        array_push($pokemonInfos, $jsonDecoded->name, $jsonDecoded->height, $jsonDecoded->weight);
+
+        
+
         $abilitiesStdClass = $jsonDecoded->abilities;
-        $abilities = "";
+        //$abilities = "";
+        $abilities = [];
         for($i = 0; $i < count((array)$abilitiesStdClass); $i++){
-            $abilities = $abilities . " " . $abilitiesStdClass[$i]->ability->name;
+            //$abilities =  $abilities . " " . $abilitiesStdClass[$i]->ability->name;
+            $abilitie = [
+                "name" => $abilitiesStdClass[$i]->ability->name,
+                "url" => $abilitiesStdClass[$i]->ability->url
+            ];
+
+            array_push($abilities, $abilitie );
         }
 
-        $sprites = $jsonDecoded->sprites->front_default . " " . $jsonDecoded->sprites->back_default;
+        //$sprites = $jsonDecoded->sprites->front_default . " " . $jsonDecoded->sprites->back_default;
+        array_push($pokemonInfos, $jsonDecoded->sprites->front_default, $jsonDecoded->sprites->back_default);
 
 
         //A revoir !!!
@@ -86,12 +100,12 @@ class PokemonsController
             ];
             array_push($stats, $stat);
         } 
+        array_push($pokemonInfos, $stats);
         ///
 
         //return json_encode($baseInfos . $abilities  . $sprites . $stats);
-        $baseInfosReturn = json_encode($baseInfos);
-        $statsReturn = json_encode($stats);
-        return $baseInfosReturn . "\n" . $statsReturn;
+
+        return json_encode($pokemonInfos);
     }
 
 
