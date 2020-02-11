@@ -27,7 +27,8 @@ class PokemonRepository
         $queryBuilder
             ->select('COUNT(pr.*)')
             ->from('PokemonRef', 'pr');
-        $count = $queryBuilder->getQuery()->getSingleScalarResult();
+        $statement = $queryBuilder->execute();
+        $count = $statement->getSingleScalarResult();
         return $count;
     }
 
