@@ -40,23 +40,23 @@ class PokemonsController
             $results = [];
             for($i = 0; $i < count((array)$resultsStdClass); $i++){
                 $name = $resultsStdClass[$i]->name;
-                $url = $resultsStdClass[$i]->url;
-
-                /**$parameters = [
-                    'name' => , 
-                    'urlImgBack' => ,
-                    'urlImgFront' => 
-                ];**/
-
-                /**if($count == 1) {
-                    insertImgAction()
-                }**/
-                
+                $url = $resultsStdClass[$i]->url;               
 
                 $sprites = $app['repository.pokemon']->getImgByName($name);
 
                 $urlBackImg = $sprites["urlBackImg"];
                 $urlFrontImg = $sprites["urlFrontImg"];
+                
+                $bdCount = $app['repository.pokemon']->getCount();
+
+                if ($count != $bdCount) {
+                    $parameters = [
+                        'name' => $name, 
+                        'urlImgBack' => $urlBackImg,
+                        'urlImgFront' => $urlFrontImg
+                    ];   
+                    insertImgAction($parameters);
+                }
 
                 $result = [
                     "name" => $name,

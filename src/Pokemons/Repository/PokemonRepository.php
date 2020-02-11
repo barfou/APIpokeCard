@@ -21,6 +21,17 @@ class PokemonRepository
         $this->db = $db;
     }
 
+    public function getCount()
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->select('COUNT(pr.*)')
+            ->from('PokemonRef', 'pr');
+        $statement = $queryBuilder->execute();
+        $pokemonData = $statement->fetchAll();
+        return $pokemonData;
+    }
+
     public function getImgByName($name)
     {
         $queryBuilder = $this->db->createQueryBuilder();
