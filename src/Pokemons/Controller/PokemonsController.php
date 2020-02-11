@@ -44,13 +44,13 @@ class PokemonsController
 
                 $sprites = $app['repository.pokemon']->getImgByName($name);
 
-                $urlImagBack = $sprites[0];
-                $urlImagFront = $sprites[1];
+                //$urlImagBack = $sprites[0];
+                //$urlImagFront = $sprites[1];
                 $result = [
                     "name" => $name,
                     "url" => $url,
-                    "urlImgBack" => $urlImagBack,
-                    "urlImgFront" => $urlImagFront
+                    "urlImgBack" => $sprites,
+                    "urlImgFront" => $sprites
                 ];
                 array_push($results, $result);
             }

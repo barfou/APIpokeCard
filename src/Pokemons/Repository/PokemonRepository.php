@@ -32,16 +32,18 @@ class PokemonRepository
         $statement = $queryBuilder->execute();
         $pokemonData = $statement->fetchAll();
         if($pokemonData){
-            $sprites = [
+            /**$sprites = [
                 "urlBackImg" => $pokemonData[0]['imgUrlBack'],
                 "urlFrontImg" => $pokemonData[0]['imgUrlFront']
-            ];
+            ];**/
+            $sprites = $pokemonData[0]['imgUrlFront'];
           }
           else {
-            $sprites = [
+            /**$sprites = [
                 "urlBackImg" => "",
                 "urlFrontImg" => ""
-            ];
+            ];**/
+            $sprites = "";
           }
           return $sprites;
     }
