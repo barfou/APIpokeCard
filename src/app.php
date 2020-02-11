@@ -18,5 +18,5 @@ $app['repository.user'] = function ($app) {
 };
 
 $app['repository.pokemon'] = function ($app) {
-    return new App\Pokemon\Repository\PokemonRepository($app['db'], $app['repository.pokemon']);
+    return new App\Pokemons\Repository\PokemonRepository($app['db'], $app['repository.pokemon']);
 };
