@@ -24,11 +24,11 @@ class PokemonRepository
     public function getCount()
     {
         $queryBuilder = $this->db->createQueryBuilder();
-        $queryBuilder
-            ->select('COUNT(pr.*)')
-            ->from('PokemonRef', 'pr');
-        $statement = $queryBuilder->execute();
-        $count = $statement->getSingleScalarResult();
+        $count = $queryBuilder->select('count(p.id)')
+            ->from('Products', 'p')
+            ->getQuery()
+            ->getSingleScalarResult();
+
         return $count;
     }
 
