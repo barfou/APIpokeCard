@@ -14,12 +14,24 @@ class PokemonRepository
      */
     protected $db;
 
-    protected $userRepository;
-
     public function __construct(Connection $db, UserRepository $userRepository)
     {
         $this->db = $db;
         $this->userRepository = $userRepository;
+    }
+
+    public function getImgByName($name)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->select('pr.*')
+            ->from('PokemonRef', 'pr')
+            ->where('name = ?')
+            ->setParameter(0, $name);
+        $statement = $queryBuilder->execute();
+        $pokemonData = $statement->fetchAll();
+
+        return new pokemon($pokemonData[0]['name'], $pokemonData[0]['imgUrlBack'], $pokemonData[0]['imgUrlFront']);
     }
 
     /**

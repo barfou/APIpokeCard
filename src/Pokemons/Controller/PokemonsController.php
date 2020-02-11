@@ -6,7 +6,7 @@ use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpClient\HttpClient;
-//use App\Pokemon\Repository\PokemonRepository;
+use App\Pokemon\Repository\PokemonRepository;
 
 class PokemonsController
 {
@@ -22,17 +22,15 @@ class PokemonsController
             $headers = get_headers($url); 
             return substr($headers[0], 9, 3); 
         } 
-
-        //"results": [
-        //    {
-        //        "name": "bulbasaur",
-        //        "url": "https://pokeapi.co/api/v2/pokemon/1/"
-        //        "urlImage": "https://pokeapi.co/api/v2/pokemon/1/"
-        //    },
              
         // Check HTTP response code is 200 or not 
         if (get_http_response_code($url) == 200 ){
             $response->headers->set('Content-Type', 'application/json');
+
+            //if count base different count api
+            //
+            //
+
             $httpsfile = file_get_contents($url);
             $jsonDecoded = json_decode($httpsfile);
 
@@ -46,9 +44,16 @@ class PokemonsController
                 $name = $resultsStdClass[$i]->name;
                 $url = $resultsStdClass[$i]->url;
 
+                $pokemon = $app['pokemons.repository.pokemon']->getImgByName($name);
+
+                $urlImagBack = $pokemon->getUrlImgBack;
+                $urlImagFront = $pokemon->getUrlImgFront;
+
                 $result = [
                     "name" => $name,
-                    "url" => $url, 
+                    "url" => $url,
+                    "urlImgBack" => $urlImagBack,
+                    "urlImgFront" => $urlImagFront
                 ];
                 array_push($results, $result);
             }
