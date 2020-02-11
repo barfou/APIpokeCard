@@ -11,6 +11,7 @@ class UserRepository
      * @var \Doctrine\DBAL\Connection
      */
     protected $db;
+    
     public function __construct(Connection $db)
     {
         $this->db = $db;
@@ -68,7 +69,7 @@ class UserRepository
 
 
 
-   
+
     public function delete($id)
     {
         $queryBuilder = $this->db->createQueryBuilder();

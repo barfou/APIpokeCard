@@ -13,7 +13,6 @@ class UsersController
         $users = $app['repository.user']->getAll();
         $usersEncodeJson = json_encode($users);
         return $usersEncodeJson;
-        //return $app['twig']->render('users.list.html.twig', array('users' => $users));
     }
 
     public function getUserAction(Request $request, Application $app)
@@ -22,7 +21,6 @@ class UsersController
         $user = $app['repository.user']->getById($parameters['id']);
         $userEncodeJson = json_encode($user);
         return $userEncodeJson;
-        //return $app['twig']->render('users.list.html.twig', array('users' => $users));
     }
 
     public function deleteAction(Request $request, Application $app)

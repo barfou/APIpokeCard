@@ -20,6 +20,16 @@ class User
         $this->id = $id;
     }
 
+    public function setMail($mail)
+    {
+        $this->mail = $mail;
+    }
+
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
     public function setLogin($login)
     {
         $this->login = $login;
@@ -34,6 +44,17 @@ class User
     {
         return $this->name;
     }
+
+    public function getMail()
+    {
+        return $this->mail;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
     public function toArray()
     {
         $array = array();
