@@ -31,14 +31,16 @@ class PokemonRepository
             ->setParameter(0, $name);
         $statement = $queryBuilder->execute();
         $pokemonData = $statement->fetchAll();
-
-        $sprites = [
-            "backImg" => $pokemonData[0]['imgUrlBack'],
-            "frontImg" => $pokemonData[0]['imgUrlFront']
-        ];
-        return $sprites;
-        //return new pokemon($pokemonData[0]['name'], $pokemonData[0]['imgUrlBack'], $pokemonData[0]['imgUrlFront']);
-        //return new pokemon("cc", "back", "front");
+        if($pokemonData){
+            $sprites = [
+                "urlBackImg" => $pokemonData[0]['imgUrlBack'],
+                "urlFrontImg" => $pokemonData[0]['imgUrlFront']
+            ];
+            return $sprites;
+          }
+          else {
+            return [];
+          }
     }
 
     /**
