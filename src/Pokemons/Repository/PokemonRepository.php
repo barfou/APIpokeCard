@@ -36,11 +36,14 @@ class PokemonRepository
                 "urlBackImg" => $pokemonData[0]['imgUrlBack'],
                 "urlFrontImg" => $pokemonData[0]['imgUrlFront']
             ];
-            return $sprites;
           }
           else {
-            return [];
+            $sprites = [
+                "urlBackImg" => "",
+                "urlFrontImg" => ""
+            ];
           }
+          return $sprites;
     }
 
     /**
