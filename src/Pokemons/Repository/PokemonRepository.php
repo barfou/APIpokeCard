@@ -14,10 +14,12 @@ class PokemonRepository
      */
     protected $db;
 
-    public function __construct(Connection $db, UserRepository $userRepository)
+    protected $pokemonRepository;
+
+    public function __construct(Connection $db, PokemonRepository $pokemonRepository)
     {
         $this->db = $db;
-        $this->userRepository = $userRepository;
+        $this->pokemonRepository = $pokemonRepository;
     }
 
     public function getImgByName($name)
