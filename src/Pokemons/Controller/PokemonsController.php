@@ -47,70 +47,82 @@ class PokemonsController
     public function getPokemonAction(Request $request, Application $app)
     {
         $parameters = $request->attributes->all();
-        $httpsfile = file_get_contents("https://pokeapi.co/api/v2/pokemon/" . $parameters['name']);
-        $jsonDecoded = json_decode($httpsfile);
+        $url = "https://pokeapi.co/api/v2/pokemon/" . $parameters['name'];
 
+        //Create Response object
+        $response = new Response();
 
-        $name = $jsonDecoded->name;
-        $height = $jsonDecoded->height;
-        $weight = $jsonDecoded->weight;
-        $id = $jsonDecoded->id;
-
-        $abilitiesStdClass = $jsonDecoded->abilities;
-        //$abilities = "";
-        $abilities = [];
-        for($i = 0; $i < count((array)$abilitiesStdClass); $i++){
-            //$abilities =  $abilities . " " . $abilitiesStdClass[$i]->ability->name;
-            $abilitie = [
-                "name" => $abilitiesStdClass[$i]->ability->name,
-                "url" => $abilitiesStdClass[$i]->ability->url
-            ];
-
-            array_push($abilities, $abilitie );
-        }
-
-        //$sprites = $jsonDecoded->sprites->front_default . " " . $jsonDecoded->sprites->back_default;
-        $sprites = [
-            "back_default" => $jsonDecoded->sprites->back_default,
-            "front_default" => $jsonDecoded->sprites->front_default
-        ];
-
-
-        //A revoir !!!
-        $statsStdClass = $jsonDecoded->stats;
-        $stats = [];
-        for($i = 0; $i < count((array)$statsStdClass); $i++){
-            $base_stat = $statsStdClass[$i]->base_stat;
-            $effort = $statsStdClass[$i]->effort;
-            $statStdClass = $statsStdClass[$i]->stat;
-            $statName = $statStdClass->name;
-            $statUrl = $statStdClass->url;
-            
-            //$stats = $stats . " " . $base_stat . " " . $effort . " " . $statName . " " . $statUrl;
-            $stat = [
-                "base_stat" => $base_stat,
-                "effort" => $effort, 
-                "stat" => [
-                    "name" => $statName,
-                    "url" => $statUrl
-                ]
-            ];
-            array_push($stats, $stat);
+        // Function to get HTTP response code  
+        function get_http_response_code($url) { 
+            $headers = get_headers($url); 
+            return substr($headers[0], 9, 3); 
         } 
-        ///
 
-        //return json_encode($baseInfos . $abilities  . $sprites . $stats);
-        
-        $pokemonInfos = [
-            "abilities" => $abilities,
-            "height" => $height,
-            "id" => $id,
-            "sprites" => $sprites,
-            "stats" => $stats,
-            "weight" => $weight
-        ];
+        // Check HTTP response code is 200 or not 
+        if (get_http_response_code($url) == 200 ){
+            $response->headers->set('Content-Type', 'application/json');
 
-        return json_encode($pokemonInfos);
+            $httpsfile = file_get_contents($url);
+            $jsonDecoded = json_decode($httpsfile);
+
+            $name = $jsonDecoded->name;
+            $height = $jsonDecoded->height;
+            $weight = $jsonDecoded->weight;
+            $id = $jsonDecoded->id;
+
+            $abilitiesStdClass = $jsonDecoded->abilities;
+            $abilities = [];
+            for($i = 0; $i < count((array)$abilitiesStdClass); $i++){
+                $abilitie = [
+                    "name" => $abilitiesStdClass[$i]->ability->name,
+                    "url" => $abilitiesStdClass[$i]->ability->url
+                ];
+                array_push($abilities, $abilitie );
+            }
+
+            $sprites = [
+                "back_default" => $jsonDecoded->sprites->back_default,
+                "front_default" => $jsonDecoded->sprites->front_default
+            ];
+
+            $statsStdClass = $jsonDecoded->stats;
+            $stats = [];
+            for($i = 0; $i < count((array)$statsStdClass); $i++){
+                $base_stat = $statsStdClass[$i]->base_stat;
+                $effort = $statsStdClass[$i]->effort;
+                $statStdClass = $statsStdClass[$i]->stat;
+                $statName = $statStdClass->name;
+                $statUrl = $statStdClass->url;
+
+                $stat = [
+                    "base_stat" => $base_stat,
+                    "effort" => $effort, 
+                    "stat" => [
+                        "name" => $statName,
+                        "url" => $statUrl
+                    ]
+                ];
+                array_push($stats, $stat);
+            }
+            
+            $pokemonInfos = [
+                "abilities" => $abilities,
+                "height" => $height,
+                "id" => $id,
+                "sprites" => $sprites,
+                "stats" => $stats,
+                "weight" => $weight
+            ];
+
+            $response->setContent(json_encode($pokemonInfos));
+            $response->setStatusCode(Response::HTTP_OK);
+        }
+        else{
+            $response->setContent("HTTP request not successfully!");
+            $response->headers->set('Content-Type', 'text/html');
+            $response->setStatusCode(Response::HTTP_NOT_FOUND);
+        }  
+        return $response;
     }
 
 
