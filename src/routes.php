@@ -21,8 +21,8 @@ $app->post('/users/delete/{id}', 'App\Users\Controller\UsersController::deleteAc
 $app->post('/users/save', 'App\Users\Controller\UsersController::saveAction')->bind('users.save');
 
 //Pokemon
-$app->get('/pokemons', 'App\Pokemons\Controller\PokemonsController::getListPokemonAction')->bind('pokemons.list');
 $app->get('/pokemons?offset={offset}&limit={limit}', 'App\Pokemons\Controller\PokemonsController::getListPokemonAction')->bind('pokemons.list');
+$app->get('/pokemons', 'App\Pokemons\Controller\PokemonsController::getListPokemonAction')->bind('pokemons.list');
 $app->get('/pokemons/insertImg', 'App\Pokemons\Controller\PokemonsController::insertImgAction')->bind('pokemons.insrtImg');
 $app->get('/pokemons/{name}', 'App\Pokemons\Controller\PokemonsController::getPokemonAction')->bind('pokemons.entity');
 
