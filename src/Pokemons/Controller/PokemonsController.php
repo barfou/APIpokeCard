@@ -80,8 +80,10 @@ class PokemonsController
 
     public function getPokemonAction(Request $request, Application $app)
     {
-        $parameters = $request->attributes->all();
-        $url = "https://pokeapi.co/api/v2/pokemon/" . $parameters['name'];
+        //$parameters = $request->attributes->all();
+        //$url = "https://pokeapi.co/api/v2/pokemon/" . $parameters['name'];
+        $name = $_GET['name'];
+        $url = "https://pokeapi.co/api/v2/pokemon/" . $name;
 
         //Create Response object
         $response = new Response();

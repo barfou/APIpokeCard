@@ -24,7 +24,7 @@ $app->post('/users/save', 'App\Users\Controller\UsersController::saveAction')->b
 $app->get('/pokemons', 'App\Pokemons\Controller\PokemonsController::getListPokemonAction')->bind('pokemons.list');
 //$app->get('/pokemons', 'App\Pokemons\Controller\PokemonsController::getListPokemonAction')->bind('pokemons.list');
 $app->get('/pokemons/insertImg', 'App\Pokemons\Controller\PokemonsController::insertImgAction')->bind('pokemons.insrtImg');
-$app->get('/pokemons/name={name}', 'App\Pokemons\Controller\PokemonsController::getPokemonAction')->bind('pokemons.entity');
+$app->get('/pokemons/detail', 'App\Pokemons\Controller\PokemonsController::getPokemonAction')->bind('pokemons.entity');
 
 $app->get('/pokemons/edit/{id}', 'App\Pokemons\Controller\PokemonsController::editAction')->bind('pokemons.edit');
 $app->get('/pokemons/new', 'App\Pokemons\Controller\PokemonsController::newAction')->bind('pokemons.new');
