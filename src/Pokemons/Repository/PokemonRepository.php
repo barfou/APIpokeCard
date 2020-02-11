@@ -48,6 +48,24 @@ class PokemonRepository
           return $sprites;
     }
 
+    public function insertImg($parameters)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->insert('PokemonRef')
+            ->values(
+                array(
+                    'name' => ':name',
+                    'urlImgBack' => ':urlImgBack',
+                    'urlImgFront' => ':urlImgFront'
+                )
+            )
+            ->setParameter(':name', $parameters['name'])
+            ->setParameter(':urlImgBack', $parameters['urlImgBack'])
+            ->setParameter(':urlImgFront', $parameters['urlImgFront']);
+        $statement = $queryBuilder->execute();
+    }
+
     /**
      * Returns a collection of pokemons.
      *

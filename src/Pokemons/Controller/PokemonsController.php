@@ -42,14 +42,28 @@ class PokemonsController
                 $name = $resultsStdClass[$i]->name;
                 $url = $resultsStdClass[$i]->url;
 
+                /**$parameters = [
+                    'name' => , 
+                    'urlImgBack' => ,
+                    'urlImgFront' => 
+                ];**/
+
+                /**if($count == 1) {
+                    insertImgAction()
+                }**/
+                
+
                 $sprites = $app['repository.pokemon']->getImgByName($name);
 
-                //$urlImagBack = $sprites[0];
-                //$urlImagFront = $sprites[1];
+                $urlBackImg = $sprites["urlBackImg"];
+                $urlFrontImg = $sprites["urlFrontImg"];
+
                 $result = [
                     "name" => $name,
                     "url" => $url,
-                    "urlImg" => $sprites
+                    "urlBackImg" => $urlBackImg,
+                    "urlFrontImg" => $urlFrontImg
+                    //"urlImg" => $sprites
                 ];
                 array_push($results, $result);
             }
@@ -153,9 +167,15 @@ class PokemonsController
         return $response;
     }
 
+    public function insertImgAction(Request $request, Application $app, $parameters)
+    {
+        $app['repository.pokemon']->getImgByName($parameters['name'], $parameters['urlImgBack'], $parameters['urlImgFront']);
+    }
 
 
-    public function deleteAction(Request $request, Application $app)
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**public function deleteAction(Request $request, Application $app)
     {
         $parameters = $request->attributes->all();
         $app['repository.device']->delete($parameters['id']);
@@ -188,5 +208,5 @@ class PokemonsController
         $users = $app['repository.user']->getAll();
 
         return $app['twig']->render('device.form.html.twig', array('users' => $users));
-    }
+    }**/
 }
