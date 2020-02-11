@@ -50,7 +50,7 @@ class PokemonsController
                     "name" => $name,
                     "url" => $url, 
                 ];
-                array_push($results, $results);
+                array_push($results, $result);
             }
 
             $pokemonInfos = [
