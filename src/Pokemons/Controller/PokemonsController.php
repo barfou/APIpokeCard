@@ -177,8 +177,9 @@ class PokemonsController
                 'urlImgBack' => $urlBackImg,
                 'urlImgFront' => $urlFrontImg
             ];   
-            $bool = $app['repository.pokemon']->insertImg($parameters);
+            $app['repository.pokemon']->insertImg($parameters);
         }
+        return "OK";
     }
 
 
