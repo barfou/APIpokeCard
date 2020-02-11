@@ -167,10 +167,18 @@ class PokemonsController
         for($i = 0; $i < count((array)$resultsStdClass); $i++){
             $name = $resultsStdClass[$i]->name;           
 
-            $sprites = $app['repository.pokemon']->getImgByName($name);
+            $urldetail = "https://pokeapi.co/api/v2/pokemon/" . $parameters['name'];
 
-            $urlBackImg = $sprites["urlBackImg"];
-            $urlFrontImg = $sprites["urlFrontImg"];
+            $httpsfile = file_get_contents($urldetail);
+            $jsonDecoded = json_decode($httpsfile);
+
+            $sprites = [
+                "back_default" => $jsonDecoded->sprites->back_default,
+                "front_default" => $jsonDecoded->sprites->front_default
+            ];
+
+            $urlBackImg = $sprites["back_default"];
+            $urlFrontImg = $sprites["front_default"];
             
             $parameters = [
                 'name' => $name, 
