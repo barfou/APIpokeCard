@@ -24,8 +24,8 @@ class PokemonRepository
     public function getCount()
     {
         $queryBuilder = $this->db->createQueryBuilder();
-        $queryBuilder->select('count(p.id)')
-            ->from('Products', 'p');
+        $queryBuilder->select('count(pr.*)')
+            ->from('PokemonRef', 'pr');
             $count = $queryBuilder->execute()->fetchAll();
 
         return $count;
