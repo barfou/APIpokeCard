@@ -33,7 +33,34 @@ class PokemonsController
         // Check HTTP response code is 200 or not 
         if (get_http_response_code($url) == 200 ){
             $response->headers->set('Content-Type', 'application/json');
-            $response->setContent(file_get_contents($url));
+            $httpsfile = file_get_contents($url);
+            $jsonDecoded = json_decode($httpsfile);
+
+            $count = $jsonDecoded->count;
+            $next = $jsonDecoded->next;
+            $previous = $jsonDecoded->previous;
+
+            $resultsStdClass = $jsonDecoded->results;
+            $results = [];
+            for($i = 0; $i < count((array)$resultsStdClass); $i++){
+                $name = $resultsStdClass[$i]->name;
+                $url = $resultsStdClass[$i]->url;
+
+                $result = [
+                    "name" => $name,
+                    "url" => $url, 
+                ];
+                array_push($results, $results);
+            }
+
+            $pokemonInfos = [
+                "count" => $count,
+                "next" => $next,
+                "previous" => $previous,
+                "results" => $results
+            ];
+
+            $response->setContent(json_encode($pokemonInfos));
             $response->setStatusCode(Response::HTTP_OK);
         }
         else{
