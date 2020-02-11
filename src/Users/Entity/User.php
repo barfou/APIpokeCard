@@ -4,13 +4,15 @@ class User
 {
     protected $id;
     protected $login;
-    //protected $mail;
-    //protected $password;
+    protected $mail;
+    protected $password;
 
-    public function __construct($id, $login)
+    public function __construct($id, $login, $mail, $password)
     {
         $this->id = $id;
         $this->login = $login;
+        $this->mail = $mail;
+        $this->password = $password;
     }
 
     public function setId($id)
@@ -37,6 +39,8 @@ class User
         $array = array();
         $array['id'] = $this->id;
         $array['login'] = $this->login;
+        $array['mail'] = $this->mail;
+        $array['password'] = $this->password;
 
         return $array;
     }
