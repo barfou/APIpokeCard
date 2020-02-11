@@ -157,7 +157,7 @@ class PokemonsController
 
     public function insertImgAction(Request $request, Application $app)
     {
-        $url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=964";
+        $url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=1";
 
         $httpsfile = file_get_contents($url);
         $jsonDecoded = json_decode($httpsfile);
