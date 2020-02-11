@@ -155,9 +155,30 @@ class PokemonsController
         return $response;
     }
 
-    public function insertImgAction(Request $request, Application $app, $parameters)
+    public function insertImgAction(Request $request, Application $app)
     {
-        $app['repository.pokemon']->getImgByName($parameters['name'], $parameters['urlImgBack'], $parameters['urlImgFront']);
+        $url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=964";
+
+        $httpsfile = file_get_contents($url);
+        $jsonDecoded = json_decode($httpsfile);
+
+        $resultsStdClass = $jsonDecoded->results;
+        $results = [];
+        for($i = 0; $i < count((array)$resultsStdClass); $i++){
+            $name = $resultsStdClass[$i]->name;           
+
+            $sprites = $app['repository.pokemon']->getImgByName($name);
+
+            $urlBackImg = $sprites["urlBackImg"];
+            $urlFrontImg = $sprites["urlFrontImg"];
+            
+            $parameters = [
+                'name' => $name, 
+                'urlImgBack' => $urlBackImg,
+                'urlImgFront' => $urlFrontImg
+            ];   
+            $bool = $app['repository.pokemon']->insertImg($parameters);
+        }
     }
 
 
