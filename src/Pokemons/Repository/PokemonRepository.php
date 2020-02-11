@@ -26,10 +26,12 @@ class PokemonRepository
         $queryBuilder = $this->db->createQueryBuilder();
         $count = $queryBuilder->select('count(p.id)')
             ->from('Products', 'p')
-            ->getQuery()
+            ->fetchAll()
             ->getSingleScalarResult();
 
         return $count;
+
+        
     }
 
     public function getImgByName($name)
