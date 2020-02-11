@@ -55,7 +55,7 @@ class PokemonsController
                         'urlImgBack' => $urlBackImg,
                         'urlImgFront' => $urlFrontImg
                     ];   
-                    insertImgAction($parameters);
+                    $this->insertImgAction($parameters);
                 //}
 
                 $result = [
