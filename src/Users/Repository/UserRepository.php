@@ -30,17 +30,18 @@ class UserRepository
     */
    public function getAll()
    {
-       $queryBuilder = $this->db->createQueryBuilder();
-       $queryBuilder
-           ->select('u.*')
-           ->from('User', 'u');
-       $statement = $queryBuilder->execute();
-       $usersData = $statement->fetchAll();
-       foreach ($usersData as $userData) {
-           //$userEntityList[$userData['id']] = new User($userData['id'], $userData['login'], $userData['mail'], $userData['password']);
-           array_push($userEntityList, new User($userData['id'], $userData['login'], $userData['mail'], $userData['password']));
-       }
-       return $userEntityList;
+      $userEntityList = [];
+      $queryBuilder = $this->db->createQueryBuilder();
+      $queryBuilder
+          ->select('u.*')
+          ->from('User', 'u');
+      $statement = $queryBuilder->execute();
+      $usersData = $statement->fetchAll();
+      foreach ($usersData as $userData) {
+          //$userEntityList[$userData['id']] = new User($userData['id'], $userData['login'], $userData['mail'], $userData['password']);
+          array_push($userEntityList, new User($userData['id'], $userData['login'], $userData['mail'], $userData['password']));
+      }
+      return $userEntityList;
    }
    /**
     * Returns an User object.
