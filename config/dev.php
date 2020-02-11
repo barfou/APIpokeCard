@@ -14,6 +14,6 @@ $app['db.options'] = array(
     'port' => '3306',
     'dbname' => 'bdPokeCard',
     'user' => 'admin01',
-    'password' => '123',
+    'password' => '',
 );
 
