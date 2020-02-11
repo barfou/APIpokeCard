@@ -49,8 +49,7 @@ class PokemonsController
                 $result = [
                     "name" => $name,
                     "url" => $url,
-                    "urlImgBack" => $sprites[0],
-                    "urlImgFront" => $sprites
+                    "urlImg" => $sprites
                 ];
                 array_push($results, $result);
             }
