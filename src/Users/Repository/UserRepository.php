@@ -68,10 +68,18 @@ class UserRepository
        $statement = $queryBuilder->execute();
        $userData = $statement->fetchAll();
       if($userData){
-        return new User($userData[0]['id'], $userData[0]['login'], $userData[0]['mail'], $userData[0]['password']);
+        $user = [
+          "id" => $userData[0]['id'],
+          "login" => $userData[0]['login'],
+          "mail" => $userData[0]['mail'],
+          "password" => $userData[0]['password']
+        ];
+        return $user;
+        //return new User($userData[0]['id'], $userData[0]['login'], $userData[0]['mail'], $userData[0]['password']);
       }
       else {
-        return new User("","","", "");
+        return [];
+        //return new User("","","", "");
       }
    }
 
