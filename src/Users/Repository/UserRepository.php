@@ -65,6 +65,10 @@ class UserRepository
         return new User("","","");
       }
    }
+
+
+
+   
     public function delete($id)
     {
         $queryBuilder = $this->db->createQueryBuilder();
