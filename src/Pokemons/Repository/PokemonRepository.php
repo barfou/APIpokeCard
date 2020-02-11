@@ -24,10 +24,9 @@ class PokemonRepository
     public function getCount()
     {
         $queryBuilder = $this->db->createQueryBuilder();
-        $count = $queryBuilder->select('count(p.id)')
-            ->from('Products', 'p')
-            ->fetchAll()
-            ->getSingleScalarResult();
+        $queryBuilder->select('count(p.id)')
+            ->from('Products', 'p');
+            $count = $queryBuilder->execute()->fetchAll();
 
         return $count;
 
