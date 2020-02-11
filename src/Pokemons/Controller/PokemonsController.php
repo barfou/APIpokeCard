@@ -165,7 +165,7 @@ class PokemonsController
         $resultsStdClass = $jsonDecoded->results;
         $results = [];
         for($i = 0; $i < count((array)$resultsStdClass); $i++){
-            $name = $resultsStdClass[$i-1]->name;           
+            $name = $resultsStdClass[$i + 1]->name;           
 
             $urldetail = "https://pokeapi.co/api/v2/pokemon/" . $parameters['name'];
 
