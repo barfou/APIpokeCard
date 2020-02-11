@@ -21,7 +21,7 @@ class PokemonRepository
         $this->db = $db;
     }
 
-    public function getCount()
+    /**public function getCount()
     {
         $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder->select('count(pr.*)')
@@ -31,7 +31,7 @@ class PokemonRepository
         return $count;
 
         
-    }
+    }**/
 
     public function getImgByName($name)
     {

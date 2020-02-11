@@ -49,21 +49,20 @@ class PokemonsController
                 
                 $bdCount = $app['repository.pokemon']->getCount();
 
-                if ($count != $bdCount) {
+                //if ($count != $bdCount) {
                     $parameters = [
                         'name' => $name, 
                         'urlImgBack' => $urlBackImg,
                         'urlImgFront' => $urlFrontImg
                     ];   
                     insertImgAction($parameters);
-                }
+                //}
 
                 $result = [
                     "name" => $name,
                     "url" => $url,
                     "urlBackImg" => $urlBackImg,
                     "urlFrontImg" => $urlFrontImg
-                    //"urlImg" => $sprites
                 ];
                 array_push($results, $result);
             }
