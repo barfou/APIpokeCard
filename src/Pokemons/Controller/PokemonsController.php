@@ -55,7 +55,7 @@ class PokemonsController
                         'urlImgBack' => $urlBackImg,
                         'urlImgFront' => $urlFrontImg
                     ];   
-                    $this->insertImgAction($request, $app, $parameters);
+                    $app['repository.pokemon']->insertImg($parameters);
                 //}
 
                 $result = [
