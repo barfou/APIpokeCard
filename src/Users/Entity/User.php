@@ -3,35 +3,32 @@ namespace App\Users\Entity;
 class User
 {
     protected $id;
-    protected $name;
-    //protected $prenom;
-    public function __construct($id, $name)//, $prenom)
+    protected $login;
+    //protected $mail;
+    //protected $password;
+
+    public function __construct($id, $login)
     {
         $this->id = $id;
-        //$this->prenom = $prenom;
-        $this->nom = $name;
+        $this->login = $login;
     }
+
     public function setId($id)
     {
         $this->id = $id;
     }
-    public function setNom($name)
+
+    public function setLogin($login)
     {
-        $this->name = $name;
+        $this->login = $login;
     }
-    /*public function setPrenom($prenom)
-    {
-        $this->prenom = $prenom;
-    }*/
+
     public function getId()
     {
         return $this->id;
     }
-    /*public function getPrenom()
-    {
-        return $this->prenom;
-    }*/
-    public function getNom()
+
+    public function getLogin()
     {
         return $this->name;
     }
@@ -39,8 +36,8 @@ class User
     {
         $array = array();
         $array['id'] = $this->id;
-        $array['name'] = $this->name;
-        //$array['prenom'] = $this->prenom;
+        $array['login'] = $this->login;
+
         return $array;
     }
 }

@@ -32,11 +32,11 @@ class UserRepository
        $queryBuilder = $this->db->createQueryBuilder();
        $queryBuilder
            ->select('u.*')
-           ->from('Users', 'u');
+           ->from('User', 'u');
        $statement = $queryBuilder->execute();
        $usersData = $statement->fetchAll();
        foreach ($usersData as $userData) {
-           $userEntityList[$userData['id']] = new User($userData['id'], $userData['name']);//, $userData['prenom']);
+           $userEntityList[$userData['id']] = new User($userData['id'], $userData['login']);//, $userData['prenom']);
        }
        return $userEntityList;
    }
@@ -53,7 +53,7 @@ class UserRepository
        $queryBuilder = $this->db->createQueryBuilder();
        $queryBuilder
            ->select('u.*')
-           ->from('Users', 'u')
+           ->from('User', 'u')
            ->where('id = ?')
            ->setParameter(0, $id);
        $statement = $queryBuilder->execute();
