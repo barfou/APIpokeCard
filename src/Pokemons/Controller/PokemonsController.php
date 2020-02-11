@@ -46,17 +46,6 @@ class PokemonsController
 
                 $urlBackImg = $sprites["urlBackImg"];
                 $urlFrontImg = $sprites["urlFrontImg"];
-                
-                //$bdCount = $app['repository.pokemon']->getCount();
-
-                //if ($count != $bdCount) {
-                    $parameters = [
-                        'name' => $name, 
-                        'urlImgBack' => $urlBackImg,
-                        'urlImgFront' => $urlFrontImg
-                    ];   
-                    $app['repository.pokemon']->insertImg($parameters);
-                //}
 
                 $result = [
                     "name" => $name,
