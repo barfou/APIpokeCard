@@ -11,7 +11,7 @@ class PokemonsController
     public function getListPokemonAction(Request $request, Application $app)
     {
         $parameters = $request->attributes->all();
-        $url = "https://pokeapi.co/api/v2/pokemon?offset=" . $parameters["offset"] . "&limit=" . $parameters["limit"];
+        $url = "https://pokeapi.co/api/v2/pokemon?offset=" . $parameters["offset"] . "&limit=100";// . "&limit=" . $parameters["limit"];
 
         //Create Response object
         $response = new Response();
