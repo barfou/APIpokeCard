@@ -44,10 +44,10 @@ class PokemonsController
                 $name = $resultsStdClass[$i]->name;
                 $url = $resultsStdClass[$i]->url;
 
-                $pokemon = $app['repository.pokemon']->getImgByName($name);
+                //$pokemon = $app['repository.pokemon']->getImgByName($name);
 
-                $urlImagBack = $pokemon->getUrlImgBack;
-                $urlImagFront = $pokemon->getUrlImgFront;
+                $urlImagBack;// = $pokemon->getUrlImgBack;
+                $urlImagFront;// = $pokemon->getUrlImgFront;
 
                 $result = [
                     "name" => $name,
