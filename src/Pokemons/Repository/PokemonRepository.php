@@ -33,7 +33,8 @@ class PokemonRepository
         $statement = $queryBuilder->execute();
         $pokemonData = $statement->fetchAll();
 
-        return new pokemon($pokemonData[0]['name'], $pokemonData[0]['imgUrlBack'], $pokemonData[0]['imgUrlFront']);
+        //return new pokemon($pokemonData[0]['name'], $pokemonData[0]['imgUrlBack'], $pokemonData[0]['imgUrlFront']);
+        return new pokemon("cc", "back", "front");
     }
 
     /**
