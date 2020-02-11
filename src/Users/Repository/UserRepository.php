@@ -38,8 +38,7 @@ class UserRepository
        $usersData = $statement->fetchAll();
        foreach ($usersData as $userData) {
            //$userEntityList[$userData['id']] = new User($userData['id'], $userData['login'], $userData['mail'], $userData['password']);
-           //$userEntityList[$userData['id']] = new User("1", "2", "3", "4");
-           $userEntityList[$userData['id']] = $userData['id'];
+           array_push($userEntityList, new User($userData['id'], $userData['login'], $userData['mail'], $userData['password']));
        }
        return $userEntityList;
    }
@@ -62,9 +61,7 @@ class UserRepository
        $statement = $queryBuilder->execute();
        $userData = $statement->fetchAll();
       if($userData){
-        //return new User($userData[0]['id'], $userData[0]['login'], $userData[0]['mail'], $userData[0]['password']);
-        //return new User("1", "2", "3", "4");
-        return $userData[0]['id'];
+        return new User($userData[0]['id'], $userData[0]['login'], $userData[0]['mail'], $userData[0]['password']);
       }
       else {
         return new User("","","", "");
