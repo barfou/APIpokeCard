@@ -5,8 +5,6 @@ namespace App\Pokemons\Controller;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpClient\HttpClient;
-use App\Pokemon\Repository\PokemonRepository;
 
 class PokemonsController
 {
