@@ -33,8 +33,8 @@ class PokemonRepository
         $pokemonData = $statement->fetchAll();
 
         $sprites = [
-            "backImg" => $pokemonData['imgUrlBack'],
-            "frontImg" => $pokemonData['imgUrlFront']
+            "backImg" => $pokemonData[0]['imgUrlBack'],
+            "frontImg" => $pokemonData[0]['imgUrlFront']
         ];
         return $sprites;
         //return new pokemon($pokemonData[0]['name'], $pokemonData[0]['imgUrlBack'], $pokemonData[0]['imgUrlFront']);
