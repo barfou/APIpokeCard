@@ -10,17 +10,31 @@ class UsersController
 {
     public function getListUserAction(Request $request, Application $app)
     {
+        //Create Response object
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/json');
+
         $users = $app['repository.user']->getAll();
-        $usersEncodeJson = json_encode($users);
-        return $usersEncodeJson;
+
+        $response->setContent(json_encode($users));
+        $response->setStatusCode(Response::HTTP_OK);
+
+        return $response;
     }
 
     public function getUserAction(Request $request, Application $app)
     {
+        //Create Response object
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/json');
+
         $parameters = $request->attributes->all();
-        $user = $app['repository.user']->getById($parameters['id']);
-        $userEncodeJson = json_encode($user);
-        return $userEncodeJson;
+        $user = $app['repository.user']->getById($parameters['id']);      
+        
+        $response->setContent(json_encode($user));
+        $response->setStatusCode(Response::HTTP_OK);
+
+        return $response;
     }
 
     public function deleteAction(Request $request, Application $app)
