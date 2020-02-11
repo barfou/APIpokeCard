@@ -27,9 +27,8 @@ class PokemonRepository
         $queryBuilder
             ->select('COUNT(pr.*)')
             ->from('PokemonRef', 'pr');
-        $statement = $queryBuilder->execute();
-        $pokemonData = $statement->fetchAll();
-        return $pokemonData;
+        $count = $queryBuilder->getQuery()->getSingleScalarResult();
+        return $count;
     }
 
     public function getImgByName($name)
