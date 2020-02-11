@@ -11,7 +11,7 @@ class UserRepository
      * @var \Doctrine\DBAL\Connection
      */
     protected $db;
-    
+
     public function __construct(Connection $db)
     {
         $this->db = $db;
@@ -63,7 +63,7 @@ class UserRepository
         return new User($userData[0]['id'], $userData[0]['login'], $userData[0]['mail'], $userData[0]['password']);
       }
       else {
-        return new User("","","");
+        return new User("1","1","1", "1");
       }
    }
 
