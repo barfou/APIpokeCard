@@ -13,7 +13,9 @@ $app->get('/article/list', 'App\Controller\ArticleController::listAction')->bind
 
 //User
 $app->get('/users', 'App\Users\Controller\UsersController::getListUserAction')->bind('users.list');
-$app->get('/users/{id}', 'App\Users\Controller\UsersController::getUserAction')->bind('users.get');
+$app->get('/users/detail', 'App\Users\Controller\UsersController::getUserAction')->bind('users.get');
+$app->post('/users/delete', 'App\Users\Controller\UsersController::deleteAction')->bind('users.delete');
+$app->post('/users/save', 'App\Users\Controller\UsersController::saveAction')->bind('users.save');
 
 $app->get('/users/edit/{id}', 'App\Users\Controller\UsersController::editAction')->bind('users.edit');
 $app->get('/users/new', 'App\Users\Controller\UsersController::newAction')->bind('users.new');
