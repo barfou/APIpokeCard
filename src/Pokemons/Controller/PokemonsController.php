@@ -110,8 +110,10 @@ class PokemonsController
             $abilities = [];
             for($i = 0; $i < count((array)$abilitiesStdClass); $i++){
                 $abilitie = [
-                    "name" => $abilitiesStdClass[$i]->ability->name,
-                    "url" => $abilitiesStdClass[$i]->ability->url
+                    "ability" => [
+                        "name" => $abilitiesStdClass[$i]->ability->name,
+                        "url" => $abilitiesStdClass[$i]->ability->url
+                    ]
                 ];
                 array_push($abilities, $abilitie );
             }
@@ -145,6 +147,7 @@ class PokemonsController
                 "abilities" => $abilities,
                 "height" => $height,
                 "id" => $id,
+                "name" => $name,
                 "sprites" => $sprites,
                 "stats" => $stats,
                 "weight" => $weight
