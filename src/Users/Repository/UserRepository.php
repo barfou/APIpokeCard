@@ -38,16 +38,16 @@ class UserRepository
         $statement = $queryBuilder->execute();
         $usersData = $statement->fetchAll();
         foreach ($usersData as $userData) {
-        //$userEntityList[$userData['id']] = new User($userData['id'], $userData['login'], $userData['mail'], $userData['password']);
-        $user = [
-            "id" => $userData['id'],
-            "login" => $userData['login'],
-            "mail" => $userData['mail'],
-            "password" => $userData['password']
-        ];
-        array_push($userEntityList, $user);
-    }
-    return $userEntityList;
+            //$userEntityList[$userData['id']] = new User($userData['id'], $userData['login'], $userData['mail'], $userData['password']);
+            $user = [
+                "id" => $userData['id'],
+                "login" => $userData['login'],
+                "mail" => $userData['mail'],
+                "password" => $userData['password']
+            ];
+            array_push($userEntityList, $user);
+        }
+        return $userEntityList;
     }
     /**
     * Returns an User object.
@@ -76,12 +76,7 @@ class UserRepository
             ];
         }
         else {
-            $user = [
-                "id" => "",
-                "login" => "",
-                "mail" => "",
-                "password" => ""
-            ];
+            $user = [];
         }
         return $user;
     }
