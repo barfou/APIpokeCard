@@ -41,8 +41,13 @@ class UsersController
     public function deleteUserAction(Request $request, Application $app)
     {
         $id = $_GET["id"];
-        $app['repository.user']->delete($id);
-        return "OK";
+        $bool = $app['repository.user']->delete($id);
+        if($bool = true){
+            return "OK";
+        }
+        else{
+            return "PasOK"
+        }
         //$method = $request->getRealMethod();
         //$msg = "about: " . $method;
         //return $msg;
@@ -56,8 +61,31 @@ class UsersController
             "mail" => $_GET["mail"],
             "password" => $_GET["password"]
         ];
-        $user = $app['repository.user']->insert($parameters);
-        return "OK";
+        $bool = $app['repository.user']->insert($parameters);
+        if($bool = true){
+            return "OK";
+        }
+        else{
+            return "PasOK"
+        }
+    }
+
+    public function updateAction(Request $request, Application $app)
+    {
+        //$parameters = $request->request->all();
+        $parameters = [
+            "id" => $_GET["id"],
+            "login" => $_GET["login"],
+            "mail" => $_GET["mail"],
+            "password" => $_GET["password"]
+        ];
+        $bool = $app['repository.user']->update($parameters);
+        if($bool = true){
+            return "OK";
+        }
+        else{
+            return "PasOK"
+        }
     }
 
 
