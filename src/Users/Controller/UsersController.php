@@ -40,21 +40,32 @@ class UsersController
 
     public function deleteUserAction(Request $request, Application $app)
     {
+        //Create Response object
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/json');
+
         $id = $_GET["id"];
         $bool = $app['repository.user']->delete($id);
         if($bool = true){
-            return "OK";
+            $response->setContent(json_encode("Request executed"));
+            $response->setStatusCode(Response::HTTP_OK);
         }
         else{
-            return "PasOK";
+            $response->setContent(json_encode("Request not executed"));
+            $response->setStatusCode(Response::HTTP_OK);
         }
+        return $response;
         //$method = $request->getRealMethod();
         //$msg = "about: " . $method;
         //return $msg;
     }
 
-    public function insertAction(Request $request, Application $app)
+    public function insertUserAction(Request $request, Application $app)
     {
+        //Create Response object
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/json');
+
         //$parameters = $request->request->all();
         $parameters = [
             "login" => $_GET["login"],
@@ -63,15 +74,22 @@ class UsersController
         ];
         $bool = $app['repository.user']->insert($parameters);
         if($bool = true){
-            return "OK";
+            $response->setContent(json_encode("Request executed"));
+            $response->setStatusCode(Response::HTTP_OK);
         }
         else{
-            return "PasOK";
+            $response->setContent(json_encode("Request not executed"));
+            $response->setStatusCode(Response::HTTP_OK);
         }
+        return $response;
     }
 
-    public function updateAction(Request $request, Application $app)
+    public function updateUserAction(Request $request, Application $app)
     {
+        //Create Response object
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/json');
+        
         //$parameters = $request->request->all();
         $parameters = [
             "id" => $_GET["id"],
@@ -81,11 +99,14 @@ class UsersController
         ];
         $bool = $app['repository.user']->update($parameters);
         if($bool = true){
-            return "OK";
+            $response->setContent(json_encode("Request executed"));
+            $response->setStatusCode(Response::HTTP_OK);
         }
         else{
-            return "PasOK";
+            $response->setContent(json_encode("Request not executed"));
+            $response->setStatusCode(Response::HTTP_OK);
         }
+        return $response;
     }
 
 
