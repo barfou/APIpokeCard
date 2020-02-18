@@ -30,8 +30,8 @@ class UsersController
 
         //$parameters = $request->attributes->all();
         $id = $_GET["id"];
-        $user = $app['repository.user']->getById($id);      
-        
+        $user = $app['repository.user']->getById($id);
+
         $response->setContent(json_encode($user));
         $response->setStatusCode(Response::HTTP_OK);
 
@@ -41,10 +41,8 @@ class UsersController
     public function deleteAction(Request $request, Application $app)
     {
         //$parameters = $request->attributes->all();
-        $id = $_GET["id"];
+        $id = $_POST["id"];
         $app['repository.user']->delete($id);
-
-        //return $app->redirect($app['url_generator']->generate('users.list'));
     }
 
     public function insertAction(Request $request, Application $app)
@@ -56,13 +54,11 @@ class UsersController
             "password" => $_GET["password"]
         ];
         $user = $app['repository.user']->insert($parameters);
-
-        //return $app->redirect($app['url_generator']->generate('users.list'));
     }
 
 
 
-    public function editAction(Request $request, Application $app)
+    /*public function editAction(Request $request, Application $app)
     {
         $parameters = $request->attributes->all();
         $user = $app['repository.user']->getById($parameters['id']);
@@ -85,5 +81,5 @@ class UsersController
     public function newAction(Request $request, Application $app)
     {
         return $app['twig']->render('users.form.html.twig');
-    }
+    }*/
 }
