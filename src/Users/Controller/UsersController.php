@@ -43,7 +43,7 @@ class UsersController
 
         $method = $request->getRealMethod();
         $msg = "about: " . $method;
-        return $msg
+        return $msg;
         //$parameters = $request->attributes->all();
         //$app['repository.user']->delete($parameters['id']);
         //$id = $_POST["id"];
