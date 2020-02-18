@@ -38,10 +38,14 @@ class UsersController
         return $response;
     }
 
-    public function deleteAction(Request $request, Application $app)
+    public function deleteUserAction(Request $request, Application $app)
     {
-        $parameters = $request->attributes->all();
-        $app['repository.user']->delete($parameters['id']);
+
+        $method = $request->getRealMethod();
+        $msg = "about: " . $method;
+        return $msg
+        //$parameters = $request->attributes->all();
+        //$app['repository.user']->delete($parameters['id']);
         //$id = $_POST["id"];
         //$app['repository.user']->delete($id);
 

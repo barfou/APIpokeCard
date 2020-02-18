@@ -14,7 +14,7 @@ $app->get('/article/list', 'App\Controller\ArticleController::listAction')->bind
 //User
 $app->get('/users', 'App\Users\Controller\UsersController::getListUserAction')->bind('users.list');
 $app->get('/users/detail', 'App\Users\Controller\UsersController::getUserAction')->bind('users.entity');
-$app->post('/users/delete/{id}', 'App\Users\Controller\UsersController::deleteAction')->bind('users.delete');
+$app->post('/users/delete', 'App\Users\Controller\UsersController::deleteUserAction')->bind('users.delete');
 $app->post('/users/insert', 'App\Users\Controller\UsersController::insertAction')->bind('users.insert');
 
 /*$app->get('/users/edit/{id}', 'App\Users\Controller\UsersController::editAction')->bind('users.edit');
@@ -24,7 +24,6 @@ $app->post('/users/save', 'App\Users\Controller\UsersController::saveAction')->b
 
 //Pokemon
 $app->get('/pokemons', 'App\Pokemons\Controller\PokemonsController::getListPokemonAction')->bind('pokemons.list');
-//$app->get('/pokemons', 'App\Pokemons\Controller\PokemonsController::getListPokemonAction')->bind('pokemons.list');
 $app->get('/pokemons/insertImg', 'App\Pokemons\Controller\PokemonsController::insertImgAction')->bind('pokemons.insrtImg');
 $app->get('/pokemons/detail', 'App\Pokemons\Controller\PokemonsController::getPokemonAction')->bind('pokemons.entity');
 
