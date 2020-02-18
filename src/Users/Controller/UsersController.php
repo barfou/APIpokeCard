@@ -47,11 +47,17 @@ class UsersController
         $id = $_GET["id"];
         $bool = $app['repository.user']->delete($id);
         if($bool = true){
-            $response->setContent(json_encode("Request executed"));
+            $responseJson = [
+                "response" => "Request executed"
+            ];
+            $response->setContent(json_encode($responseJson));
             $response->setStatusCode(Response::HTTP_OK);
         }
         else{
-            $response->setContent(json_encode("Request not executed"));
+            $responseJson = [
+                "response" => "Request not executed"
+            ];
+            $response->setContent(json_encode($responseJson));
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
         return $response;
@@ -74,11 +80,17 @@ class UsersController
         ];
         $bool = $app['repository.user']->insert($parameters);
         if($bool = true){
-            $response->setContent(json_encode("Request executed"));
+            $responseJson = [
+                "response" => "Request executed"
+            ];
+            $response->setContent(json_encode($responseJson));
             $response->setStatusCode(Response::HTTP_OK);
         }
         else{
-            $response->setContent(json_encode("Request not executed"));
+            $responseJson = [
+                "response" => "Request not executed"
+            ];
+            $response->setContent(json_encode($responseJson));
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
         return $response;
@@ -99,14 +111,20 @@ class UsersController
         ];
         $bool = $app['repository.user']->update($parameters);
         if($bool = true){
-            $response->setContent(json_encode("Request executed"));
+            $responseJson = [
+                "response" => "Request executed"
+            ];
+            $response->setContent(json_encode($responseJson));
             $response->setStatusCode(Response::HTTP_OK);
         }
         else{
-            $response->setContent(json_encode("Request not executed"));
+            $responseJson = [
+                "response" => "Request not executed"
+            ];
+            $response->setContent(json_encode($responseJson));
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
-        return $bool;
+        return $response;
     }
 
 
