@@ -14,7 +14,7 @@ $app->get('/article/list', 'App\Controller\ArticleController::listAction')->bind
 //User
 $app->get('/users', 'App\Users\Controller\UsersController::getListUserAction')->bind('users.list');
 $app->get('/users/detail', 'App\Users\Controller\UsersController::getUserAction')->bind('users.entity');
-$app->post('/users/delete', 'App\Users\Controller\UsersController::deleteUserAction')->bind('users.delete');
+$app->get('/users/delete', 'App\Users\Controller\UsersController::deleteUserAction')->bind('users.delete');
 $app->post('/users/insert', 'App\Users\Controller\UsersController::insertAction')->bind('users.insert');
 
 /*$app->get('/users/edit/{id}', 'App\Users\Controller\UsersController::editAction')->bind('users.edit');
