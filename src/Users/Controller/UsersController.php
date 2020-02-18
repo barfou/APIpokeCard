@@ -40,15 +40,14 @@ class UsersController
 
     public function deleteUserAction(Request $request, Application $app)
     {
-
+        $id = $_GET["id"];
+        $app['repository.user']->delete($id);
+        
         $method = $request->getRealMethod();
         $msg = "about: " . $method;
         return $msg;
         //$parameters = $request->attributes->all();
         //$app['repository.user']->delete($parameters['id']);
-        //$id = $_POST["id"];
-        //$app['repository.user']->delete($id);
-
     }
 
     public function insertAction(Request $request, Application $app)
