@@ -89,7 +89,7 @@ class UsersController
         //Create Response object
         $response = new Response();
         $response->headers->set('Content-Type', 'application/json');
-        
+
         //$parameters = $request->request->all();
         $parameters = [
             "id" => $_GET["id"],

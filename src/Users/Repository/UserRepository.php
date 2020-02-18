@@ -121,7 +121,7 @@ class UserRepository
     {
         $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder
-            ->update('users')
+            ->update('User')
             ->where('id = :id')
             ->setParameter(':id', $parameters['id']);
 
