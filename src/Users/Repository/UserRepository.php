@@ -135,10 +135,10 @@ class UserRepository
                 ->set('mail', ':mail')
                 ->setParameter(':mail', $parameters['mail']);
         }
-        if ($parameters['mail']) {
+        if ($parameters['password']) {
             $queryBuilder
-                ->set('mail', ':mail')
-                ->setParameter(':mail', $parameters['mail']);
+                ->set('password', ':password')
+                ->setParameter(':password', $parameters['password']);
         }
 
         $statement = $queryBuilder->execute();
