@@ -42,12 +42,10 @@ class UsersController
     {
         $id = $_GET["id"];
         $app['repository.user']->delete($id);
-        
-        $method = $request->getRealMethod();
-        $msg = "about: " . $method;
-        return $msg;
-        //$parameters = $request->attributes->all();
-        //$app['repository.user']->delete($parameters['id']);
+        return "OK";
+        //$method = $request->getRealMethod();
+        //$msg = "about: " . $method;
+        //return $msg;
     }
 
     public function insertAction(Request $request, Application $app)
@@ -59,6 +57,7 @@ class UsersController
             "password" => $_GET["password"]
         ];
         $user = $app['repository.user']->insert($parameters);
+        return "OK";
     }
 
 
