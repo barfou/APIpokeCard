@@ -46,7 +46,7 @@ class UsersController
             return "OK";
         }
         else{
-            return "PasOK"
+            return "PasOK";
         }
         //$method = $request->getRealMethod();
         //$msg = "about: " . $method;
@@ -66,7 +66,7 @@ class UsersController
             return "OK";
         }
         else{
-            return "PasOK"
+            return "PasOK";
         }
     }
 
@@ -84,7 +84,7 @@ class UsersController
             return "OK";
         }
         else{
-            return "PasOK"
+            return "PasOK";
         }
     }
 
