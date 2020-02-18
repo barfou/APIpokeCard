@@ -81,7 +81,7 @@ class UsersController
             $response->setContent(json_encode("Request not executed"));
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
-        return $bool;
+        return $response;
     }
 
     public function updateUserAction(Request $request, Application $app)
@@ -106,7 +106,7 @@ class UsersController
             $response->setContent(json_encode("Request not executed"));
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
-        return $response;
+        return $bool;
     }
 
 
