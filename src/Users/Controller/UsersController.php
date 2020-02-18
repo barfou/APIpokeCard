@@ -52,7 +52,7 @@ class UsersController
         }
         else{
             $response->setContent(json_encode("Request not executed"));
-            $response->setStatusCode(Response::HTTP_OK);
+            $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
         return $response;
         //$method = $request->getRealMethod();
@@ -79,9 +79,9 @@ class UsersController
         }
         else{
             $response->setContent(json_encode("Request not executed"));
-            $response->setStatusCode(Response::HTTP_OK);
+            $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
-        return $response;
+        return $bool;
     }
 
     public function updateUserAction(Request $request, Application $app)
@@ -104,7 +104,7 @@ class UsersController
         }
         else{
             $response->setContent(json_encode("Request not executed"));
-            $response->setStatusCode(Response::HTTP_OK);
+            $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
         return $response;
     }
