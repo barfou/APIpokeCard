@@ -1,20 +1,18 @@
 <?php
-
 namespace App\Users\Entity;
-
 class User
 {
     protected $id;
+    protected $login;
+    protected $mail;
+    protected $password;
 
-    protected $nom;
-
-    protected $prenom;
-
-    public function __construct($id, $nom, $prenom)
+    public function __construct($id, $login, $mail, $password)
     {
         $this->id = $id;
-        $this->prenom = $prenom;
-        $this->nom = $nom;
+        $this->login = $login;
+        $this->mail = $mail;
+        $this->password = $password;
     }
 
     public function setId($id)
@@ -22,35 +20,48 @@ class User
         $this->id = $id;
     }
 
-    public function setNom($nom)
+    public function setMail($mail)
     {
-        $this->nom = $nom;
+        $this->mail = $mail;
     }
 
-    public function setPrenom($prenom)
+    public function setPassword($password)
     {
-        $this->prenom = $prenom;
+        $this->password = $password;
+    }
+
+    public function setLogin($login)
+    {
+        $this->login = $login;
     }
 
     public function getId()
     {
         return $this->id;
     }
-    public function getPrenom()
+
+    public function getLogin()
     {
-        return $this->prenom;
+        return $this->name;
     }
-    public function getNom()
+
+    public function getMail()
     {
-        return $this->nom;
+        return $this->mail;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
     }
 
     public function toArray()
     {
         $array = array();
         $array['id'] = $this->id;
-        $array['nom'] = $this->nom;
-        $array['prenom'] = $this->prenom;
+        $array['login'] = $this->login;
+        $array['mail'] = $this->mail;
+        $array['password'] = $this->password;
 
         return $array;
     }

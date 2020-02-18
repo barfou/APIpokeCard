@@ -4,81 +4,53 @@ namespace App\Pokemons\Entity;
 
 class Pokemon
 {
-    protected $id;
+    protected $name;
 
-    protected $lib;
+    protected $urlImgBack;
 
-    protected $marque;
+    protected $urlImgFront;
 
-    protected $os;
-
-    protected $user;
-
-    public function __construct($id, $lib, $marque, $os, $user)
+    public function __construct($name, $urlImgBack, $urlImgFront)
     {
-        $this->id = $id;
-        $this->lib = $lib;
-        $this->marque = $marque;
-        $this->os = $os;
-        $this->user = $user;
+        $this->name = $name;
+        $this->urlImgBack = $urlImgBack;
+        $this->urlImgFront = $urlImgFront;
     }
 
-    public function setId($id)
+    public function setName($name)
     {
-        $this->id = $id;
+        $this->name = $name;
     }
 
-    public function setLib($lib)
+    public function setUrlImgBack($urlImgBack)
     {
-        $this->lib = $lib;
+        $this->urlImgBack = $urlImgBack;
     }
 
-    public function setMarque($marque)
+    public function setUrlImgFront($urlImgFront)
     {
-        $this->marque = $marque;
+        $this->urlImgFront = $urlImgFront;
     }
 
-    public function setOS($os)
+    public function getName()
     {
-      $this->os = $os;
+        return $this->name;
     }
-
-    public function setUser($user)
+    public function getUrlImgBack()
     {
-      $this->user = $user;
+        return $this->urlImgBack;
     }
-
-    public function getId()
+    public function getUrlImgFront()
     {
-        return $this->id;
-    }
-    public function getLib()
-    {
-        return $this->lib;
-    }
-    public function getMarque()
-    {
-        return $this->marque;
-    }
-
-    public function getOs()
-    {
-        return $this->os;
-    }
-
-    public function getUser()
-    {
-        return $this->user;
+        return $this->urlImgFront;
     }
 
     public function toArray()
     {
         $array = array();
-        $array['id'] = $this->id;
-        $array['lib'] = $this->lib;
-        $array['marque'] = $this->marque;
-        $array['os'] = $this->os;
-        $array['userid'] = $this->userid;
+        $array['name'] = $this->name;
+        $array['urlImgBack'] = $this->urlImgBack;
+        $array['urlImgFront'] = $this->urlImgFront;
 
         return $array;
     }

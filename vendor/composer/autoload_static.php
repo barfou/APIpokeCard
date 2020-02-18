@@ -7,13 +7,14 @@ namespace Composer\Autoload;
 class ComposerStaticInit29533c39c8c92442be06b4131c2b096c
 {
     public static $files = array (
-        'e88992873b7765f9b5710cab95ba5dd7' => __DIR__ . '/..' . '/hoa/consistency/Prelude.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        'e88992873b7765f9b5710cab95ba5dd7' => __DIR__ . '/..' . '/hoa/consistency/Prelude.php',
         '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
-        '3e76f7f02b41af8cea96018933f6b7e3' => __DIR__ . '/..' . '/hoa/protocol/Wrapper.php',
         '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
+        '3e76f7f02b41af8cea96018933f6b7e3' => __DIR__ . '/..' . '/hoa/protocol/Wrapper.php',
+        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -29,16 +30,20 @@ class ComposerStaticInit29533c39c8c92442be06b4131c2b096c
             'Symfony\\Polyfill\\Intl\\Idn\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Contracts\\Service\\' => 26,
+            'Symfony\\Contracts\\HttpClient\\' => 29,
             'Symfony\\Contracts\\EventDispatcher\\' => 34,
             'Symfony\\Contracts\\Cache\\' => 24,
             'Symfony\\Component\\VarExporter\\' => 30,
+            'Symfony\\Component\\VarDumper\\' => 28,
             'Symfony\\Component\\Routing\\' => 26,
             'Symfony\\Component\\Mime\\' => 23,
             'Symfony\\Component\\HttpKernel\\' => 29,
             'Symfony\\Component\\HttpFoundation\\' => 33,
+            'Symfony\\Component\\HttpClient\\' => 29,
             'Symfony\\Component\\Finder\\' => 25,
             'Symfony\\Component\\Filesystem\\' => 29,
             'Symfony\\Component\\EventDispatcher\\' => 34,
+            'Symfony\\Component\\ErrorHandler\\' => 31,
             'Symfony\\Component\\DependencyInjection\\' => 38,
             'Symfony\\Component\\Debug\\' => 24,
             'Symfony\\Component\\Config\\' => 25,
@@ -95,9 +100,6 @@ class ComposerStaticInit29533c39c8c92442be06b4131c2b096c
             'App\\Pokemons\\Repository\\' => 24,
             'App\\Pokemons\\Entity\\' => 20,
             'App\\Pokemons\\Controller\\' => 24,
-            'App\\Devices\\Repository\\' => 23,
-            'App\\Devices\\Entity\\' => 19,
-            'App\\Devices\\Controller\\' => 23,
         ),
     );
 
@@ -130,6 +132,10 @@ class ComposerStaticInit29533c39c8c92442be06b4131c2b096c
         array (
             0 => __DIR__ . '/..' . '/symfony/service-contracts',
         ),
+        'Symfony\\Contracts\\HttpClient\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/http-client-contracts',
+        ),
         'Symfony\\Contracts\\EventDispatcher\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/event-dispatcher-contracts',
@@ -141,6 +147,10 @@ class ComposerStaticInit29533c39c8c92442be06b4131c2b096c
         'Symfony\\Component\\VarExporter\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/var-exporter',
+        ),
+        'Symfony\\Component\\VarDumper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/var-dumper',
         ),
         'Symfony\\Component\\Routing\\' => 
         array (
@@ -158,6 +168,10 @@ class ComposerStaticInit29533c39c8c92442be06b4131c2b096c
         array (
             0 => __DIR__ . '/..' . '/symfony/http-foundation',
         ),
+        'Symfony\\Component\\HttpClient\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/http-client',
+        ),
         'Symfony\\Component\\Finder\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/finder',
@@ -169,6 +183,10 @@ class ComposerStaticInit29533c39c8c92442be06b4131c2b096c
         'Symfony\\Component\\EventDispatcher\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/event-dispatcher',
+        ),
+        'Symfony\\Component\\ErrorHandler\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/error-handler',
         ),
         'Symfony\\Component\\DependencyInjection\\' => 
         array (
@@ -321,18 +339,6 @@ class ComposerStaticInit29533c39c8c92442be06b4131c2b096c
         'App\\Pokemons\\Controller\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/Pokemons/Controller',
-        ),
-        'App\\Devices\\Repository\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/Devices/Repository',
-        ),
-        'App\\Devices\\Entity\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/Devices/Entity',
-        ),
-        'App\\Devices\\Controller\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/Devices/Controller',
         ),
     );
 
