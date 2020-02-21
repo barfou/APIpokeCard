@@ -50,7 +50,7 @@ class UsersController
 
         $parameters = $request->attributes->all();
         $bool = $app['repository.user']->delete($parameters['id']);
-        if($bool = true){
+        if($bool == true){
             $responseJson = [
                 "response" => "Request executed"
             ];
@@ -73,14 +73,14 @@ class UsersController
         $response = new Response();
         $response->headers->set('Content-Type', 'application/json');
 
-        $parameters = $request->request->all();
+        $parametersURL = $request->request->all();
         $parameters = [
-            "login" => $parameters['login'],
-            "mail" => $parameters['mail'],
-            "password" => $parameters['password']
+            "login" => $parametersURL['login'],
+            "mail" => $parametersURL['mail'],
+            "password" => $parametersURL['password']
         ];
         $bool = $app['repository.user']->insert($parameters);
-        if($bool = true){
+        if($bool == true){
             $responseJson = [
                 "response" => "Request executed"
             ];
@@ -111,7 +111,7 @@ class UsersController
             "password" => $_GET["password"]
         ];
         $bool = $app['repository.user']->update($parameters);
-        if($bool = true){
+        if($bool == true){
             $responseJson = [
                 "response" => "Request executed"
             ];
