@@ -28,13 +28,17 @@ class UsersController
         $response = new Response();
         $response->headers->set('Content-Type', 'application/json');
 
-        //$parameters = $request->attributes->all();
-        $id = $_GET["id"];
-        $user = $app['repository.user']->getById($id);
+        $parameters = $request->attributes->all();
+        $user = $app['repository.user']->getById($parameters['id']);
 
-        $response->setContent(json_encode($user));
-        $response->setStatusCode(Response::HTTP_OK);
-
+        if($user !== []){
+            $response->setContent(json_encode($user));
+            $response->setStatusCode(Response::HTTP_OK);
+        }
+        else{
+             $response->setContent(json_encode("404 ERROR"));
+             $response->setStatusCode(Response::HTTP_NOT_FOUND);
+        }
         return $response;
     }
 

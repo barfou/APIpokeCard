@@ -8,16 +8,15 @@ $app->post('/users/save', 'App\Controller\UsersController::saveAction')->bind('u
 
 //User
 $app->get('/users', 'App\Users\Controller\UsersController::getListUserAction')->bind('users.list');
-$app->get('/users/detail', 'App\Users\Controller\UsersController::getUserAction')->bind('users.entity');
-$app->post('/users/delete', 'App\Users\Controller\UsersController::deleteUserAction')->bind('users.delete');
-$app->get('/users/insert', 'App\Users\Controller\UsersController::insertUserAction')->bind('users.insert');
-$app->get('/users/update', 'App\Users\Controller\UsersController::updateUserAction')->bind('users.update');
+$app->get('/users/{id}', 'App\Users\Controller\UsersController::getUserAction')->bind('users.entity');
 
-//$app->post('/users/delete', 'App\Users\Controller\UsersController::deleteUserAction')->bind('users.delete');
-//$app->post('/users/insert', 'App\Users\Controller\UsersController::insertAction')->bind('users.insert');
-/*$app->get('/users/edit/{id}', 'App\Users\Controller\UsersController::editAction')->bind('users.edit');
-$app->get('/users/new', 'App\Users\Controller\UsersController::newAction')->bind('users.new');
-$app->post('/users/save', 'App\Users\Controller\UsersController::saveAction')->bind('users.save');*/
+$app->delete('/users/{id}', 'App\Users\Controller\UsersController::deleteUserAction')->bind('users.delete');
+$app->post('/users/insert', 'App\Users\Controller\UsersController::insertUserAction')->bind('users.insert');
+$app->put('/users/update', 'App\Users\Controller\UsersController::updateUserAction')->bind('users.update');
+
+/*$app->get('/users/delete', 'App\Users\Controller\UsersController::deleteUserAction')->bind('users.delete');
+$app->get('/users/insert', 'App\Users\Controller\UsersController::insertUserAction')->bind('users.insert');
+$app->get('/users/update', 'App\Users\Controller\UsersController::updateUserAction')->bind('users.update');*/
 
 //Pokemon
 $app->get('/pokemons', 'App\Pokemons\Controller\PokemonsController::getListPokemonAction')->bind('pokemons.list');
