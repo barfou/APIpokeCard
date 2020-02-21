@@ -73,6 +73,7 @@ class UsersController
 
         //$request->query->get()
         $parameters = $request->attributes->all();
+        var_dump($parameters);
         $parametersInsert = [
             "login" => $parameters['login'],
             "mail" => $parameters['mail'],
