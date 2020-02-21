@@ -30,7 +30,7 @@ class PokemonRepository
 
         return $count;
 
-        
+
     }**/
 
     public function getImgByName($name)
@@ -60,7 +60,26 @@ class PokemonRepository
           return $sprites;
     }
 
-    public function insertImg($parameters)
+    public function insert($parameters)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->insert('CreatedPokemon')
+            ->values(
+                array(
+                'name' => ':name',
+                'height' => ':height',
+                'weight' => ':weight'
+                )
+            )
+            ->setParameter(':name', $parameters['name'])
+            ->setParameter(':height', $parameters['height'])
+            ->setParameter(':weight', $parameters['weight']);
+        $statement = $queryBuilder->execute();
+        return $statement;
+    }
+
+    /*public function insertImg($parameters)
     {
         $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder
@@ -76,7 +95,7 @@ class PokemonRepository
             ->setParameter(':urlImgBack', $parameters['urlImgBack'])
             ->setParameter(':urlImgFront', $parameters['urlImgFront']);
         $statement = $queryBuilder->execute();
-    }
+    }*/
 
     /**
      * Returns a collection of pokemons.

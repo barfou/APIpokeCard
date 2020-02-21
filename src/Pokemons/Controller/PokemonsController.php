@@ -162,7 +162,37 @@ class PokemonsController
         return $response;
     }
 
-    public function insertImgAction(Request $request, Application $app)
+    /*public function insertPokemonAction(Request $request, Application $app)
+    {
+        //Create Response object
+                $response = new Response();
+                $response->headers->set('Content-Type', 'application/json');
+
+                //$parameters = $request->request->all();
+                $parameters = [
+                    "login" => $_GET["login"],
+                    "mail" => $_GET["mail"],
+                    "password" => $_GET["password"]
+                ];
+                $bool = $app['repository.user']->insert($parameters);
+                if($bool = true){
+                    $responseJson = [
+                        "response" => "Request executed"
+                    ];
+                    $response->setContent(json_encode($responseJson));
+                    $response->setStatusCode(Response::HTTP_OK);
+                }
+                else{
+                    $responseJson = [
+                        "response" => "Request not executed"
+                    ];
+                    $response->setContent(json_encode($responseJson));
+                    $response->setStatusCode(Response::HTTP_NOT_FOUND);
+                }
+                return $response;
+    }*/
+
+    /*public function insertImgAction(Request $request, Application $app)
     {
         $url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=964";
 
@@ -195,7 +225,7 @@ class PokemonsController
             $app['repository.pokemon']->insertImg($parameters);
         }
         return "OK";
-    }
+    }*/
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
