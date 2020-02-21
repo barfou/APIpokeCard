@@ -19,13 +19,13 @@ class PokemonsController
         //Create Response object
         $response = new Response();
 
-        // Function to get HTTP response code  
-        function get_http_response_code($url) { 
-            $headers = get_headers($url); 
-            return substr($headers[0], 9, 3); 
-        } 
-             
-        // Check HTTP response code is 200 or not 
+        // Function to get HTTP response code
+        function get_http_response_code($url) {
+            $headers = get_headers($url);
+            return substr($headers[0], 9, 3);
+        }
+
+        // Check HTTP response code is 200 or not
         if (get_http_response_code($url) == 200 ){
             $response->headers->set('Content-Type', 'application/json');
 
@@ -44,7 +44,7 @@ class PokemonsController
             $results = [];
             for($i = 0; $i < count((array)$resultsStdClass); $i++){
                 $name = $resultsStdClass[$i]->name;
-                $url = $resultsStdClass[$i]->url;               
+                $url = $resultsStdClass[$i]->url;
 
                 $sprites = $app['repository.pokemon']->getImgByName($name);
 
@@ -74,7 +74,7 @@ class PokemonsController
             $response->setContent("HTTP request not successfully!");
             $response->headers->set('Content-Type', 'text/html');
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
-        }  
+        }
         return $response;
     }
 
@@ -88,13 +88,13 @@ class PokemonsController
         //Create Response object
         $response = new Response();
 
-        // Function to get HTTP response code  
-        function get_http_response_code($url) { 
-            $headers = get_headers($url); 
-            return substr($headers[0], 9, 3); 
-        } 
+        // Function to get HTTP response code
+        function get_http_response_code($url) {
+            $headers = get_headers($url);
+            return substr($headers[0], 9, 3);
+        }
 
-        // Check HTTP response code is 200 or not 
+        // Check HTTP response code is 200 or not
         if (get_http_response_code($url) == 200 ){
             $response->headers->set('Content-Type', 'application/json');
 
@@ -127,14 +127,12 @@ class PokemonsController
             $stats = [];
             for($i = 0; $i < count((array)$statsStdClass); $i++){
                 $base_stat = $statsStdClass[$i]->base_stat;
-                $effort = $statsStdClass[$i]->effort;
                 $statStdClass = $statsStdClass[$i]->stat;
                 $statName = $statStdClass->name;
                 $statUrl = $statStdClass->url;
 
                 $stat = [
                     "base_stat" => $base_stat,
-                    "effort" => $effort, 
                     "stat" => [
                         "name" => $statName,
                         "url" => $statUrl
@@ -142,7 +140,7 @@ class PokemonsController
                 ];
                 array_push($stats, $stat);
             }
-            
+
             $pokemonInfos = [
                 "abilities" => $abilities,
                 "height" => $height,
@@ -160,7 +158,7 @@ class PokemonsController
             $response->setContent("HTTP request not successfully!");
             $response->headers->set('Content-Type', 'text/html');
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
-        }  
+        }
         return $response;
     }
 
@@ -174,7 +172,7 @@ class PokemonsController
         $resultsStdClass = $jsonDecoded->results;
         $results = [];
         for($i = 0; $i < count((array)$resultsStdClass); $i++){
-            $name = $resultsStdClass[$i]->name;           
+            $name = $resultsStdClass[$i]->name;
 
             $urldetail = "https://pokeapi.co/api/v2/pokemon/" . $name;
 
@@ -188,12 +186,12 @@ class PokemonsController
 
             $urlBackImg = $sprites["back_default"];
             $urlFrontImg = $sprites["front_default"];
-            
+
             $parameters = [
-                'name' => $name, 
+                'name' => $name,
                 'urlImgBack' => $urlBackImg,
                 'urlImgFront' => $urlFrontImg
-            ];   
+            ];
             $app['repository.pokemon']->insertImg($parameters);
         }
         return "OK";
