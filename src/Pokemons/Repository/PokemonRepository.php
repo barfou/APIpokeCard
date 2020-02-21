@@ -191,24 +191,4 @@ class PokemonRepository
 
         $statement = $queryBuilder->execute();
     }
-
-    public function insert($parameters)
-    {
-        $queryBuilder = $this->db->createQueryBuilder();
-        $queryBuilder
-            ->insert('pokemons')
-            ->values(
-                array(
-                    'lib' => ':lib',
-                    'marque' => ':marque',
-                    'os' => ':os',
-                    'userid' => ':userid'
-                )
-            )
-            ->setParameter(':lib', $parameters['lib'])
-            ->setParameter(':marque', $parameters['marque'])
-            ->setParameter(':os', $parameters['os'])
-            ->setParameter(':userid', $parameters['cboUser']);
-        $statement = $queryBuilder->execute();
-    }
 }
