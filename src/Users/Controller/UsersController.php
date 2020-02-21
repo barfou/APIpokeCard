@@ -72,11 +72,11 @@ class UsersController
         $response->headers->set('Content-Type', 'application/json');
 
         //$request->query->get()
-        //$parameters = $request->attributes->all();
+        $parameters = $request->attributes->all();
         $parametersInsert = [
-            "login" => $request->query->get('login'),
-            "mail" => $request->query->get('mail'),
-            "password" => $request->query->get('password')
+            "login" => $parameters['login'],
+            "mail" => $parameters['mail'],
+            "password" => $parameters['password']
         ];
         $bool = $app['repository.user']->insert($parametersInsert);
         if($bool == true){
