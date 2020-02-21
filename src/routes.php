@@ -10,17 +10,12 @@ $app->post('/users/save', 'App\Controller\UsersController::saveAction')->bind('u
 $app->get('/users', 'App\Users\Controller\UsersController::getListUserAction')->bind('users.list');
 $app->get('/users/{id}', 'App\Users\Controller\UsersController::getUserAction')->bind('users.entity');
 $app->delete('/users/{id}', 'App\Users\Controller\UsersController::deleteUserAction')->bind('users.delete');
-$app->post('/users/{login}/{mail}/{password}', 'App\Users\Controller\UsersController::insertUserAction')->bind('users.insert');
-
-$app->put('/users/{id}/{login}/{mail}/{password}', 'App\Users\Controller\UsersController::updateUserAction')->bind('users.update');
-
-/*$app->get('/users/delete', 'App\Users\Controller\UsersController::deleteUserAction')->bind('users.delete');
-$app->get('/users/insert', 'App\Users\Controller\UsersController::insertUserAction')->bind('users.insert');
-$app->get('/users/update', 'App\Users\Controller\UsersController::updateUserAction')->bind('users.update');*/
+$app->post('/users/{login}/mail/{mail}/password/{password}', 'App\Users\Controller\UsersController::insertUserAction')->bind('users.insert');
+$app->put('/users/{id}/login/{login}/mail/{mail}/password/{password}', 'App\Users\Controller\UsersController::updateUserAction')->bind('users.update');
 
 //Pokemon
-$app->get('/pokemons', 'App\Pokemons\Controller\PokemonsController::getListPokemonAction')->bind('pokemons.list');
-$app->get('/pokemons/detail', 'App\Pokemons\Controller\PokemonsController::getPokemonAction')->bind('pokemons.entity');
+$app->get('/pokemons/page/{page}', 'App\Pokemons\Controller\PokemonsController::getListPokemonAction')->bind('pokemons.list');
+$app->get('/pokemons/{id}', 'App\Pokemons\Controller\PokemonsController::getPokemonAction')->bind('pokemons.entity');
 //$app->get('/pokemons/insertImg', 'App\Pokemons\Controller\PokemonsController::insertImgAction')->bind('pokemons.insrtImg');
 /*$app->get('/pokemons/edit/{id}', 'App\Pokemons\Controller\PokemonsController::editAction')->bind('pokemons.edit');
 $app->get('/pokemons/new', 'App\Pokemons\Controller\PokemonsController::newAction')->bind('pokemons.new');
