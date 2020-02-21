@@ -73,13 +73,13 @@ class UsersController
         $response = new Response();
         $response->headers->set('Content-Type', 'application/json');
 
-        $parametersURL = $request->request->all();
-        $parameters = [
-            "login" => $parametersURL['login'],
-            "mail" => $parametersURL['mail'],
-            "password" => $parametersURL['password']
+        $parameters = $request->attributes->all();
+        $parametersInsert = [
+            "login" => $parameters['login'],
+            "mail" => $parameters['mail'],
+            "password" => $parameters['password']
         ];
-        $bool = $app['repository.user']->insert($parameters);
+        $bool = $app['repository.user']->insert($parametersInsert);
         if($bool == true){
             $responseJson = [
                 "response" => "Request executed"
