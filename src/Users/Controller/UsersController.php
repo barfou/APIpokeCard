@@ -16,9 +16,14 @@ class UsersController
 
         $users = $app['repository.user']->getAll();
 
-        $response->setContent(json_encode($users));
-        $response->setStatusCode(Response::HTTP_OK);
-
+        if($users !== []){
+                    $response->setContent(json_encode($users));
+                    $response->setStatusCode(Response::HTTP_OK);
+        }
+        else{
+             $response->setContent(json_encode("204 NO CONTENT"));
+             $response->setStatusCode(Response::HTTP_NO_CONTENT);
+        }
         return $response;
     }
 
