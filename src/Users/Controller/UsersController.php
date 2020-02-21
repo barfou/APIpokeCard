@@ -48,8 +48,8 @@ class UsersController
         $response = new Response();
         $response->headers->set('Content-Type', 'application/json');
 
-        $id = $_GET["id"];
-        $bool = $app['repository.user']->delete($id);
+        $parameters = $request->attributes->all();
+        $bool = $app['repository.user']->delete($parameters['id']);
         if($bool = true){
             $responseJson = [
                 "response" => "Request executed"
