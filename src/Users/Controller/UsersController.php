@@ -44,8 +44,7 @@ class UsersController
         $response = new Response();
         $response->headers->set('Content-Type', 'application/json');
 
-        //$id = $_GET["id"];
-        $id = 1;
+        $id = $_GET["id"];
         $bool = $app['repository.user']->delete($id);
         if($bool = true){
             $responseJson = [
