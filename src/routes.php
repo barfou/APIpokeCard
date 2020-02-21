@@ -12,7 +12,7 @@ $app->get('/users/{id}', 'App\Users\Controller\UsersController::getUserAction')-
 $app->delete('/users/{id}', 'App\Users\Controller\UsersController::deleteUserAction')->bind('users.delete');
 $app->post('/users/{login}/{mail}/{password}', 'App\Users\Controller\UsersController::insertUserAction')->bind('users.insert');
 
-$app->put('/users/update', 'App\Users\Controller\UsersController::updateUserAction')->bind('users.update');
+$app->put('/users/{id}/{login}/{mail}/{password}', 'App\Users\Controller\UsersController::updateUserAction')->bind('users.update');
 
 /*$app->get('/users/delete', 'App\Users\Controller\UsersController::deleteUserAction')->bind('users.delete');
 $app->get('/users/insert', 'App\Users\Controller\UsersController::insertUserAction')->bind('users.insert');

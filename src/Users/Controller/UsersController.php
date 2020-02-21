@@ -17,12 +17,11 @@ class UsersController
         $users = $app['repository.user']->getAll();
 
         if($users !== []){
-                    $response->setContent(json_encode($users));
-                    $response->setStatusCode(Response::HTTP_OK);
+            $response->setContent(json_encode($users));
+            $response->setStatusCode(Response::HTTP_OK);
         }
         else{
-             $response->setContent(json_encode("204 NO CONTENT"));
-             $response->setStatusCode(Response::HTTP_NO_CONTENT);
+            $response->setStatusCode(Response::HTTP_NO_CONTENT);
         }
         return $response;
     }
@@ -108,14 +107,14 @@ class UsersController
         $response = new Response();
         $response->headers->set('Content-Type', 'application/json');
 
-        //$parameters = $request->request->all();
-        $parameters = [
-            "id" => $_GET["id"],
-            "login" => $_GET["login"],
-            "mail" => $_GET["mail"],
-            "password" => $_GET["password"]
+        $parameters = $request->attributes->all();
+        $parametersUpdate = [
+            "id" => $parameters['id'],
+            "login" => $parameters['login'],
+            "mail" => $parameters['mail'],
+            "password" => $parameters['password']
         ];
-        $bool = $app['repository.user']->update($parameters);
+        $bool = $app['repository.user']->update($parametersUpdate);
         if($bool == true){
             $responseJson = [
                 "response" => "Request executed"
