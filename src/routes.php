@@ -16,10 +16,6 @@ $app->put('/users/{id}/login/{login}/mail/{mail}/password/{password}', 'App\User
 //Pokemon
 $app->get('/pokemons/page/{page}', 'App\Pokemons\Controller\PokemonsController::getListPokemonAction')->bind('pokemons.list');
 $app->get('/pokemons/{name}', 'App\Pokemons\Controller\PokemonsController::getPokemonAction')->bind('pokemons.entity');
-//$app->get('/pokemons/insertImg', 'App\Pokemons\Controller\PokemonsController::insertImgAction')->bind('pokemons.insrtImg');
-/*$app->get('/pokemons/edit/{id}', 'App\Pokemons\Controller\PokemonsController::editAction')->bind('pokemons.edit');
-$app->get('/pokemons/new', 'App\Pokemons\Controller\PokemonsController::newAction')->bind('pokemons.new');
-$app->post('/pokemons/delete/{id}', 'App\Pokemons\Controller\PokemonsController::deleteAction')->bind('pokemons.delete');
-$app->post('/pokemons/save', 'App\Pokemons\Controller\PokemonsController::saveAction')->bind('pokemons.save');*/
+$app->post('/pokemons/img', 'App\Pokemons\Controller\PokemonsController::insertImgAction')->bind('pokemons.insertImg');
 
 

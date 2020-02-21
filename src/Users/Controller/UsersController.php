@@ -55,17 +55,11 @@ class UsersController
         $parameters = $request->attributes->all();
         $bool = $app['repository.user']->delete($parameters['id']);
         if($bool == true){
-            $responseJson = [
-                "response" => "Request executed"
-            ];
-            $response->setContent(json_encode($responseJson));
+            $response->setContent(json_encode("Request executed"));
             $response->setStatusCode(Response::HTTP_OK);
         }
         else{
-            $responseJson = [
-                "response" => "Request not executed"
-            ];
-            $response->setContent(json_encode($responseJson));
+            $response->setContent(json_encode("Request not executed"));
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
         return $response;
@@ -85,17 +79,11 @@ class UsersController
         ];
         $bool = $app['repository.user']->insert($parametersInsert);
         if($bool == true){
-            $responseJson = [
-                "response" => "Request executed"
-            ];
-            $response->setContent(json_encode($responseJson));
+            $response->setContent(json_encode("Request executed"));
             $response->setStatusCode(Response::HTTP_OK);
         }
         else{
-            $responseJson = [
-                "response" => "Request not executed"
-            ];
-            $response->setContent(json_encode($responseJson));
+            $response->setContent(json_encode("Request not executed"));
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
         return $response;
@@ -116,46 +104,13 @@ class UsersController
         ];
         $bool = $app['repository.user']->update($parametersUpdate);
         if($bool == true){
-            $responseJson = [
-                "response" => "Request executed"
-            ];
-            $response->setContent(json_encode($responseJson));
+            $response->setContent(json_encode("Request executed"));
             $response->setStatusCode(Response::HTTP_OK);
         }
         else{
-            $responseJson = [
-                "response" => "Request not executed"
-            ];
-            $response->setContent(json_encode($responseJson));
+            $response->setContent(json_encode("Request not executed"));
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
         return $response;
     }
-
-
-
-    /*public function editAction(Request $request, Application $app)
-    {
-        $parameters = $request->attributes->all();
-        $user = $app['repository.user']->getById($parameters['id']);
-
-        return $app['twig']->render('users.form.html.twig', array('user' => $user));
-    }
-
-    public function saveAction(Request $request, Application $app)
-    {
-        $parameters = $request->request->all();
-        if (isset($parameters['id'])) {
-            $user = $app['repository.user']->update($parameters);
-        } else {
-            $user = $app['repository.user']->insert($parameters);
-        }
-
-        return $app->redirect($app['url_generator']->generate('users.list'));
-    }
-
-    public function newAction(Request $request, Application $app)
-    {
-        return $app['twig']->render('users.form.html.twig');
-    }*/
 }

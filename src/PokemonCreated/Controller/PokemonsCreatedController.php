@@ -158,48 +158,106 @@ class PokemonsController
         return $response;
     }
 
+    /*public function insertPokemonAction(Request $request, Application $app)
+    {
+        //Create Response object
+                $response = new Response();
+                $response->headers->set('Content-Type', 'application/json');
+
+                //$parameters = $request->request->all();
+                $parameters = [
+                    "login" => $_GET["login"],
+                    "mail" => $_GET["mail"],
+                    "password" => $_GET["password"]
+                ];
+                $bool = $app['repository.user']->insert($parameters);
+                if($bool = true){
+                    $responseJson = [
+                        "response" => "Request executed"
+                    ];
+                    $response->setContent(json_encode($responseJson));
+                    $response->setStatusCode(Response::HTTP_OK);
+                }
+                else{
+                    $responseJson = [
+                        "response" => "Request not executed"
+                    ];
+                    $response->setContent(json_encode($responseJson));
+                    $response->setStatusCode(Response::HTTP_NOT_FOUND);
+                }
+                return $response;
+    }*/
+
     public function insertImgAction(Request $request, Application $app)
     {
-        $bool = true;
         $url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=964";
+
         $httpsfile = file_get_contents($url);
         $jsonDecoded = json_decode($httpsfile);
 
         $resultsStdClass = $jsonDecoded->results;
         $results = [];
         for($i = 0; $i < count((array)$resultsStdClass); $i++){
-            if($bool == true){
-                $name = $resultsStdClass[$i]->name;
+            $name = $resultsStdClass[$i]->name;
 
-                $urldetail = "https://pokeapi.co/api/v2/pokemon/" . $name;
+            $urldetail = "https://pokeapi.co/api/v2/pokemon/" . $name;
 
-                $httpsfile = file_get_contents($urldetail);
-                $jsonDecoded = json_decode($httpsfile);
+            $httpsfile = file_get_contents($urldetail);
+            $jsonDecoded = json_decode($httpsfile);
 
-                $sprites = [
-                    "back_default" => $jsonDecoded->sprites->back_default,
-                    "front_default" => $jsonDecoded->sprites->front_default
-                ];
+            $sprites = [
+                "back_default" => $jsonDecoded->sprites->back_default,
+                "front_default" => $jsonDecoded->sprites->front_default
+            ];
 
-                $urlBackImg = $sprites["back_default"];
-                $urlFrontImg = $sprites["front_default"];
+            $urlBackImg = $sprites["back_default"];
+            $urlFrontImg = $sprites["front_default"];
 
-                $parameters = [
-                    'name' => $name,
-                    'urlImgBack' => $urlBackImg,
-                    'urlImgFront' => $urlFrontImg
-                ];
-                $bool = $app['repository.pokemon']->insertImg($parameters);
-            }
+            $parameters = [
+                'name' => $name,
+                'urlImgBack' => $urlBackImg,
+                'urlImgFront' => $urlFrontImg
+            ];
+            $app['repository.pokemon']->insertImg($parameters);
         }
-        if($bool == true){
-            $response->setContent(json_encode("Request executed"));
-            $response->setStatusCode(Response::HTTP_OK);
-        }
-        else{
-            $response->setContent(json_encode("Request not executed"));
-            $response->setStatusCode(Response::HTTP_NOT_FOUND);
-        }
-        return $response;
+        return "OK";
     }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**public function deleteAction(Request $request, Application $app)
+    {
+        $parameters = $request->attributes->all();
+        $app['repository.device']->delete($parameters['id']);
+
+        return $app->redirect($app['url_generator']->generate('device.list'));
+    }
+
+    public function editAction(Request $request, Application $app)
+    {
+        $parameters = $request->attributes->all();
+        $device = $app['repository.device']->getById($parameters['id']);
+
+        return $app['twig']->render('device.form.html.twig', array('device' => $device));
+    }
+
+    public function saveAction(Request $request, Application $app)
+    {
+        $parameters = $request->request->all();
+        if (isset($parameters['id'])) {
+            $device = $app['repository.device']->update($parameters);
+        } else {
+            $device = $app['repository.device']->insert($parameters);
+        }
+
+        return $app->redirect($app['url_generator']->generate('device.list'));
+    }
+
+    public function newAction(Request $request, Application $app)
+    {
+        $users = $app['repository.user']->getAll();
+
+        return $app['twig']->render('device.form.html.twig', array('users' => $users));
+    }**/
 }

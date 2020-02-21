@@ -81,17 +81,6 @@ class UserRepository
         return $user;
     }
 
-    public function delete($id)
-    {
-        $queryBuilder = $this->db->createQueryBuilder();
-        $queryBuilder
-            ->delete('User')
-            ->where('id = :id')
-            ->setParameter(':id', $id);
-        $statement = $queryBuilder->execute();
-        return $statement;
-    }
-
     public function insert($parameters)
     {
         $queryBuilder = $this->db->createQueryBuilder();
@@ -110,7 +99,6 @@ class UserRepository
         $statement = $queryBuilder->execute();
         return $statement;
     }
-
 
     public function update($parameters)
     {
@@ -136,6 +124,17 @@ class UserRepository
                 ->setParameter(':password', $parameters['password']);
         }
 
+        $statement = $queryBuilder->execute();
+        return $statement;
+    }
+
+    public function delete($id)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->delete('User')
+            ->where('id = :id')
+            ->setParameter(':id', $id);
         $statement = $queryBuilder->execute();
         return $statement;
     }
