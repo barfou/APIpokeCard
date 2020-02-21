@@ -69,7 +69,7 @@ class PokemonsController
             $response->setStatusCode(Response::HTTP_OK);
         }
         else{
-            $response->setContent("HTTP request not successfully!");
+            $response->setContent(json_encode("HTTP request not successfully!"));
             $response->headers->set('Content-Type', 'text/html');
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }

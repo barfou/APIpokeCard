@@ -101,6 +101,7 @@ class UsersController
             "login" => $parameters['login'],
             "mail" => $parameters['mail'],
             "password" => $parameters['password']
+
         ];
         $bool = $app['repository.user']->update($parametersUpdate);
         if($bool == true){
