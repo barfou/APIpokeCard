@@ -65,9 +65,6 @@ class UsersController
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
         return $response;
-        //$method = $request->getRealMethod();
-        //$msg = "about: " . $method;
-        //return $msg;
     }
 
     public function insertUserAction(Request $request, Application $app)
@@ -76,11 +73,11 @@ class UsersController
         $response = new Response();
         $response->headers->set('Content-Type', 'application/json');
 
-        //$parameters = $request->request->all();
+        $parameters = $request->request->all();
         $parameters = [
-            "login" => $_GET["login"],
-            "mail" => $_GET["mail"],
-            "password" => $_GET["password"]
+            "login" => $parameters['login'],
+            "mail" => $parameters['mail'],
+            "password" => $parameters['password']
         ];
         $bool = $app['repository.user']->insert($parameters);
         if($bool = true){
