@@ -68,26 +68,27 @@ class UsersController
     public function insertUserAction(Request $request, Application $app)
     {
         //Create Response object
-        $response = new Response();
-        $response->headers->set('Content-Type', 'application/json');
+        //$response = new Response();
+        //$response->headers->set('Content-Type', 'application/json');
 
         $parameters = $request;
+        var_dump($parameters);
         var_dump($parameters->parameters);
 
-        $parametersInsert = [
-            "login" => $parameters['login'],
-            "mail" => $parameters['mail'],
-            "password" => $parameters['password']
-        ];
-        $bool = $app['repository.user']->insert($parametersInsert);
-        if($bool == true){
-            $response->setContent(json_encode("Request executed"));
-            $response->setStatusCode(Response::HTTP_OK);
-        }
-        else{
-            $response->setContent(json_encode("Request not executed"));
-            $response->setStatusCode(Response::HTTP_NOT_FOUND);
-        }
+        //$parametersInsert = [
+        //    "login" => $parameters['login'],
+        //    "mail" => $parameters['mail'],
+        //    "password" => $parameters['password']
+        //];
+        //$bool = $app['repository.user']->insert($parametersInsert);
+        //if($bool == true){
+        //    $response->setContent(json_encode("Request executed"));
+        //    $response->setStatusCode(Response::HTTP_OK);
+        //}
+        //else{
+        //    $response->setContent(json_encode("Request not executed"));
+        //    $response->setStatusCode(Response::HTTP_NOT_FOUND);
+        //}
         return $response;
     }
 
