@@ -91,7 +91,7 @@ class UsersController
         //    $response->setStatusCode(Response::HTTP_NOT_FOUND);
         //}
         //return $response;
-        return "Cc"
+        return "Cc";
     }
 
     public function updateUserAction(Request $request, Application $app)
