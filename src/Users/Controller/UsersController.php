@@ -73,7 +73,6 @@ class UsersController
 
         //$parameters = $request;
         var_dump($request->request);
-        var_dump($request->request->getProperty('parameters'));
         //var_dump($parameters->parameters);
 
         //$parametersInsert = [
@@ -91,7 +90,7 @@ class UsersController
         //    $response->setStatusCode(Response::HTTP_NOT_FOUND);
         //}
         //return $response;
-        return "Rien";
+        return "";
     }
 
     public function updateUserAction(Request $request, Application $app)
