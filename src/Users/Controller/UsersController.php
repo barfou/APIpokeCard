@@ -72,7 +72,7 @@ class UsersController
         //$response->headers->set('Content-Type', 'application/json');
 
         //$parameters = $request;
-        //var_dump($parameters);
+        var_dump($request);
         var_dump($request->request)
         //var_dump($parameters->parameters);
 
@@ -90,7 +90,7 @@ class UsersController
         //    $response->setContent(json_encode("Request not executed"));
         //    $response->setStatusCode(Response::HTTP_NOT_FOUND);
         //}
-        return $response;
+        //return $response;
     }
 
     public function updateUserAction(Request $request, Application $app)
