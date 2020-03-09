@@ -72,7 +72,7 @@ class UsersController
         //$response->headers->set('Content-Type', 'application/json');
 
         //$parameters = $request;
-        var_dump($request);
+        //var_dump($request);
         var_dump($request->request);
         //var_dump($parameters->parameters);
 
