@@ -71,9 +71,10 @@ class UsersController
         //$response = new Response();
         //$response->headers->set('Content-Type', 'application/json');
 
-        $parameters = $request;
-        var_dump($parameters);
-        var_dump($parameters->parameters[0]);
+        //$parameters = $request;
+        //var_dump($parameters);
+        var_dump($request->request)
+        //var_dump($parameters->parameters);
 
         //$parametersInsert = [
         //    "login" => $parameters['login'],
