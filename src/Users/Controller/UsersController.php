@@ -73,6 +73,7 @@ class UsersController
 
         //$parameters = $request;
         var_dump($request);
+        var_dump($_POST["login"]);
         //var_dump($parameters->parameters);
 
         //$parametersInsert = [
