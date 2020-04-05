@@ -9,9 +9,9 @@ $app->post('/users/save', 'App\Controller\UsersController::saveAction')->bind('u
 //User
 $app->get('/users', 'App\Users\Controller\UsersController::getListUserAction')->bind('users.list');
 $app->get('/users/{id}', 'App\Users\Controller\UsersController::getUserAction')->bind('users.entity');
-$app->delete('/users/{id}', 'App\Users\Controller\UsersController::deleteUserAction')->bind('users.delete');
 $app->post('/users', 'App\Users\Controller\UsersController::insertUserAction')->bind('users.insert');
 $app->put('/users', 'App\Users\Controller\UsersController::updateUserAction')->bind('users.update');
+$app->delete('/users/{id}', 'App\Users\Controller\UsersController::deleteUserAction')->bind('users.delete');
 
 //Pokemon
 $app->get('/pokemons/page/{page}', 'App\Pokemons\Controller\PokemonsController::getListPokemonAction')->bind('pokemons.list');
