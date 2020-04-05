@@ -98,7 +98,7 @@ class UsersController
         parse_str(file_get_contents("php://input"), $_PUT);
         //foreach ($_PUT as $key => $value)
         //{
-            var_dump($__PUT["id"]);
+            var_dump($_PUT["id"]);
         //}
 
         /*$parametersUpdate = [
