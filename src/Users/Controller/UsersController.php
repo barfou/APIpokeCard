@@ -100,7 +100,8 @@ class UsersController
         //{
             var_dump($_PUT["id"]);
         //}
-
+        $string = "222";
+        var_dump($string);
         /*$parametersUpdate = [
             "id" => $_PUT['id'],
             "login" => $_PUT['login'],
