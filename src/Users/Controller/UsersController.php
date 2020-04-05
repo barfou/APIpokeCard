@@ -91,18 +91,14 @@ class UsersController
     public function updateUserAction(Request $request, Application $app)
     {
         //Create Response object
-        /*$response = new Response();
-        $response->headers->set('Content-Type', 'application/json');*/
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/json');
 
+        //Permet de récupéré les paramètres de la requete
         $_PUT = array();
         parse_str(file_get_contents("php://input"), $_PUT);
-        //foreach ($_PUT as $key => $value)
-        //{
-            var_dump($_PUT["id"]);
-        //}
-        $string = "222";
-        var_dump($string);
-        /*$parametersUpdate = [
+
+        $parametersUpdate = [
             "id" => $_PUT['id'],
             "login" => $_PUT['login'],
             "mail" => $_PUT['mail'],
@@ -118,6 +114,6 @@ class UsersController
             $response->setContent(json_encode("Request not executed"));
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
-        return $response;*/
+        return $response;
     }
 }
