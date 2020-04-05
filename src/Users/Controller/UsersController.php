@@ -86,7 +86,6 @@ class UsersController
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
         return $response;
-        return "";
     }
 
     public function updateUserAction(Request $request, Application $app)
@@ -95,12 +94,11 @@ class UsersController
         $response = new Response();
         $response->headers->set('Content-Type', 'application/json');
 
-        //$parameters = $request->attributes->all();
         $parametersUpdate = [
-            "id" => $_POST['id'],
-            "login" => $_POST['login'],
-            "mail" => $_POST['mail'],
-            "password" => $_POST['password']
+            "id" => $_PUT['id'],
+            "login" => $_PUT['login'],
+            "mail" => $_PUT['mail'],
+            "password" => $_PUT['password']
 
         ];
         $bool = $app['repository.user']->update($parametersUpdate);
