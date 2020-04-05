@@ -95,12 +95,12 @@ class UsersController
         $response = new Response();
         $response->headers->set('Content-Type', 'application/json');
 
-        $parameters = $request->attributes->all();
+        //$parameters = $request->attributes->all();
         $parametersUpdate = [
-            "id" => $parameters['id'],
-            "login" => $parameters['login'],
-            "mail" => $parameters['mail'],
-            "password" => $parameters['password']
+            "id" => $_POST['id'],
+            "login" => $_POST['login'],
+            "mail" => $_POST['mail'],
+            "password" => $_POST['password']
 
         ];
         $bool = $app['repository.user']->update($parametersUpdate);
