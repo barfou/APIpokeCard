@@ -72,7 +72,8 @@ class UserRepository
                 "id" => $userData[0]['id'],
                 "login" => $userData[0]['login'],
                 "mail" => $userData[0]['mail'],
-                "password" => $userData[0]['password']
+                "password" => $userData[0]['password'],
+                "poke_points" => $userData[0]['poke_points']
             ];
         }
         else {
