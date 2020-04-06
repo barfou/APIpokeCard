@@ -98,6 +98,33 @@ class UsersController
         return $response;
     }
 
+    public function updatePokePointsUserAction(Request $request, Application $app)
+    {
+        //Create Response object
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/json');
+
+        //Permet de récupéré les paramètres de la requete
+        $_PUT = array();
+        parse_str(file_get_contents("php://input"), $_PUT);
+
+        $parametersUpdate = [
+            "user_id" => $_PUT['user_id'],
+            "poke_points" => $_PUT['poke_points']
+
+        ];
+        $bool = $app['repository.user']->updatePokePoints($parametersUpdate);
+        if($bool == true){
+            $response->setContent(json_encode("Request executed"));
+            $response->setStatusCode(Response::HTTP_OK);
+        }
+        else{
+            $response->setContent(json_encode("Request not executed"));
+            $response->setStatusCode(Response::HTTP_NOT_FOUND);
+        }
+        return $response;
+    }
+
     public function deleteUserAction(Request $request, Application $app)
     {
         //Create Response object
@@ -116,4 +143,6 @@ class UsersController
         }
         return $response;
     }
+
+
 }

@@ -128,6 +128,24 @@ class UserRepository
         return $statement;
     }
 
+    public function updatePokePoints($parameters)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->update('User')
+            ->where('id = :user_id')
+            ->setParameter(':id', $parameters['user_id']);
+
+        if ($parameters['poke_points']) {
+            $queryBuilder
+                ->set('poke_points', ':poke_points')
+                ->setParameter(':poke_points', $parameters['poke_points']);
+        }
+
+        $statement = $queryBuilder->execute();
+        return $statement;
+    }
+
     public function delete($id)
     {
         $queryBuilder = $this->db->createQueryBuilder();

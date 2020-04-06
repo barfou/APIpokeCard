@@ -11,6 +11,7 @@ $app->get('/users', 'App\Users\Controller\UsersController::getListUserAction')->
 $app->get('/users/{id}', 'App\Users\Controller\UsersController::getUserAction')->bind('users.entity');
 $app->post('/users', 'App\Users\Controller\UsersController::insertUserAction')->bind('users.insert');
 $app->put('/users', 'App\Users\Controller\UsersController::updateUserAction')->bind('users.update');
+$app->put('/users/poke_points', 'App\Users\Controller\UsersController::updatePokePointsUserAction')->bind('users.pokepointsUpdate');
 $app->delete('/users/{id}', 'App\Users\Controller\UsersController::deleteUserAction')->bind('users.delete');
 
 //Pokemon
