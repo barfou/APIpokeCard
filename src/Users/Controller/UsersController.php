@@ -46,25 +46,6 @@ class UsersController
         return $response;
     }
 
-    public function deleteUserAction(Request $request, Application $app)
-    {
-        //Create Response object
-        $response = new Response();
-        $response->headers->set('Content-Type', 'application/json');
-
-        $parameters = $request->attributes->all();
-        $bool = $app['repository.user']->delete($parameters['id']);
-        if($bool == true){
-            $response->setContent(json_encode("Request executed"));
-            $response->setStatusCode(Response::HTTP_OK);
-        }
-        else{
-            $response->setContent(json_encode("Request not executed"));
-            $response->setStatusCode(Response::HTTP_NOT_FOUND);
-        }
-        return $response;
-    }
-
     public function insertUserAction(Request $request, Application $app)
     {
         //Create Response object
@@ -106,6 +87,25 @@ class UsersController
 
         ];
         $bool = $app['repository.user']->update($parametersUpdate);
+        if($bool == true){
+            $response->setContent(json_encode("Request executed"));
+            $response->setStatusCode(Response::HTTP_OK);
+        }
+        else{
+            $response->setContent(json_encode("Request not executed"));
+            $response->setStatusCode(Response::HTTP_NOT_FOUND);
+        }
+        return $response;
+    }
+
+    public function deleteUserAction(Request $request, Application $app)
+    {
+        //Create Response object
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/json');
+
+        $parameters = $request->attributes->all();
+        $bool = $app['repository.user']->delete($parameters['id']);
         if($bool == true){
             $response->setContent(json_encode("Request executed"));
             $response->setStatusCode(Response::HTTP_OK);

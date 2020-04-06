@@ -46,6 +46,36 @@ class PokemonRepository
           return $sprites;
     }
 
+    public function insertOwnedPokemon($parameters)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->insert('OwnedPokemon')
+            ->values(
+                array(
+                    'pokemon_id' => ':pokemon_id',
+                    'user_id' => ':user_id'
+                )
+            )
+            ->setParameter(':pokemon_id', $parameters['pokemon_id'])
+            ->setParameter(':user_id', $parameters['user_id']);
+        $statement = $queryBuilder->execute();
+        return $statement;
+    }
+
+    public function updateOwnedPokemon($parameters)
+        {
+            $queryBuilder = $this->db->createQueryBuilder();
+            $queryBuilder
+                ->update('OwnedPokemon')
+                ->where('pokemon_id = :pokemon_id AND user_id = :user_id')
+                ->setParameter(':pokemon_id', $parameters['pokemon_id'])
+                ->setParameter(':user_id', $parameters['user_id']);
+
+            $statement = $queryBuilder->execute();
+            return $statement;
+        }
+
     public function insertImg($parameters)
     {
         $queryBuilder = $this->db->createQueryBuilder();

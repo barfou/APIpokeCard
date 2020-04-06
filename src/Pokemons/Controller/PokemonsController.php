@@ -158,6 +158,55 @@ class PokemonsController
         return $response;
     }
 
+    public function insertOwnedPokemonAction(Request $request, Application $app)
+    {
+        //Create Response object
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/json');
+
+        $parametersInsert = [
+            "pokemon_id" => $_POST['pokemon_id'],
+            "user_id" => $_POST['user_id']
+        ];
+        $bool = $app['repository.pokemon']->insertOwnedPokemon($parametersInsert);
+        if($bool == true){
+            $response->setContent(json_encode("Request executed"));
+            $response->setStatusCode(Response::HTTP_OK);
+        }
+        else{
+            $response->setContent(json_encode("Request not executed"));
+            $response->setStatusCode(Response::HTTP_NOT_FOUND);
+        }
+        return $response;
+    }
+
+    public function updateOwnedPokemonAction(Request $request, Application $app)
+        {
+            //Create Response object
+            $response = new Response();
+            $response->headers->set('Content-Type', 'application/json');
+
+            //Permet de récupéré les paramètres de la requete
+            $_PUT = array();
+            parse_str(file_get_contents("php://input"), $_PUT);
+
+            $parametersUpdate = [
+                "pokemon_id" => $_POST['pokemon_id'],
+                "user_id" => $_POST['user_id']
+
+            ];
+            $bool = $app['repository.pokemon']->updateOwnedPokemon($parametersUpdate);
+            if($bool == true){
+                $response->setContent(json_encode("Request executed"));
+                $response->setStatusCode(Response::HTTP_OK);
+            }
+            else{
+                $response->setContent(json_encode("Request not executed"));
+                $response->setStatusCode(Response::HTTP_NOT_FOUND);
+            }
+            return $response;
+        }
+
     public function insertImgAction(Request $request, Application $app)
     {
         $bool = true;
