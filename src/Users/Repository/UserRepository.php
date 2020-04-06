@@ -134,7 +134,7 @@ class UserRepository
         $queryBuilder
             ->update('User')
             ->where('id = :user_id')
-            ->setParameter(':id', $parameters['user_id']);
+            ->setParameter(':user_id', $parameters['user_id']);
 
         if ($parameters['poke_points']) {
             $queryBuilder
