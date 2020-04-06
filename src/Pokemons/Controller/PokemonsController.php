@@ -165,9 +165,10 @@ class PokemonsController
         $response->headers->set('Content-Type', 'application/json');
 
         $parameters = $request->attributes->all();
-        $ownedPokemons = $app['repository.pokemon']->getOwnedPokemon($parameters['user_id']);
         var_dump($parameters['user_id']);
+        $ownedPokemons = $app['repository.pokemon']->getOwnedPokemon($parameters['user_id']);
         var_dump($ownedPokemons);
+
         if($ownedPokemons !== []){
             $response->setContent(json_encode($users));
             $response->setStatusCode(Response::HTTP_OK);

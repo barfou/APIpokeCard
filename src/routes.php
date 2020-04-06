@@ -20,10 +20,10 @@ $app->get('/pokemons/{name}', 'App\Pokemons\Controller\PokemonsController::getPo
 $app->put('/pokemons', 'App\Pokemons\Controller\PokemonsController::updatePokemonAction')->bind('pokemons.update');
 $app->delete('/pokemons/{id}', 'App\Pokemons\Controller\PokemonsController::deletePokemonAction')->bind('pokemons.delete');*/
 
-$app->get('/pokemons/owned/{id}', 'App\Pokemons\Controller\PokemonsController::getOwnedPokemonAction')->bind('pokemons.list');
-$app->post('/pokemons/owned', 'App\Pokemons\Controller\PokemonsController::insertOwnedPokemonAction')->bind('pokemons.insert');
-$app->put('/pokemons/owned', 'App\Pokemons\Controller\PokemonsController::updateOwnedPokemonAction')->bind('pokemons.update');
-$app->delete('/pokemons/owned/{id}', 'App\Pokemons\Controller\PokemonsController::deleteOwnedPokemonAction')->bind('pokemons.delete');
+$app->get('/pokemons/owned/{user_id}', 'App\Pokemons\Controller\PokemonsController::getOwnedPokemonAction')->bind('pokemons.ownedList');
+$app->post('/pokemons/owned', 'App\Pokemons\Controller\PokemonsController::insertOwnedPokemonAction')->bind('pokemons.ownedinsert');
+$app->put('/pokemons/owned', 'App\Pokemons\Controller\PokemonsController::updateOwnedPokemonAction')->bind('pokemons.ownedUpdate');
+$app->delete('/pokemons/owned/{user_id}', 'App\Pokemons\Controller\PokemonsController::deleteOwnedPokemonAction')->bind('pokemons.ownedDelete');
 
 $app->post('/pokemons/img', 'App\Pokemons\Controller\PokemonsController::insertImgAction')->bind('pokemons.insertImg');
 
