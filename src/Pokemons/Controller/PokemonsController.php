@@ -166,6 +166,7 @@ class PokemonsController
 
         $parameters = $request->attributes->all();
         $ownedPokemons = $app['repository.pokemon']->getOwnedPokemon($parameters['user_id']);
+        var_dump($ownedPokemons);
 
         if($ownedPokemons !== []){
             $response->setContent(json_encode($users));

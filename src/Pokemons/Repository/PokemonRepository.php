@@ -61,7 +61,9 @@ class PokemonRepository
         foreach ($ownedPokemonsData as $ownedPokemonData) {
             //$userEntityList[$userData['id']] = new User($userData['id'], $userData['login'], $userData['mail'], $userData['password']);
             array_push($ownedPokemonsEntityList, $ownedPokemonData["pokemon_id"]);
+            var_dump($ownedPokemonsEntityList);
         }
+        var_dump($ownedPokemonsEntityList);
         return $ownedPokemonsEntityList;
     }
 
