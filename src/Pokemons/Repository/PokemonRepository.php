@@ -60,8 +60,7 @@ class PokemonRepository
         $usersData = $statement->fetchAll();
         foreach ($ownedPokemonsData as $ownedPokemonData) {
             //$userEntityList[$userData['id']] = new User($userData['id'], $userData['login'], $userData['mail'], $userData['password']);
-            $ownedPokemon = $ownedPokemonData["pokemon_id"]
-            array_push($ownedPokemonsEntityList, $ownedPokemon);
+            array_push($ownedPokemonsEntityList, $ownedPokemonData["pokemon_id"]);
         }
         return $ownedPokemonsEntityList;
     }
