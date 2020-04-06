@@ -168,11 +168,84 @@ class PokemonsController
         $ownedPokemons = $app['repository.pokemon']->getOwnedPokemon($parameters['user_id']);
 
         if($ownedPokemons !== []){
-            $response->setContent(json_encode($ownedPokemons));
+            $tblOwnedPokemons = [];
+            foreach ($arr as &$value) {
+                $url = "https://pokeapi.co/api/v2/pokemon/" . $value;
+
+                //Create Response object
+                $response = new Response();
+
+                // Function to get HTTP response code
+                function get_http_response_code($url) {
+                    $headers = get_headers($url);
+                    return substr($headers[0], 9, 3);
+                }
+
+                // Check HTTP response code is 200 or not
+                if (get_http_response_code($url) == 200 ){
+                    $response->headers->set('Content-Type', 'application/json');
+
+                    $httpsfile = file_get_contents($url);
+                    $jsonDecoded = json_decode($httpsfile);
+
+                    $name = $jsonDecoded->name;
+                    $height = $jsonDecoded->height;
+                    $weight = $jsonDecoded->weight;
+                    $id = $jsonDecoded->id;
+
+                    $abilitiesStdClass = $jsonDecoded->abilities;
+                    $abilities = [];
+                    for($i = 0; $i < count((array)$abilitiesStdClass); $i++){
+                        $abilitie = [
+                            "ability" => [
+                                "name" => $abilitiesStdClass[$i]->ability->name,
+                                "url" => $abilitiesStdClass[$i]->ability->url
+                            ]
+                        ];
+                        array_push($abilities, $abilitie);
+                    }
+
+                    $sprites = [
+                        "back_default" => $jsonDecoded->sprites->back_default,
+                        "front_default" => $jsonDecoded->sprites->front_default
+                    ];
+
+                    $statsStdClass = $jsonDecoded->stats;
+                    $stats = [];
+                    for($i = 0; $i < count((array)$statsStdClass); $i++){
+                        $base_stat = $statsStdClass[$i]->base_stat;
+                        $statStdClass = $statsStdClass[$i]->stat;
+                        $statName = $statStdClass->name;
+                        $statUrl = $statStdClass->url;
+
+                        $stat = [
+                            "base_stat" => $base_stat,
+                            "stat" => [
+                                "name" => $statName,
+                                "url" => $statUrl
+                            ]
+                        ];
+                        array_push($stats, $stat);
+                    }
+
+                    $pokemonInfos = [
+                        "abilities" => $abilities,
+                        "height" => $height,
+                        "id" => $id,
+                        "name" => $name,
+                        "sprites" => $sprites,
+                        "stats" => $stats,
+                        "weight" => $weight
+                    ];
+
+                    array_push($tblOwnedPokemons, $pokemonInfos);
+                }
+            }
+            $response->setContent(json_encode($tblOwnedPokemons));
             $response->setStatusCode(Response::HTTP_OK);
         }
         else{
-            $response->setStatusCode(Response::HTTP_NO_CONTENT);
+            $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
         return $response;
     }
