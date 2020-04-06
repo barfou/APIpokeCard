@@ -43,7 +43,8 @@ class UserRepository
                 "id" => $userData['id'],
                 "login" => $userData['login'],
                 "mail" => $userData['mail'],
-                "password" => $userData['password']
+                "password" => $userData['password'],
+                "poke_points" => $userData[0]['poke_points']
             ];
             array_push($userEntityList, $user);
         }
