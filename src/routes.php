@@ -23,7 +23,7 @@ $app->delete('/pokemons/{id}', 'App\Pokemons\Controller\PokemonsController::dele
 $app->get('/pokemons/owned/{user_id}', 'App\Pokemons\Controller\PokemonsController::getOwnedPokemonAction')->bind('pokemons.ownedList');
 $app->post('/pokemons/owned', 'App\Pokemons\Controller\PokemonsController::insertOwnedPokemonAction')->bind('pokemons.ownedinsert');
 $app->put('/pokemons/owned', 'App\Pokemons\Controller\PokemonsController::updateOwnedPokemonAction')->bind('pokemons.ownedUpdate');
-$app->delete('/pokemons/owned/{user_id}', 'App\Pokemons\Controller\PokemonsController::deleteOwnedPokemonAction')->bind('pokemons.ownedDelete');
+$app->delete('/pokemons/owned/{pokemon_id}/{user_id}', 'App\Pokemons\Controller\PokemonsController::deleteOwnedPokemonAction')->bind('pokemons.ownedDelete');
 
 $app->post('/pokemons/img', 'App\Pokemons\Controller\PokemonsController::insertImgAction')->bind('pokemons.insertImg');
 

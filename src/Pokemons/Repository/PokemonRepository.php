@@ -98,6 +98,18 @@ class PokemonRepository
         return $statement;
     }
 
+    public function deleteOwnedPokemon($parameters)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->delete('OwnedPokemon')
+            ->where('pokemon_id = :pokemon_id AND user_id = :user_id')
+            ->setParameter(':pokemon_id', $parameters['pokemon_id'])
+            ->setParameter(':user_id', $parameters['user_id']);
+        $statement = $queryBuilder->execute();
+        return $statement;
+    }
+
     public function insertImg($parameters)
     {
         $queryBuilder = $this->db->createQueryBuilder();

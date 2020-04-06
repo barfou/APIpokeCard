@@ -271,22 +271,46 @@ class PokemonsController
     }
 
     public function updateOwnedPokemonAction(Request $request, Application $app)
+    {
+        //Create Response object
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/json');
+
+        //Permet de récupéré les paramètres de la requete
+        $_PUT = array();
+        parse_str(file_get_contents("php://input"), $_PUT);
+
+        $parametersUpdate = [
+            "pokemon_id" => $_PUT['pokemon_id'],
+            "user_id" => $_PUT['user_id'],
+            "new_user_id" => $_PUT['new_user_id']
+
+        ];
+        $bool = $app['repository.pokemon']->updateOwnedPokemon($parametersUpdate);
+        if($bool == true){
+            $response->setContent(json_encode("Request executed"));
+            $response->setStatusCode(Response::HTTP_OK);
+        }
+        else{
+            $response->setContent(json_encode("Request not executed"));
+            $response->setStatusCode(Response::HTTP_NOT_FOUND);
+        }
+        return $response;
+    }
+
+    public function deleteOwnedPokemonAction(Request $request, Application $app)
         {
             //Create Response object
             $response = new Response();
             $response->headers->set('Content-Type', 'application/json');
 
-            //Permet de récupéré les paramètres de la requete
-            $_PUT = array();
-            parse_str(file_get_contents("php://input"), $_PUT);
+            $parameters = $request->attributes->all();
 
-            $parametersUpdate = [
-                "pokemon_id" => $_PUT['pokemon_id'],
-                "user_id" => $_PUT['user_id'],
-                "new_user_id" => $_PUT['new_user_id']
-
+            $parametersDelete = [
+                "pokemon_id" => $parameters['pokemon_id'],
+                "user_id" => $parameters['user_id']
             ];
-            $bool = $app['repository.pokemon']->updateOwnedPokemon($parametersUpdate);
+            $bool = $app['repository.pokemon']->deleteOwnedPokemon($parametersDelete);
             if($bool == true){
                 $response->setContent(json_encode("Request executed"));
                 $response->setStatusCode(Response::HTTP_OK);
