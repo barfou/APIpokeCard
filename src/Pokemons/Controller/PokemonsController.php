@@ -191,8 +191,9 @@ class PokemonsController
             parse_str(file_get_contents("php://input"), $_PUT);
 
             $parametersUpdate = [
-                "pokemon_id" => $_POST['pokemon_id'],
-                "user_id" => $_POST['user_id']
+                "pokemon_id" => $_PUT['pokemon_id'],
+                "user_id" => $_PUT['user_id'],
+                "new_user_id" => $_PUT['new_user_id']
 
             ];
             $bool = $app['repository.pokemon']->updateOwnedPokemon($parametersUpdate);

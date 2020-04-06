@@ -68,10 +68,11 @@ class PokemonRepository
             $queryBuilder = $this->db->createQueryBuilder();
             $queryBuilder
                 ->update('OwnedPokemon')
-                ->set('user_id', ':user_id')
+                ->set('user_id', ':new_user_id')
                 ->where('pokemon_id = :pokemon_id AND user_id = :user_id')
                 ->setParameter(':pokemon_id', $parameters['pokemon_id'])
-                ->setParameter(':user_id', $parameters['user_id']);
+                ->setParameter(':user_id', $parameters['user_id'])
+                ->setParameter(':new_user_id', $parameters['new_user_id']);
 
             $statement = $queryBuilder->execute();
             return $statement;
