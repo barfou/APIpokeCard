@@ -168,19 +168,16 @@ class PokemonsController
         $ownedPokemons = $app['repository.pokemon']->getOwnedPokemon($parameters['user_id']);
 
         if($ownedPokemons !== []){
+            // Function to get HTTP response code
+            function get_http_response_code($url) {
+                $headers = get_headers($url);
+                return substr($headers[0], 9, 3);
+            }
+
             $tblOwnedPokemons = [];
 
             foreach ($ownedPokemons as &$id) {
                 $url = "https://pokeapi.co/api/v2/pokemon/" . $id;
-
-                //Create Response object
-                $response = new Response();
-
-                // Function to get HTTP response code
-                function get_http_response_code($url) {
-                    $headers = get_headers($url);
-                    return substr($headers[0], 9, 3);
-                }
 
                 // Check HTTP response code is 200 or not
                 if (get_http_response_code($url) == 200 ){
