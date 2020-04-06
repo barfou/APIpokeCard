@@ -57,7 +57,7 @@ class PokemonRepository
             ->where('user_id = :user_id')
             ->setParameter(':user_id', $user_id);
         $statement = $queryBuilder->execute();
-        $usersData = $statement->fetchAll();
+        $ownedPokemonsData = $statement->fetchAll();
         foreach ($ownedPokemonsData as $ownedPokemonData) {
             //$userEntityList[$userData['id']] = new User($userData['id'], $userData['login'], $userData['mail'], $userData['password']);
             array_push($ownedPokemonsEntityList, $ownedPokemonData["pokemon_id"]);
