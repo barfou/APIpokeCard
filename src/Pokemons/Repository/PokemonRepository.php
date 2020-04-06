@@ -46,6 +46,26 @@ class PokemonRepository
           return $sprites;
     }
 
+
+    public function getOwnedPokemon($user_id)
+    {
+        $ownedPokemonsEntityList = [];
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->select('op.*')
+            ->from('OwnedPokemon', 'op')
+            ->where('user_id = :user_id')
+            ->setParameter(':user_id', $name);
+        $statement = $queryBuilder->execute();
+        $usersData = $statement->fetchAll();
+        foreach ($ownedPokemonsData as $ownedPokemonData) {
+            //$userEntityList[$userData['id']] = new User($userData['id'], $userData['login'], $userData['mail'], $userData['password']);
+            $ownedPokemon = $ownedPokemonData["pokemon_id"]
+            array_push($ownedPokemonsEntityList, $ownedPokemon);
+        }
+        return $ownedPokemonsEntityList;
+    }
+
     public function insertOwnedPokemon($parameters)
     {
         $queryBuilder = $this->db->createQueryBuilder();
@@ -64,19 +84,19 @@ class PokemonRepository
     }
 
     public function updateOwnedPokemon($parameters)
-        {
-            $queryBuilder = $this->db->createQueryBuilder();
-            $queryBuilder
-                ->update('OwnedPokemon')
-                ->set('user_id', ':new_user_id')
-                ->where('pokemon_id = :pokemon_id AND user_id = :user_id')
-                ->setParameter(':pokemon_id', $parameters['pokemon_id'])
-                ->setParameter(':user_id', $parameters['user_id'])
-                ->setParameter(':new_user_id', $parameters['new_user_id']);
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->update('OwnedPokemon')
+            ->set('user_id', ':new_user_id')
+            ->where('pokemon_id = :pokemon_id AND user_id = :user_id')
+            ->setParameter(':pokemon_id', $parameters['pokemon_id'])
+            ->setParameter(':user_id', $parameters['user_id'])
+            ->setParameter(':new_user_id', $parameters['new_user_id']);
 
-            $statement = $queryBuilder->execute();
-            return $statement;
-        }
+        $statement = $queryBuilder->execute();
+        return $statement;
+    }
 
     public function insertImg($parameters)
     {

@@ -158,6 +158,25 @@ class PokemonsController
         return $response;
     }
 
+    public function getOwnedPokemonAction(Request $request, Application $app)
+    {
+        //Create Response object
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/json');
+
+        $parameters = $request->attributes->all();
+        $ownedPokemons = $app['repository.pokemon']->getOwnedPokemon($parameters['user_id']);
+
+        if($ownedPokemons !== []){
+            $response->setContent(json_encode($users));
+            $response->setStatusCode(Response::HTTP_OK);
+        }
+        else{
+            $response->setStatusCode(Response::HTTP_NO_CONTENT);
+        }
+        return $response;
+    }
+
     public function insertOwnedPokemonAction(Request $request, Application $app)
     {
         //Create Response object
