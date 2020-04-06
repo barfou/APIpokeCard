@@ -169,8 +169,9 @@ class PokemonsController
 
         if($ownedPokemons !== []){
             $tblOwnedPokemons = [];
-            foreach ($arr as &$value) {
-                $url = "https://pokeapi.co/api/v2/pokemon/" . $value;
+
+            foreach ($ownedPokemons as &$id) {
+                $url = "https://pokeapi.co/api/v2/pokemon/" . $id;
 
                 //Create Response object
                 $response = new Response();
