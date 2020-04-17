@@ -276,7 +276,7 @@ class PokemonsController
                 $response->setStatusCode(Response::HTTP_NOT_FOUND);
             }
         } else {
-            $response->setContent("CONSTRAINT FOREIGN KEY (`user_id`)");
+            $response->setContent("CONSTRAINT FOREIGN KEY");
             $response->setStatusCode(Response::HTTP_FORBIDDEN);
         }
 
