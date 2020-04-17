@@ -150,7 +150,7 @@ class UsersController
         $count = $app['repository.pokemon']->countOwnedPokemon($parameters['id']);
 
         if($count > 0){
-            $response->setContent(json_encode("Impossible to delete this user because he is linked to pokemons"));
+            $response->setContent("Impossible to delete this user because he is linked to pokemons");
             $response->setStatusCode(Response::HTTP_FORBIDDEN);
         } else {
 
