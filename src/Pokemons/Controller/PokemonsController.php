@@ -257,9 +257,11 @@ class PokemonsController
         $response = new Response();
         $response->headers->set('Content-Type', 'text/html');
 
-        $user = $app['repository.user']->getById($_POST['user_id']);
 
-        if($user !== []){
+
+        //$user = $app['repository.user']->getById($_POST['user_id']);
+
+        //if($user !== []){
             $parametersInsert = [
                 "pokemon_id" => $_POST['pokemon_id'],
                 "user_id" => $_POST['user_id']
@@ -275,10 +277,10 @@ class PokemonsController
                 $response->setContent("HTTP request not successfully!");
                 $response->setStatusCode(Response::HTTP_NOT_FOUND);
             }
-        } else {
-            $response->setContent("Sorry it do not exist user for this id");
-            $response->setStatusCode(Response::HTTP_FORBIDDEN);
-        }
+        //} else {
+        //    $response->setContent("Sorry user do not exist for this id");
+        //    $response->setStatusCode(Response::HTTP_FORBIDDEN);
+        //}
 
         return $response;
     }
