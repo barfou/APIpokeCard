@@ -17,10 +17,8 @@ $app->delete('/users/{id}', 'App\Users\Controller\UsersController::deleteUserAct
 //Pokemon
 $app->get('/pokemons/page/{page}', 'App\Pokemons\Controller\PokemonsController::getListPokemonAction')->bind('pokemons.list');
 $app->get('/pokemons/{name}', 'App\Pokemons\Controller\PokemonsController::getPokemonAction')->bind('pokemons.entity');
-/*$app->post('/pokemons', 'App\Pokemons\Controller\PokemonsController::insertPokemonAction')->bind('pokemons.insert');
-$app->put('/pokemons', 'App\Pokemons\Controller\PokemonsController::updatePokemonAction')->bind('pokemons.update');
-$app->delete('/pokemons/{id}', 'App\Pokemons\Controller\PokemonsController::deletePokemonAction')->bind('pokemons.delete');*/
 
+//OwnedPokemon
 $app->get('/pokemons/owned/{user_id}', 'App\Pokemons\Controller\PokemonsController::getOwnedPokemonAction')->bind('pokemons.ownedList');
 $app->post('/pokemons/owned', 'App\Pokemons\Controller\PokemonsController::insertOwnedPokemonAction')->bind('pokemons.ownedinsert');
 $app->put('/pokemons/owned', 'App\Pokemons\Controller\PokemonsController::updateOwnedPokemonAction')->bind('pokemons.ownedUpdate');

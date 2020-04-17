@@ -132,14 +132,22 @@ class UsersController
         $response->headers->set('Content-Type', 'application/json');
 
         $parameters = $request->attributes->all();
-        $bool = $app['repository.user']->delete($parameters['id']);
-        if($bool == true){
-            $response->setContent(json_encode("Request executed"));
-            $response->setStatusCode(Response::HTTP_OK);
-        }
-        else{
-            $response->setContent(json_encode("Request not executed"));
-            $response->setStatusCode(Response::HTTP_NOT_FOUND);
+
+        $count = $app['repository.pokemon']->countOwnedPokemon($parameters['id']);
+
+        if(count != 0){
+            $response->setContent(json_encode("Impossible to delete user"));
+            $response->setStatusCode(Response::HTTP_FORBIDDEN);
+        } else {
+            $bool = $app['repository.user']->delete($parameters['id']);
+            if($bool == true){
+                $response->setContent(json_encode("Request executed"));
+                $response->setStatusCode(Response::HTTP_OK);
+            }
+            else{
+                $response->setContent(json_encode("Request not executed"));
+                $response->setStatusCode(Response::HTTP_NOT_FOUND);
+            }
         }
         return $response;
     }
