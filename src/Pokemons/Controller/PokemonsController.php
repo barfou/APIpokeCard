@@ -257,7 +257,7 @@ class PokemonsController
         $response = new Response();
         $response->headers->set('Content-Type', 'text/html');
 
-        $pokemon = $app['repository.user']->getOwnedPokemonUser($_POST['pokemon_id'], $_POST['user_id']);
+        $pokemon = $app['repository.pokemon']->getOwnedPokemonUser($_POST['pokemon_id'], $_POST['user_id']);
 
         if ($pokemon != []){
             $user = $app['repository.user']->getById($_POST['user_id']);
