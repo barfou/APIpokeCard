@@ -259,10 +259,10 @@ class PokemonsController
 
         $pokemon = $app['repository.pokemon']->getOwnedPokemonUser($_POST['pokemon_id'], $_POST['user_id']);
 
-        if ($pokemon != []){
+        if ($pokemon == []){
             $user = $app['repository.user']->getById($_POST['user_id']);
 
-            if($user !== []){
+            if($user != []){
                 $parametersInsert = [
                     "pokemon_id" => $_POST['pokemon_id'],
                     "user_id" => $_POST['user_id']
@@ -282,6 +282,9 @@ class PokemonsController
                 $response->setContent("CONSTRAINT FOREIGN KEY (`user_id`)");
                 $response->setStatusCode(Response::HTTP_FORBIDDEN);
             }
+        } else {
+            $response->setContent("CONSTRAINT FOREIGN KEY (`user_id`)");
+            $response->setStatusCode(Response::HTTP_FORBIDDEN);
         }
 
         return $response;
