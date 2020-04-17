@@ -10,28 +10,22 @@ class PokemonsController
 {
     public function getListPokemonAction(Request $request, Application $app)
     {
-        //$parameters = $request->attributes->all();
-        //$url = "https://pokeapi.co/api/v2/pokemon?offset=" . $parameters["offset"] . "&limit=" . "&limit=" . $parameters["limit"];
-        $offset = $_GET['offset'];
-        $limit = $_GET['limit'];
-        $url = "https://pokeapi.co/api/v2/pokemon?offset=" . $offset . "&limit=" . "&limit=" . $limit;
+        $parameters = $request->attributes->all();
+        $offset = $parameters['page'] * 20;
+        $url = "https://pokeapi.co/api/v2/pokemon?offset=" . $offset . "&limit=" . "&limit=20";
 
         //Create Response object
         $response = new Response();
 
-        // Function to get HTTP response code  
-        function get_http_response_code($url) { 
-            $headers = get_headers($url); 
-            return substr($headers[0], 9, 3); 
-        } 
-             
-        // Check HTTP response code is 200 or not 
+        // Function to get HTTP response code
+        function get_http_response_code($url) {
+            $headers = get_headers($url);
+            return substr($headers[0], 9, 3);
+        }
+
+        // Check HTTP response code is 200 or not
         if (get_http_response_code($url) == 200 ){
             $response->headers->set('Content-Type', 'application/json');
-
-            //if count base different count api
-            //
-            //
 
             $httpsfile = file_get_contents($url);
             $jsonDecoded = json_decode($httpsfile);
@@ -44,7 +38,7 @@ class PokemonsController
             $results = [];
             for($i = 0; $i < count((array)$resultsStdClass); $i++){
                 $name = $resultsStdClass[$i]->name;
-                $url = $resultsStdClass[$i]->url;               
+                $url = $resultsStdClass[$i]->url;
 
                 $sprites = $app['repository.pokemon']->getImgByName($name);
 
@@ -67,34 +61,34 @@ class PokemonsController
                 "results" => $results
             ];
 
+            $response->headers->set('Content-Type', 'application/json');
             $response->setContent(json_encode($pokemonInfos));
             $response->setStatusCode(Response::HTTP_OK);
         }
         else{
-            $response->setContent("HTTP request not successfully!");
             $response->headers->set('Content-Type', 'text/html');
+            $response->setContent(json_encode("HTTP request not successfully!"));
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
-        }  
+        }
+
         return $response;
     }
 
     public function getPokemonAction(Request $request, Application $app)
     {
-        //$parameters = $request->attributes->all();
-        //$url = "https://pokeapi.co/api/v2/pokemon/" . $parameters['name'];
-        $name = $_GET['name'];
-        $url = "https://pokeapi.co/api/v2/pokemon/" . $name;
+        $parameters = $request->attributes->all();
+        $url = "https://pokeapi.co/api/v2/pokemon/" . $parameters['name'];
 
         //Create Response object
         $response = new Response();
 
-        // Function to get HTTP response code  
-        function get_http_response_code($url) { 
-            $headers = get_headers($url); 
-            return substr($headers[0], 9, 3); 
-        } 
+        // Function to get HTTP response code
+        function get_http_response_code($url) {
+            $headers = get_headers($url);
+            return substr($headers[0], 9, 3);
+        }
 
-        // Check HTTP response code is 200 or not 
+        // Check HTTP response code is 200 or not
         if (get_http_response_code($url) == 200 ){
             $response->headers->set('Content-Type', 'application/json');
 
@@ -127,14 +121,12 @@ class PokemonsController
             $stats = [];
             for($i = 0; $i < count((array)$statsStdClass); $i++){
                 $base_stat = $statsStdClass[$i]->base_stat;
-                $effort = $statsStdClass[$i]->effort;
                 $statStdClass = $statsStdClass[$i]->stat;
                 $statName = $statStdClass->name;
                 $statUrl = $statStdClass->url;
 
                 $stat = [
                     "base_stat" => $base_stat,
-                    "effort" => $effort, 
                     "stat" => [
                         "name" => $statName,
                         "url" => $statUrl
@@ -142,7 +134,7 @@ class PokemonsController
                 ];
                 array_push($stats, $stat);
             }
-            
+
             $pokemonInfos = [
                 "abilities" => $abilities,
                 "height" => $height,
@@ -153,87 +145,252 @@ class PokemonsController
                 "weight" => $weight
             ];
 
+            $response->headers->set('Content-Type', 'application/json');
             $response->setContent(json_encode($pokemonInfos));
             $response->setStatusCode(Response::HTTP_OK);
         }
         else{
-            $response->setContent("HTTP request not successfully!");
             $response->headers->set('Content-Type', 'text/html');
+            $response->setContent("HTTP request not successfully!");
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
-        }  
+        }
+
         return $response;
     }
 
+    public function getOwnedPokemonAction(Request $request, Application $app)
+    {
+        //Create Response object
+        $response = new Response();
+
+        $parameters = $request->attributes->all();
+        $ownedPokemons = $app['repository.pokemon']->getOwnedPokemon($parameters['user_id']);
+
+        if($ownedPokemons !== []){
+            // Function to get HTTP response code
+            function get_http_response_code($url) {
+                $headers = get_headers($url);
+                return substr($headers[0], 9, 3);
+            }
+
+            $tblOwnedPokemons = [];
+
+            foreach ($ownedPokemons as &$id) {
+                $url = "https://pokeapi.co/api/v2/pokemon/" . $id;
+
+                // Check HTTP response code is 200 or not
+                if (get_http_response_code($url) == 200 ){
+                    $response->headers->set('Content-Type', 'application/json');
+
+                    $httpsfile = file_get_contents($url);
+                    $jsonDecoded = json_decode($httpsfile);
+
+                    $name = $jsonDecoded->name;
+                    $height = $jsonDecoded->height;
+                    $weight = $jsonDecoded->weight;
+                    $id = $jsonDecoded->id;
+
+                    $abilitiesStdClass = $jsonDecoded->abilities;
+                    $abilities = [];
+                    for($i = 0; $i < count((array)$abilitiesStdClass); $i++){
+                        $abilitie = [
+                            "ability" => [
+                                "name" => $abilitiesStdClass[$i]->ability->name,
+                                "url" => $abilitiesStdClass[$i]->ability->url
+                            ]
+                        ];
+                        array_push($abilities, $abilitie);
+                    }
+
+                    $sprites = [
+                        "back_default" => $jsonDecoded->sprites->back_default,
+                        "front_default" => $jsonDecoded->sprites->front_default
+                    ];
+
+                    $statsStdClass = $jsonDecoded->stats;
+                    $stats = [];
+                    for($i = 0; $i < count((array)$statsStdClass); $i++){
+                        $base_stat = $statsStdClass[$i]->base_stat;
+                        $statStdClass = $statsStdClass[$i]->stat;
+                        $statName = $statStdClass->name;
+                        $statUrl = $statStdClass->url;
+
+                        $stat = [
+                            "base_stat" => $base_stat,
+                            "stat" => [
+                                "name" => $statName,
+                                "url" => $statUrl
+                            ]
+                        ];
+                        array_push($stats, $stat);
+                    }
+
+                    $pokemonInfos = [
+                        "abilities" => $abilities,
+                        "height" => $height,
+                        "id" => $id,
+                        "name" => $name,
+                        "sprites" => $sprites,
+                        "stats" => $stats,
+                        "weight" => $weight
+                    ];
+
+                    array_push($tblOwnedPokemons, $pokemonInfos);
+                }
+            }
+            $response->headers->set('Content-Type', 'application/json');
+            $response->setContent(json_encode($tblOwnedPokemons));
+            $response->setStatusCode(Response::HTTP_OK);
+        }
+        else{
+            $response->headers->set('Content-Type', 'text/html');
+            $response->setContent("HTTP request not successfully!");
+            $response->setStatusCode(Response::HTTP_NOT_FOUND);
+        }
+
+        return $response;
+    }
+
+    public function insertOwnedPokemonAction(Request $request, Application $app)
+    {
+        //Create Response object
+        $response = new Response();
+        $response->headers->set('Content-Type', 'text/html');
+
+        $pokemon = $app['repository.pokemon']->getOwnedPokemonUser($_POST['pokemon_id'], $_POST['user_id']);
+
+        if ($pokemon == []){
+            $user = $app['repository.user']->getById($_POST['user_id']);
+
+            if($user != []){
+                $parametersInsert = [
+                    "pokemon_id" => $_POST['pokemon_id'],
+                    "user_id" => $_POST['user_id']
+                ];
+
+                $result = $app['repository.pokemon']->insertOwnedPokemon($parametersInsert);
+
+                if($result == true){
+                    $response->setContent("HTTP request successfully");
+                    $response->setStatusCode(Response::HTTP_OK);
+                }
+                else{
+                    $response->setContent("HTTP request not successfully!");
+                    $response->setStatusCode(Response::HTTP_NOT_FOUND);
+                }
+            } else {
+                $response->setContent("CONSTRAINT FOREIGN KEY (`user_id`)");
+                $response->setStatusCode(Response::HTTP_FORBIDDEN);
+            }
+        } else {
+            $response->setContent("CONSTRAINT FOREIGN KEY (`user_id`)");
+            $response->setStatusCode(Response::HTTP_FORBIDDEN);
+        }
+
+        return $response;
+    }
+
+    public function updateOwnedPokemonAction(Request $request, Application $app)
+    {
+        //Create Response object
+        $response = new Response();
+        $response->headers->set('Content-Type', 'text/html');
+
+        //Permet de récupérer les paramètres de la requête
+        $_PUT = array();
+        parse_str(file_get_contents("php://input"), $_PUT);
+
+        $parametersUpdate = [
+            "pokemon_id" => $_PUT['pokemon_id'],
+            "user_id" => $_PUT['user_id'],
+            "new_user_id" => $_PUT['new_user_id']
+
+        ];
+
+        $bool = $app['repository.pokemon']->updateOwnedPokemon($parametersUpdate);
+
+        if($bool == true){
+            $response->setContent("HTTP request successfully");
+            $response->setStatusCode(Response::HTTP_OK);
+        }
+        else{
+            $response->setContent("HTTP request not successfully!");
+            $response->setStatusCode(Response::HTTP_NOT_FOUND);
+        }
+
+        return $response;
+    }
+
+    public function deleteOwnedPokemonAction(Request $request, Application $app)
+        {
+            //Create Response object
+            $response = new Response();
+            $response->headers->set('Content-Type', 'text/html');
+
+            $parameters = $request->attributes->all();
+
+            $parametersDelete = [
+                "pokemon_id" => $parameters['pokemon_id'],
+                "user_id" => $parameters['user_id']
+            ];
+            $bool = $app['repository.pokemon']->deleteOwnedPokemon($parametersDelete);
+            if($bool == true){
+                $response->setContent("HTTP request successfully");
+                $response->setStatusCode(Response::HTTP_OK);
+            }
+            else{
+                $response->setContent("HTTP request not successfully!");
+                $response->setStatusCode(Response::HTTP_NOT_FOUND);
+            }
+            return $response;
+        }
+
     public function insertImgAction(Request $request, Application $app)
     {
-        $url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=964";
+        //Create Response object
+        $response = new Response();
+        $response->headers->set('Content-Type', 'text/html');
 
+        $bool = true;
+        $url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=964";
         $httpsfile = file_get_contents($url);
         $jsonDecoded = json_decode($httpsfile);
 
         $resultsStdClass = $jsonDecoded->results;
         $results = [];
         for($i = 0; $i < count((array)$resultsStdClass); $i++){
-            $name = $resultsStdClass[$i]->name;           
+            if($bool == true){
+                $name = $resultsStdClass[$i]->name;
 
-            $urldetail = "https://pokeapi.co/api/v2/pokemon/" . $name;
+                $urldetail = "https://pokeapi.co/api/v2/pokemon/" . $name;
 
-            $httpsfile = file_get_contents($urldetail);
-            $jsonDecoded = json_decode($httpsfile);
+                $httpsfile = file_get_contents($urldetail);
+                $jsonDecoded = json_decode($httpsfile);
 
-            $sprites = [
-                "back_default" => $jsonDecoded->sprites->back_default,
-                "front_default" => $jsonDecoded->sprites->front_default
-            ];
+                $sprites = [
+                    "back_default" => $jsonDecoded->sprites->back_default,
+                    "front_default" => $jsonDecoded->sprites->front_default
+                ];
 
-            $urlBackImg = $sprites["back_default"];
-            $urlFrontImg = $sprites["front_default"];
-            
-            $parameters = [
-                'name' => $name, 
-                'urlImgBack' => $urlBackImg,
-                'urlImgFront' => $urlFrontImg
-            ];   
-            $app['repository.pokemon']->insertImg($parameters);
+                $urlBackImg = $sprites["back_default"];
+                $urlFrontImg = $sprites["front_default"];
+
+                $parameters = [
+                    'name' => $name,
+                    'urlImgBack' => $urlBackImg,
+                    'urlImgFront' => $urlFrontImg
+                ];
+                $bool = $app['repository.pokemon']->insertImg($parameters);
+            }
         }
-        return "OK";
-    }
-
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /**public function deleteAction(Request $request, Application $app)
-    {
-        $parameters = $request->attributes->all();
-        $app['repository.device']->delete($parameters['id']);
-
-        return $app->redirect($app['url_generator']->generate('device.list'));
-    }
-
-    public function editAction(Request $request, Application $app)
-    {
-        $parameters = $request->attributes->all();
-        $device = $app['repository.device']->getById($parameters['id']);
-
-        return $app['twig']->render('device.form.html.twig', array('device' => $device));
-    }
-
-    public function saveAction(Request $request, Application $app)
-    {
-        $parameters = $request->request->all();
-        if (isset($parameters['id'])) {
-            $device = $app['repository.device']->update($parameters);
-        } else {
-            $device = $app['repository.device']->insert($parameters);
+        if($bool == true){
+            $response->setContent("HTTP request successfully");
+            $response->setStatusCode(Response::HTTP_OK);
         }
-
-        return $app->redirect($app['url_generator']->generate('device.list'));
+        else{
+            $response->setContent("HTTP request not successfully!");
+            $response->setStatusCode(Response::HTTP_NOT_FOUND);
+        }
+        return $response;
     }
-
-    public function newAction(Request $request, Application $app)
-    {
-        $users = $app['repository.user']->getAll();
-
-        return $app['twig']->render('device.form.html.twig', array('users' => $users));
-    }**/
 }

@@ -14,24 +14,10 @@ class PokemonRepository
      */
     protected $db;
 
-    protected $pokemonRepository;
-
     public function __construct(Connection $db)
     {
         $this->db = $db;
     }
-
-    /**public function getCount()
-    {
-        $queryBuilder = $this->db->createQueryBuilder();
-        $queryBuilder->select('count(pr.*)')
-            ->from('PokemonRef', 'pr');
-            $count = $queryBuilder->execute()->fetchAll();
-
-        return $count;
-
-        
-    }**/
 
     public function getImgByName($name)
     {
@@ -48,16 +34,107 @@ class PokemonRepository
                 "urlBackImg" => $pokemonData[0]['urlImgBack'],
                 "urlFrontImg" => $pokemonData[0]['urlImgFront']
             ];
-            //$sprites = $pokemonData[0]['urlImgFront'];
-          }
-          else {
+        }
+        else {
             $sprites = [
                 "urlBackImg" => "",
                 "urlFrontImg" => ""
             ];
-            //$sprites = "";
-          }
-          return $sprites;
+        }
+        return $sprites;
+    }
+
+
+    public function getOwnedPokemon($user_id)
+    {
+        $ownedPokemonsEntityList = [];
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->select('op.*')
+            ->from('OwnedPokemon', 'op')
+            ->where('user_id = :user_id')
+            ->setParameter(':user_id', $user_id);
+        $statement = $queryBuilder->execute();
+
+        $ownedPokemonsData = $statement->fetchAll();
+        foreach ($ownedPokemonsData as $ownedPokemonData) {
+            array_push($ownedPokemonsEntityList, $ownedPokemonData["pokemon_id"]);
+        }
+        return $ownedPokemonsEntityList;
+    }
+
+    public function getOwnedPokemonUser($pokemon_id, $user_id)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->select('op.*')
+            ->from('OwnedPokemon', 'op')
+             ->where('pokemon_id = :pokemon_id AND user_id = :user_id')
+            ->setParameter(':pokemon_id', $pokemon_id)
+            ->setParameter(':user_id', $user_id);
+        $statement = $queryBuilder->execute();
+
+        return $statement->fetchAll();
+    }
+
+    public function countOwnedPokemon($user_id)
+    {
+        $ownedPokemonsEntityList = [];
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->select('COUNT(*)')
+            ->from('OwnedPokemon')
+            ->where('user_id = :user_id')
+            ->setParameter(':user_id', $user_id);
+        $statement = $queryBuilder->execute();
+
+        $countOwnedPokemonsData = $statement->fetchAll();
+        return $countOwnedPokemonsData;
+    }
+
+    public function insertOwnedPokemon($parameters)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->insert('OwnedPokemon')
+            ->values(
+                array(
+                    'pokemon_id' => ':pokemon_id',
+                    'user_id' => ':user_id'
+                )
+            )
+            ->setParameter(':pokemon_id', $parameters['pokemon_id'])
+            ->setParameter(':user_id', $parameters['user_id']);
+        $statement = $queryBuilder->execute();
+
+        return $statement;
+    }
+
+    public function updateOwnedPokemon($parameters)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->update('OwnedPokemon')
+            ->set('user_id', ':new_user_id')
+            ->where('pokemon_id = :pokemon_id AND user_id = :user_id')
+            ->setParameter(':pokemon_id', $parameters['pokemon_id'])
+            ->setParameter(':user_id', $parameters['user_id'])
+            ->setParameter(':new_user_id', $parameters['new_user_id']);
+
+        $statement = $queryBuilder->execute();
+        return $statement;
+    }
+
+    public function deleteOwnedPokemon($parameters)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->delete('OwnedPokemon')
+            ->where('pokemon_id = :pokemon_id AND user_id = :user_id')
+            ->setParameter(':pokemon_id', $parameters['pokemon_id'])
+            ->setParameter(':user_id', $parameters['user_id']);
+        $statement = $queryBuilder->execute();
+        return $statement;
     }
 
     public function insertImg($parameters)
@@ -76,120 +153,6 @@ class PokemonRepository
             ->setParameter(':urlImgBack', $parameters['urlImgBack'])
             ->setParameter(':urlImgFront', $parameters['urlImgFront']);
         $statement = $queryBuilder->execute();
-    }
-
-    /**
-     * Returns a collection of pokemons.
-     *
-     * @param int $limit
-     *   The number of pokemons to return.
-     * @param int $offset
-     *   The number of pokemons to skip.
-     * @param array $orderBy
-     *   Optionally, the order by info, in the $column => $direction format.
-     *
-     * @return array A collection of pokemons, keyed by pokemon id.
-     */
-
-    public function getAll()
-    {
-        /*$queryBuilder = $this->db->createQueryBuilder();
-        $queryBuilder
-            ->select('d.*')
-            ->from('pokemons', 'd');
-        $statement = $queryBuilder->execute();
-        $pokemonData = $statement->fetchAll();
-        foreach ($pokemonData as $pokemonData) {
-            $pokemonEntityList[$pokemonData['id']] = new pokemon($pokemonData['id'], $pokemonData['lib'], $pokemonData['marque'], $pokemonData['os'], $this->userRepository->getById($pokemonData['userid']));
-        }
-        return $pokemonEntityList;*/
-        /**
-         * Returns an pokemons object.
-         *
-         * @param $id
-         *   The id of the pokemon to return.
-         *
-         * @return array A collection of pokemons, keyed by pokemon id.
-         */
-    }
-
-    public function getById($id)
-    {
-        $queryBuilder = $this->db->createQueryBuilder();
-        $queryBuilder
-            ->select('d.*')
-            ->from('pokemons', 'd')
-            ->where('id = ?')
-            ->setParameter(0, $id);
-        $statement = $queryBuilder->execute();
-        $pokemonData = $statement->fetchAll();
-
-        return new pokemon($pokemonData[0]['id'], $pokemonData[0]['lib'], $pokemonData[0]['marque'], $pokemonData[0]['os'], $this->userRepository->getById($pokemonData['userid']));
-    }
-
-    public function delete($id)
-    {
-        $queryBuilder = $this->db->createQueryBuilder();
-        $queryBuilder
-            ->delete('pokemons')
-            ->where('id = :id')
-            ->setParameter(':id', $id);
-
-        $statement = $queryBuilder->execute();
-    }
-
-    public function update($parameters)
-    {
-        $queryBuilder = $this->db->createQueryBuilder();
-        $queryBuilder
-            ->update('pokemons')
-            ->where('id = :id')
-            ->setParameter(':id', $parameters['id']);
-
-        if ($parameters['lib']) {
-            $queryBuilder
-                ->set('lib', ':lib')
-                ->setParameter(':lib', $parameters['lib']);
-        }
-
-        if ($parameters['marque']) {
-            $queryBuilder
-                ->set('marque', ':marque')
-                ->setParameter(':marque', $parameters['marque']);
-        }
-
-        if ($parameters['os']) {
-            $queryBuilder
-                ->set('os', ':os')
-                ->setParameter(':os', $parameters['os']);
-        }
-
-        if ($parameters['userid']) {
-            $queryBuilder
-                ->set('userid', ':userid')
-                ->setParameter(':userid', $parameters['userid']);
-        }
-
-        $statement = $queryBuilder->execute();
-    }
-
-    public function insert($parameters)
-    {
-        $queryBuilder = $this->db->createQueryBuilder();
-        $queryBuilder
-            ->insert('pokemons')
-            ->values(
-                array(
-                    'lib' => ':lib',
-                    'marque' => ':marque',
-                    'os' => ':os',
-                    'userid' => ':userid'
-                )
-            )
-            ->setParameter(':lib', $parameters['lib'])
-            ->setParameter(':marque', $parameters['marque'])
-            ->setParameter(':os', $parameters['os'])
-            ->setParameter(':userid', $parameters['cboUser']);
-        $statement = $queryBuilder->execute();
+        return $statement;
     }
 }
