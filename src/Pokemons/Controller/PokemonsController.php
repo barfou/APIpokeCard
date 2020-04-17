@@ -27,10 +27,6 @@ class PokemonsController
         if (get_http_response_code($url) == 200 ){
             $response->headers->set('Content-Type', 'application/json');
 
-            //if count base different count api
-            //
-            //
-
             $httpsfile = file_get_contents($url);
             $jsonDecoded = json_decode($httpsfile);
 
@@ -65,14 +61,16 @@ class PokemonsController
                 "results" => $results
             ];
 
+            $response->headers->set('Content-Type', 'application/json');
             $response->setContent(json_encode($pokemonInfos));
             $response->setStatusCode(Response::HTTP_OK);
         }
         else{
-            $response->setContent(json_encode("HTTP request not successfully!"));
             $response->headers->set('Content-Type', 'text/html');
+            $response->setContent(json_encode("HTTP request not successfully!"));
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
+
         return $response;
     }
 
@@ -147,14 +145,16 @@ class PokemonsController
                 "weight" => $weight
             ];
 
+            $response->headers->set('Content-Type', 'application/json');
             $response->setContent(json_encode($pokemonInfos));
             $response->setStatusCode(Response::HTTP_OK);
         }
         else{
-            $response->setContent("HTTP request not successfully!");
             $response->headers->set('Content-Type', 'text/html');
+            $response->setContent("HTTP request not successfully!");
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
+
         return $response;
     }
 
@@ -162,7 +162,6 @@ class PokemonsController
     {
         //Create Response object
         $response = new Response();
-        $response->headers->set('Content-Type', 'application/json');
 
         $parameters = $request->attributes->all();
         $ownedPokemons = $app['repository.pokemon']->getOwnedPokemon($parameters['user_id']);
@@ -239,12 +238,16 @@ class PokemonsController
                     array_push($tblOwnedPokemons, $pokemonInfos);
                 }
             }
+            $response->headers->set('Content-Type', 'application/json');
             $response->setContent(json_encode($tblOwnedPokemons));
             $response->setStatusCode(Response::HTTP_OK);
         }
         else{
+            $response->headers->set('Content-Type', 'text/html');
+            $response->setContent("HTTP request not successfully!");
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
+
         return $response;
     }
 
@@ -252,21 +255,24 @@ class PokemonsController
     {
         //Create Response object
         $response = new Response();
-        $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Content-Type', 'text/html');
 
         $parametersInsert = [
             "pokemon_id" => $_POST['pokemon_id'],
             "user_id" => $_POST['user_id']
         ];
+
         $bool = $app['repository.pokemon']->insertOwnedPokemon($parametersInsert);
+
         if($bool == true){
-            $response->setContent(json_encode("Request executed"));
+            $response->setContent("HTTP request successfully");
             $response->setStatusCode(Response::HTTP_OK);
         }
         else{
-            $response->setContent(json_encode("Request not executed"));
+            $response->setContent("HTTP request not successfully!");
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
+
         return $response;
     }
 
@@ -274,9 +280,9 @@ class PokemonsController
     {
         //Create Response object
         $response = new Response();
-        $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Content-Type', 'text/html');
 
-        //Permet de récupéré les paramètres de la requete
+        //Permet de récupérer les paramètres de la requête
         $_PUT = array();
         parse_str(file_get_contents("php://input"), $_PUT);
 
@@ -286,15 +292,18 @@ class PokemonsController
             "new_user_id" => $_PUT['new_user_id']
 
         ];
+
         $bool = $app['repository.pokemon']->updateOwnedPokemon($parametersUpdate);
+
         if($bool == true){
-            $response->setContent(json_encode("Request executed"));
+            $response->setContent("HTTP request successfully");
             $response->setStatusCode(Response::HTTP_OK);
         }
         else{
-            $response->setContent(json_encode("Request not executed"));
+            $response->setContent("HTTP request not successfully!");
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
+
         return $response;
     }
 
@@ -302,7 +311,7 @@ class PokemonsController
         {
             //Create Response object
             $response = new Response();
-            $response->headers->set('Content-Type', 'application/json');
+            $response->headers->set('Content-Type', 'text/html');
 
             $parameters = $request->attributes->all();
 
@@ -312,11 +321,11 @@ class PokemonsController
             ];
             $bool = $app['repository.pokemon']->deleteOwnedPokemon($parametersDelete);
             if($bool == true){
-                $response->setContent(json_encode("Request executed"));
+                $response->setContent("HTTP request successfully");
                 $response->setStatusCode(Response::HTTP_OK);
             }
             else{
-                $response->setContent(json_encode("Request not executed"));
+                $response->setContent("HTTP request not successfully!");
                 $response->setStatusCode(Response::HTTP_NOT_FOUND);
             }
             return $response;
@@ -324,6 +333,10 @@ class PokemonsController
 
     public function insertImgAction(Request $request, Application $app)
     {
+        //Create Response object
+        $response = new Response();
+        $response->headers->set('Content-Type', 'text/html');
+
         $bool = true;
         $url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=964";
         $httpsfile = file_get_contents($url);
@@ -357,11 +370,11 @@ class PokemonsController
             }
         }
         if($bool == true){
-            $response->setContent(json_encode("Request executed"));
+            $response->setContent("HTTP request successfully");
             $response->setStatusCode(Response::HTTP_OK);
         }
         else{
-            $response->setContent(json_encode("Request not executed"));
+            $response->setContent("HTTP request not successfully!");
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
         return $response;

@@ -12,17 +12,20 @@ class UsersController
     {
         //Create Response object
         $response = new Response();
-        $response->headers->set('Content-Type', 'application/json');
 
         $users = $app['repository.user']->getAll();
 
         if($users !== []){
+            $response->headers->set('Content-Type', 'application/json');
             $response->setContent(json_encode($users));
             $response->setStatusCode(Response::HTTP_OK);
         }
         else{
+            $response->headers->set('Content-Type', 'text/html');
+            $response->setContent("HTTP request not successfully!");
             $response->setStatusCode(Response::HTTP_NO_CONTENT);
         }
+
         return $response;
     }
 
@@ -30,19 +33,21 @@ class UsersController
     {
         //Create Response object
         $response = new Response();
-        $response->headers->set('Content-Type', 'application/json');
 
         $parameters = $request->attributes->all();
         $user = $app['repository.user']->getById($parameters['id']);
 
         if($user !== []){
+            $response->headers->set('Content-Type', 'application/json');
             $response->setContent(json_encode($user));
             $response->setStatusCode(Response::HTTP_OK);
         }
         else{
-             $response->setContent(json_encode("404 ERROR"));
-             $response->setStatusCode(Response::HTTP_NOT_FOUND);
+            $response->headers->set('Content-Type', 'text/html');
+            $response->setContent("HTTP request not successfully!");
+            $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
+
         return $response;
     }
 
@@ -50,22 +55,25 @@ class UsersController
     {
         //Create Response object
         $response = new Response();
-        $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Content-Type', 'text/html');
 
         $parametersInsert = [
             "login" => $_POST['login'],
             "mail" => $_POST['mail'],
             "password" => $_POST['password']
         ];
+
         $bool = $app['repository.user']->insert($parametersInsert);
+
         if($bool == true){
-            $response->setContent(json_encode("Request executed"));
+            $response->setContent("HTTP request successfully");
             $response->setStatusCode(Response::HTTP_OK);
         }
         else{
-            $response->setContent(json_encode("Request not executed"));
+            $response->setContent("HTTP request not successfully!");
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
+
         return $response;
     }
 
@@ -73,7 +81,7 @@ class UsersController
     {
         //Create Response object
         $response = new Response();
-        $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Content-Type', 'text/html');
 
         //Permet de récupéré les paramètres de la requete
         $_PUT = array();
@@ -86,15 +94,18 @@ class UsersController
             "password" => $_PUT['password']
 
         ];
+
         $bool = $app['repository.user']->update($parametersUpdate);
+
         if($bool == true){
-            $response->setContent(json_encode("Request executed"));
+            $response->setContent("HTTP request successfully");
             $response->setStatusCode(Response::HTTP_OK);
         }
         else{
-            $response->setContent(json_encode("Request not executed"));
+            $response->setContent("HTTP request not successfully!");
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
+
         return $response;
     }
 
@@ -102,7 +113,7 @@ class UsersController
     {
         //Create Response object
         $response = new Response();
-        $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Content-Type', 'text/html');
 
         //Permet de récupéré les paramètres de la requete
         $_PUT = array();
@@ -113,15 +124,18 @@ class UsersController
             "poke_points" => $_PUT['poke_points']
 
         ];
+
         $bool = $app['repository.user']->updatePokePoints($parametersUpdate);
+
         if($bool == true){
-            $response->setContent(json_encode("Request executed"));
+            $response->setContent("HTTP request successfully");
             $response->setStatusCode(Response::HTTP_OK);
         }
         else{
-            $response->setContent(json_encode("Request not executed"));
+            $response->setContent("HTTP request not successfully!");
             $response->setStatusCode(Response::HTTP_NOT_FOUND);
         }
+
         return $response;
     }
 
@@ -129,26 +143,29 @@ class UsersController
     {
         //Create Response object
         $response = new Response();
-        $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Content-Type', 'text/html');
 
         $parameters = $request->attributes->all();
 
         $count = $app['repository.pokemon']->countOwnedPokemon($parameters['id']);
 
         if($count != 0){
-            $response->setContent(json_encode("Impossible to delete user"));
+            $response->setContent(json_encode("Impossible to delete this user because he is linked to pokemons"));
             $response->setStatusCode(Response::HTTP_FORBIDDEN);
         } else {
+
             $bool = $app['repository.user']->delete($parameters['id']);
+
             if($bool == true){
-                $response->setContent(json_encode("Request executed"));
+                $response->setContent("HTTP request successfully");
                 $response->setStatusCode(Response::HTTP_OK);
             }
             else{
-                $response->setContent(json_encode("Request not executed"));
+                $response->setContent("HTTP request not successfully!");
                 $response->setStatusCode(Response::HTTP_NOT_FOUND);
             }
         }
+
         return $response;
     }
 
