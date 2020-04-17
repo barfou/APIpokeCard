@@ -34,16 +34,14 @@ class PokemonRepository
                 "urlBackImg" => $pokemonData[0]['urlImgBack'],
                 "urlFrontImg" => $pokemonData[0]['urlImgFront']
             ];
-            //$sprites = $pokemonData[0]['urlImgFront'];
-          }
-          else {
+        }
+        else {
             $sprites = [
                 "urlBackImg" => "",
                 "urlFrontImg" => ""
             ];
-            //$sprites = "";
-          }
-          return $sprites;
+        }
+        return $sprites;
     }
 
 
@@ -60,26 +58,39 @@ class PokemonRepository
 
         $ownedPokemonsData = $statement->fetchAll();
         foreach ($ownedPokemonsData as $ownedPokemonData) {
-            //$userEntityList[$userData['id']] = new User($userData['id'], $userData['login'], $userData['mail'], $userData['password']);
             array_push($ownedPokemonsEntityList, $ownedPokemonData["pokemon_id"]);
         }
         return $ownedPokemonsEntityList;
     }
 
-    public function countOwnedPokemon($user_id)
-        {
-            $ownedPokemonsEntityList = [];
-            $queryBuilder = $this->db->createQueryBuilder();
-            $queryBuilder
-                ->select('COUNT(*)')
-                ->from('OwnedPokemon')
-                ->where('user_id = :user_id')
-                ->setParameter(':user_id', $user_id);
-            $statement = $queryBuilder->execute();
+    public function getOwnedPokemonUser($id_pokemon, $user_id)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->select('op.*')
+            ->from('OwnedPokemon', 'op')
+             ->where('pokemon_id = :pokemon_id AND user_id = :user_id')
+            ->setParameter(':pokemon_id', $parameters['pokemon_id'])
+            ->setParameter(':user_id', $user_id);
+        $statement = $queryBuilder->execute();
 
-            $countOwnedPokemonsData = $statement->fetchAll();
-            return $countOwnedPokemonsData;
-        }
+        return $statement->fetchAll();
+    }
+
+    public function countOwnedPokemon($user_id)
+    {
+        $ownedPokemonsEntityList = [];
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->select('COUNT(*)')
+            ->from('OwnedPokemon')
+            ->where('user_id = :user_id')
+            ->setParameter(':user_id', $user_id);
+        $statement = $queryBuilder->execute();
+
+        $countOwnedPokemonsData = $statement->fetchAll();
+        return $countOwnedPokemonsData;
+    }
 
     public function insertOwnedPokemon($parameters)
     {
