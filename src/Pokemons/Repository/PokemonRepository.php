@@ -89,7 +89,7 @@ class PokemonRepository
         $statement = $queryBuilder->execute();
 
         $countOwnedPokemonsData = $statement->fetchAll();
-        return $countOwnedPokemonsData;
+        return $countOwnedPokemonsData[0];
     }
 
     public function insertOwnedPokemon($parameters)
