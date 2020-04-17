@@ -272,7 +272,7 @@ class PokemonsController
                  $response->setContent("HTTP request not successfully!");
                  $response->setStatusCode(Response::HTTP_NOT_FOUND);
              }
-        } catch (PDOException $pdoE){
+        } catch (Exception $pdoE){
             $response->setContent("CONSTRAINT FOREIGN KEY (`user_id`)");
             $response->setStatusCode(Response::HTTP_FORBIDDEN);
         }
