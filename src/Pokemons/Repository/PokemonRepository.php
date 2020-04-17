@@ -71,8 +71,8 @@ class PokemonRepository
             $ownedPokemonsEntityList = [];
             $queryBuilder = $this->db->createQueryBuilder();
             $queryBuilder
-                ->select('COUNT(op.*)')
-                ->from('OwnedPokemon', 'op')
+                ->select('COUNT(o*)')
+                ->from('OwnedPokemon')
                 ->where('user_id = :user_id')
                 ->setParameter(':user_id', $user_id);
             $statement = $queryBuilder->execute();
