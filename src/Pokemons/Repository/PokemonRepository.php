@@ -97,7 +97,7 @@ class PokemonRepository
                 ->setParameter(':user_id', $parameters['user_id']);
             $statement = $queryBuilder->execute();
         } catch (PDOException $pdoE) {
-            $statement = -1
+            $statement = -1;
         }
 
         return $statement;
