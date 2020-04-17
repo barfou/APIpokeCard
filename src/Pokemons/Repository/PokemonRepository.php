@@ -70,7 +70,7 @@ class PokemonRepository
             ->select('op.*')
             ->from('OwnedPokemon', 'op')
              ->where('pokemon_id = :pokemon_id AND user_id = :user_id')
-            ->setParameter(':pokemon_id', $parameters['pokemon_id'])
+            ->setParameter(':pokemon_id', $pokemon_id)
             ->setParameter(':user_id', $user_id);
         $statement = $queryBuilder->execute();
 
