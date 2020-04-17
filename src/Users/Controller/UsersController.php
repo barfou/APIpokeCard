@@ -151,7 +151,7 @@ class UsersController
 
         var_dump($count);
 
-        if($count < 0){
+        if($count > 0){
             $response->setContent(json_encode("Impossible to delete this user because he is linked to pokemons"));
             $response->setStatusCode(Response::HTTP_FORBIDDEN);
         } else {
