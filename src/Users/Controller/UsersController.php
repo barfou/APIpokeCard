@@ -135,7 +135,7 @@ class UsersController
 
         $count = $app['repository.pokemon']->countOwnedPokemon($parameters['id']);
 
-        if(count != 0){
+        if($count != 0){
             $response->setContent(json_encode("Impossible to delete user"));
             $response->setStatusCode(Response::HTTP_FORBIDDEN);
         } else {
