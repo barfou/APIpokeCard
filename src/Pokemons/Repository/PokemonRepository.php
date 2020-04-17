@@ -63,7 +63,7 @@ class PokemonRepository
         return $ownedPokemonsEntityList;
     }
 
-    public function getOwnedPokemonUser($id_pokemon, $user_id)
+    public function getOwnedPokemonUser($pokemon_id, $user_id)
     {
         $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder
