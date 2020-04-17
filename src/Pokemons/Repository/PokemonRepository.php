@@ -83,22 +83,19 @@ class PokemonRepository
 
     public function insertOwnedPokemon($parameters)
     {
-        try{
-            $queryBuilder = $this->db->createQueryBuilder();
-            $queryBuilder
-                ->insert('OwnedPokemon')
-                ->values(
-                    array(
-                        'pokemon_id' => ':pokemon_id',
-                        'user_id' => ':user_id'
-                    )
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->insert('OwnedPokemon')
+            ->values(
+                array(
+                    'pokemon_id' => ':pokemon_id',
+                    'user_id' => ':user_id'
                 )
-                ->setParameter(':pokemon_id', $parameters['pokemon_id'])
-                ->setParameter(':user_id', $parameters['user_id']);
-            $statement = $queryBuilder->execute();
-        } catch (Exception $pdoE){
-            $statement = -1;
-        }
+            )
+            ->setParameter(':pokemon_id', $parameters['pokemon_id'])
+            ->setParameter(':user_id', $parameters['user_id']);
+        $statement = $queryBuilder->execute();
+
         return $statement;
     }
 
