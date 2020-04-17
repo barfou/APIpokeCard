@@ -262,7 +262,7 @@ class PokemonsController
             "user_id" => $_POST['user_id']
         ];
 
-        try {
+        //try {
             $bool = $app['repository.pokemon']->insertOwnedPokemon($parametersInsert);
 
             if($bool == true){
@@ -273,10 +273,10 @@ class PokemonsController
                 $response->setContent("HTTP request not successfully!");
                 $response->setStatusCode(Response::HTTP_NOT_FOUND);
             }
-        } catch(SQLSTATE[23000] $e) {
+        /*} catch(SQLSTATE[23000] $e) {
             $response->setContent("CONSTRAINT FOREIGN KEY (`user_id`)");
-            $response->setStatusCode(Response::HTTP_NOT_FOUND);
-        }
+            $response->setStatusCode(Response::HTTP_FORBIDDEN);
+        }*/
 
         return $response;
     }
